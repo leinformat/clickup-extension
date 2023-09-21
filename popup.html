@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Popup</title>
+  <link rel="stylesheet" href="./css/popup.css">
+</head>
+<body>
+  
+  <main class="clickup-extension">
+    <h1>Clickup Extension</h1>
+    <section class="clickup-extension__user-auth-data">
+      <form class="clickup-extension__form">
+        <div class="clickup-extension__spinner">
+          <img src="./images/spinner.gif" alt="spiner">
+        </div>
+        <div class="clickup-extension__key-content">
+          <label for="api-key">
+            Api Key
+            <span class="clickup-extension__key-error"></span>
+          </label>
+          <input id="api-key" class="clickup-extension__key" type="text" name="key" placeholder="Enter your Api Key" required autofocus>
+        </div>
+
+        <div class="clickup-extension__team-options">
+          <p>Please Select a Workspace</p>
+          <!-- Team Options -->
+        </div>
+        <div class="clickup-extension__email-content">
+          <label>
+            Enter Your Email
+            <span class="clickup-extension__email-error"></span>
+          </label>
+          <input class="clickup-extension__email" type="email" name="email" required>
+        </div>
+        <div class="clickup-extension__submit-content">
+          <input class="clickup-extension__submit" type="submit" value="Save">
+        </div>
+      </form>
+    </section>
+    <section class="clickup-extension__content hide">
+        <p>Registrado Correctamente</p>
+        <button class="clickup-extension__resetAuthAll">Reset Auth Data</button>
+    </section>
+    <script src="./popup.js"></script>
+  </main>
+</body>
+</html>

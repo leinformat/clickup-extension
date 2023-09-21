@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Extensión con Local Storage y Console.log",
+  "version": "1.0",
+  "description": "Una extensión de Chrome que utiliza el almacenamiento local y muestra mensajes de consola en todas las páginas web.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "./images/otf-logo.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "notifications",
+    "tabs",
+    "webNavigation",
+    "contextMenus",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "host_permissions":[
+    "<all_urls>"
+  ],
+  "icons": {
+    "16": "./images/otf-logo.png",
+    "48": "./images/otf-logo.png",
+    "128": "./images/otf-logo.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ]
+}
