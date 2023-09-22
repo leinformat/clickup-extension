@@ -9,15 +9,15 @@ const apiUrl = "https://api.clickup.com/api/v2/team/";
 /*###################################### AUTHENTICATION CODE ################################## */
 
 // Function to handle incoming messages
-const handleMessage = async (request) => {
+const handleMessage = async (request, sender, sendResponse) => {
   if (request.dataKey) {
-    await handleDataKey(request.dataKey);
+    handleDataKey(request.dataKey);
   }
   if (request.formData) {
-    await handleFormData(request.formData);
+    handleFormData(request.formData);
   }
   if (request.resetAuthDataAll) {
-    await handleResetAuthAll();
+    handleResetAuthAll(sendResponse);
   }
 };
 
@@ -96,12 +96,12 @@ const handleFormData = async ({ team, email, key }) => {
 };
 
 // Function to Reset All Authentication Data
-const handleResetAuthAll = async () => {
-  chrome.storage.local.clear();
-  chrome.runtime.sendMessage({ resetAuthAll: true });
+const handleResetAuthAll = (sendResponse) => {
+  chrome.storage.local.clear()
+  sendResponse({ resetAuthAll: true });
 }
 
 
 // Add listener to handle messages
-chrome.runtime.onMessage.addListener(handleMessage);
+chrome.runtime.onMessage.addListener(handleMessage); 
 /*###################################### END AUTHENTICATION CODE ################################## */
