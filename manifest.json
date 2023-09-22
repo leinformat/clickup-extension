@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Extensión con Local Storage y Console.log",
+  "name": "Extension de Clickup",
   "version": "1.0",
-  "description": "Una extensión de Chrome que utiliza el almacenamiento local y muestra mensajes de consola en todas las páginas web.",
+  "description": "Una extensión para llevar un control  de las tareas asignadas y sus estados en clickup",
   "action": {
     "default_popup": "popup.html",
     "default_icon": "./images/otf-logo.png"
@@ -17,7 +17,8 @@
     "scripting"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "host_permissions":[
     "<all_urls>"

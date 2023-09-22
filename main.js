@@ -1,6 +1,6 @@
 // main.js
 import {authContainer,dataContent} from './modules/domElements.js';
-import './modules/eventHandlers.js';
+import './modules/authEventHandlers.js';
 import { initializeAuthentication } from './modules/initialize.js';
 
 // VALIDATE IF IS ALREADY AUTHENTICATED
