@@ -10,10 +10,13 @@ import {
 import {
   handleInputChange,
   handleFormSubmit,
-  handleMessage,
   handleResetAuthData,
   handleKeyInputChange,
 } from './authFunctions.js';
+
+import {
+  handleMessage
+} from './handleMessage.js';
 
 //########## Listener to All messages from Background.js #########
 chrome.runtime.onMessage.addListener(handleMessage);

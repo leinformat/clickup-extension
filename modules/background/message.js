@@ -1,8 +1,9 @@
 // message.js
 import { handleDataKey, handleFormData, handleResetAuthAll } from "./auth.js";
+import { gettingTasks } from "./tasks.js";
 
 // Function to handle incoming messages
-export async function handleMessage(request, sender, sendResponse) {
+export function handleMessage(request, sender, sendResponse) {
   if (request.dataKey) {
     handleDataKey(request.dataKey);
   }
@@ -11,6 +12,9 @@ export async function handleMessage(request, sender, sendResponse) {
   }
   if (request.resetAuthDataAll) {
     handleResetAuthAll(sendResponse);
+  }
+  if(request.listTasks){
+    gettingTasks();
   }
 }
 

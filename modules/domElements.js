@@ -11,6 +11,9 @@ const submit = document.querySelector(".clickup-extension__submit");
 const dataContent = document.querySelector('.clickup-extension__content');
 const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll');
 
+// Tasks
+const tasksContainer = document.querySelector('.clickup-extension__tasks');
+
 export {
   authContainer,
   authenticationForm,
@@ -23,4 +26,5 @@ export {
   submit,
   dataContent,
   btnResetAuthAll,
+  tasksContainer,
 };

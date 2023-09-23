@@ -1,5 +1,5 @@
 // auth.js
-const apiUrl = "https://api.clickup.com/api/v2/team/";
+export const apiUrl = "https://api.clickup.com/api/v2/team/";
 
 // Function to handle API key authentication
 export async function handleDataKey(apikey) {
@@ -58,7 +58,7 @@ export async function handleFormData({ team, email, key }) {
           userName: username,
           userId: id,
           userAvatar: profilePicture,
-          ApiKey: key,
+          apiKey: key,
         },
         (e) => {
           if (chrome.runtime.lastError) {

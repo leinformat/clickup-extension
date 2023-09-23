@@ -25,22 +25,6 @@ export function handleFormSubmit(event) {
   }
 }
 
-// Function to handle messages from the background
-export function handleMessage(request, sender, sendResponse) {
-  if (request.invalidKey) {
-    handleInvalidKey(request.invalidKey);
-  }
-  if (request.validKey) {
-    handleValidKey(request.validKey);
-  }
-  if (request.invalidEmail) {
-    handleInvalidEmail(request.invalidEmail);
-  }
-  if (request.validEmail) {
-    handleValidEmail();
-  }
-}
-
 // Function to handle invalid key
 export function handleInvalidKey(dataError) {
   dom.spinner.classList.remove("active");
@@ -84,6 +68,7 @@ export function handleValidEmail() {
   dom.spinner.classList.remove("active");
   dom.authContainer.classList.remove("active");
   dom.dataContent.classList.remove('hide');
+  chrome.runtime.sendMessage({ listTasks: true });
 }
 
 // Function to reset all Dom authentication
