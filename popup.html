@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Popup</title>
+  <title>Clickup Extension</title>
+  <!-- Fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Styles -->
   <link rel="stylesheet" href="./css/popup.css">
 </head>
 <body>
   
   <main class="clickup-extension">
-    <h1>Clickup Extension</h1>
+    <h1><span>Clickup Extension</span> for Chrome</h1>
     <section class="clickup-extension__user-auth-data">
       <form class="clickup-extension__form">
         <div class="clickup-extension__spinner">
@@ -47,11 +50,21 @@
                 <img src="https://attachments.clickup.com/profilePictures/55308011_ui9.jpg" class="clickup-extension__img-asignBy">
               </div>
               <div class="clickup-extension__head-text">
-                <p class="clickup-extension__asignBy">David Barrios</p>
-                <p class="clickup-extension__task-name">Pack Leader USA - Create "Listing" Template to New Theme - [HubSpot ID
-                  1818694] [CP-6266]</p>
-                <p class="clickup-extension__task-status">to be delivered</p>
-                <a class="clickup-extension__task-link" target="_blank">Ir a la Tarea</a>
+                <div class="clickup-extension__name-status">
+                  <div class="clickup-extension__asignBy-container">
+                    <span class="clickup-extension__label">Assigned By:</span>
+                    <span class="clickup-extension__asignBy">David Barrios</span>
+                  </div>
+                  <div class="clickup-extension__task-status-container">
+                    <span class="clickup-extension__label">Status:</span>
+                    <span class="clickup-extension__task-status">to be delivered</span>
+                  </div>
+                </div>
+                <a href="#" class="clickup-extension__task-name">Pack Leader USA - Create "Listing" Template to New Theme - [HubSpot ID
+                  1818694] [CP-6266]</a>
+              </div>
+              <div class="clickup-extension__task-head-icon">
+                <i title="Show More" class="fa-solid fa-plus fa-beat-fade fa-lg"></i>
               </div>
             </header>
           </div>

@@ -9,6 +9,7 @@
     --yellow:#FFD700;
     --white: #fff;
     --black: #000;
+    --body: #0e101a;
 
     /* FONTS */
     --baseFontSize: 14px;
@@ -24,10 +25,19 @@
 body{
     font-size:var(--baseFontSize);
     font-family: 'Montserrat', sans-serif;
+    color: var(--body);
 }
 h1{
-    font-size:2rem;
+    font-size:1.2rem;
     color: var(--primary);
+}
+h1 > span{
+    color:var(--blue);
+}
+.clickup-extension__label{
+    font-size:1.02rem;
+    color: var(--primary);
+    font-weight: 700;
 }
 .clickup-extension{
     width: var(--width);
@@ -91,11 +101,13 @@ h1{
     height:20px;
 }
 /**************** End Authentication ******************/
+
 /**************** Task ******************/
 .clickup-extension__tasks-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-top:10px;
 }
 .clickup-extension__task{
    border-radius: 20px;
@@ -106,18 +118,33 @@ h1{
     display:grid;
     grid-column-gap: 15px;
     grid-row-gap: 20px;
-    grid-template-columns: 50px auto;
+    grid-template-columns: 40px auto 50px;
+    align-items: center;
 }
 .clickup-extension__img-container{
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     overflow: hidden;
     border-radius: 50%;
 }
 .clickup-extension__img-asignBy{
     width: 100%;
 }
-
+.clickup-extension__name-status {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding-bottom: 5px;
+}
+.clickup-extension__task-head-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.clickup-extension__task-head-icon > i{
+    color:var(--primary);
+    cursor: pointer;
+}
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{
