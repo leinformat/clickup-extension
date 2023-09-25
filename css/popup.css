@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 :root{
     /* COLORS */
     --primary: #F66129;
@@ -10,7 +11,7 @@
     --black: #000;
 
     /* FONTS */
-    --baseFontSize: 16px;
+    --baseFontSize: 14px;
 
     /* LAYOUT */
     --width:600px;
@@ -22,6 +23,7 @@
 }
 body{
     font-size:var(--baseFontSize);
+    font-family: 'Montserrat', sans-serif;
 }
 h1{
     font-size:2rem;
@@ -33,7 +35,7 @@ h1{
     padding: 20px;
 }
 
-/* Authentication */
+/**************** Authentication ******************/
 .clickup-extension__user-auth-data{
     position: relative;
     display: none;
@@ -88,7 +90,35 @@ h1{
     width:20px;
     height:20px;
 }
+/**************** End Authentication ******************/
+/**************** Task ******************/
+.clickup-extension__tasks-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.clickup-extension__task{
+   border-radius: 20px;
+   box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+   padding:10px;
+}
+.clickup-extension__task-header{
+    display:grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 20px;
+    grid-template-columns: 50px auto;
+}
+.clickup-extension__img-container{
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+.clickup-extension__img-asignBy{
+    width: 100%;
+}
 
+/**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{
     display:none;

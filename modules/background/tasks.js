@@ -11,14 +11,13 @@ export const gettingTasks = () =>{
       },
       });
 
-      const response = await req.json();
+      const response = await req.json(); 
 
       if (response.err) {
         console.log(response.err);
         return chrome.runtime.sendMessage({ gettingTaskErr: 'Error to getting Tasks' });
       }
       chrome.runtime.sendMessage({ allDataTasks: response.tasks });
-      console.log(response.tasks);
     }catch(err){
         console.log("We've had an Error: "+err);
     }

@@ -1,4 +1,4 @@
-// DOM elements
+// Auth
 const authContainer = document.querySelector(".clickup-extension__user-auth-data");
 const authenticationForm = document.querySelector(".clickup-extension__form");
 const keyInput = document.querySelector(".clickup-extension__key");
@@ -9,10 +9,11 @@ const emailError = document.querySelector(".clickup-extension__email-error");
 const email = document.querySelector(".clickup-extension__email");
 const submit = document.querySelector(".clickup-extension__submit");
 const dataContent = document.querySelector('.clickup-extension__content');
-const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll');
+const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll'); 
 
 // Tasks
-const tasksContainer = document.querySelector('.clickup-extension__tasks');
+const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
+const task = tasksContainer.querySelector('.clickup-extension__task');
 
 export {
   authContainer,
@@ -27,4 +28,5 @@ export {
   dataContent,
   btnResetAuthAll,
   tasksContainer,
+  task,
 };
