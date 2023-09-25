@@ -110,16 +110,18 @@ h1 > span{
     margin-top:10px;
 }
 .clickup-extension__task{
-   border-radius: 20px;
-   box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
-   padding:10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+    border-radius: 20px;
 }
-.clickup-extension__task-header{
-    display:grid;
+.clickup-extension__task-header {
+    display: grid;
     grid-column-gap: 15px;
     grid-row-gap: 20px;
     grid-template-columns: 40px auto 50px;
     align-items: center;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+    padding: 10px;
 }
 .clickup-extension__img-container{
     width: 40px;
@@ -144,6 +146,24 @@ h1 > span{
 .clickup-extension__task-head-icon > i{
     color:var(--primary);
     cursor: pointer;
+}
+.clickup-extension__task-show-content{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 0 0 20px 20px;
+    padding: 10px;
+}
+.clickup-extension__date-info{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.clickup-extension__estimated-info{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+}
+.clickup-extension__task-descripion{
+    word-break: break-word;
 }
 /**************** End Task ******************/
 /* General Styles */
