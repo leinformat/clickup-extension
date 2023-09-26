@@ -14,6 +14,7 @@ const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
 const task = tasksContainer.querySelector('.clickup-extension__task');
+const allTasks = document.querySelectorAll('.clickup-extension__task');
 
 export {
   authContainer,
@@ -29,4 +30,5 @@ export {
   btnResetAuthAll,
   tasksContainer,
   task,
+  allTasks,
 };

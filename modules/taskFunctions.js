@@ -1,4 +1,4 @@
-import { tasksContainer, task } from "./domElements.js";
+import { tasksContainer, task, allTasks } from "./domElements.js";
 
 
 const dateFormat = (unix, format)=>{
@@ -34,35 +34,56 @@ const dateFormat = (unix, format)=>{
   }
 }
 
+
 function formatText(text) {
   // Replace line breaks with <br> tags
-  text = text.replace(/\n/g, "<br>");
-  // Remove asterisks around the text
-  text = text.replace(/\*+/g, "");
-  return text;
+  const textIndex = text.toLowerCase().indexOf("what we need to do");
+
+  if (textIndex !== -1) {
+    let newText = text.substring(textIndex);
+    newText =  newText.replace(/\n/g, "<br>");
+    // Remove asterisks around the text
+    newText = newText.replace(/\*+/g, "");
+    return newText;
+  }
+  return 'Open the Task to more information';
+}
+
+function openTask(taskBtn){
+  if(!taskBtn) throw new Error('Sorry There is no a btn node');
+
+  const parentContainer = taskBtn.closest(".clickup-extension__task");
+  
+  if(parentContainer.classList.contains('active')){
+    parentContainer.classList.remove('active');
+  }else{
+    console.log(document.querySelector('.clickup-extension__task.active'));
+
+    if(document.querySelector('.clickup-extension__task.active') !== null){
+      document.querySelector('.clickup-extension__task.active').classList.remove('active');
+    }
+    
+    parentContainer.classList.add('active');
+  }
 }
 
 function taskTemplate(data, clonedCard) {
+    // Add Listener to All Tasks
+    const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
+
+    openTaskBtn.addEventListener("click",(event)=>{
+      openTask(event.target);
+    });
+  
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     assignedByImg.src = data.creator.profilePicture;
     assignedByImg.alt = data.creator.username;
 
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
     taskName.href = data.url;
-    taskName.textContent = data.name.slice(0, 60) + " ...";
+    taskName.textContent = data.name.slice(0, 60) + " ..."; 
     taskName.title = "Go to Task";
     taskName.target = '_blank';
-
-    const timestamp = 1692395050355;
-    const fecha = new Date(timestamp);
-    const options = {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    };
 
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
@@ -93,5 +114,4 @@ export function handleTasks(tasks) {
       tasksContainer.appendChild(clonedCard);
     });
   }
-  //tasksContainer.innerHTML = '<h5>Aqui se listaran las tareas</h5>';
 }

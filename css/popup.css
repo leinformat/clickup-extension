@@ -148,7 +148,7 @@ h1 > span{
     cursor: pointer;
 }
 .clickup-extension__task-show-content{
-    display: flex;
+    display:none;
     flex-direction: column;
     gap: 15px;
     border-radius: 0 0 20px 20px;
@@ -168,5 +168,8 @@ h1 > span{
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{
-    display:none;
+    display: none;
+}
+.clickup-extension__task.active .clickup-extension__task-show-content{
+    display: flex;
 }
