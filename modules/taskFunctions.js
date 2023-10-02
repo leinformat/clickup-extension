@@ -37,10 +37,11 @@ const dateFormat = (unix, format)=>{
 
 function formatText(text) {
   // Replace line breaks with <br> tags
-  const textIndex = text.toLowerCase().indexOf("what we need to do");
+  const startIndextText = text.toLowerCase().indexOf("what we need to do");
+  const endIndextText = text.toLowerCase().indexOf("platform");
 
-  if (textIndex !== -1) {
-    let newText = text.substring(textIndex);
+  if (startIndextText !== -1) {
+    let newText = text.substring(startIndextText,endIndextText);
     newText =  newText.replace(/\n/g, "<br>");
     // Remove asterisks around the text
     newText = newText.replace(/\*+/g, "");
@@ -57,8 +58,6 @@ function openTask(taskBtn){
   if(parentContainer.classList.contains('active')){
     parentContainer.classList.remove('active');
   }else{
-    console.log(document.querySelector('.clickup-extension__task.active'));
-
     if(document.querySelector('.clickup-extension__task.active') !== null){
       document.querySelector('.clickup-extension__task.active').classList.remove('active');
     }
@@ -66,7 +65,7 @@ function openTask(taskBtn){
     parentContainer.classList.add('active');
   }
 }
-
+// this Redndered each Task whit its content
 function taskTemplate(data, clonedCard) {
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
@@ -74,7 +73,10 @@ function taskTemplate(data, clonedCard) {
     openTaskBtn.addEventListener("click",(event)=>{
       openTask(event.target);
     });
-  
+
+    // Card
+    clonedCard.style.border = `solid 2px ${data.status.color}`;
+
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     assignedByImg.src = data.creator.profilePicture;
     assignedByImg.alt = data.creator.username;
@@ -84,6 +86,9 @@ function taskTemplate(data, clonedCard) {
     taskName.textContent = data.name.slice(0, 60) + " ..."; 
     taskName.title = "Go to Task";
     taskName.target = '_blank';
+
+    const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
+    fullTaskName.textContent = data.name;
 
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
@@ -105,6 +110,7 @@ function taskTemplate(data, clonedCard) {
 // Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
+    console.log(tasks)
     tasksContainer.innerHTML="";
     tasks.forEach((data) => {
       const clonedCard = task.cloneNode(true);

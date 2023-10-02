@@ -165,11 +165,14 @@ h1 > span{
 .clickup-extension__task-descripion{
     word-break: break-word;
 }
+.clickup-extension__task.active .clickup-extension__task-show-content{
+    display: flex;
+}
+.clickup-extension__task.active .clickup-extension__task-header{
+    box-shadow: none;
+}
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{
     display: none;
-}
-.clickup-extension__task.active .clickup-extension__task-show-content{
-    display: flex;
 }
