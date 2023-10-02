@@ -110,8 +110,11 @@ h1 > span{
     margin-top:10px;
 }
 .clickup-extension__task{
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+    
     border-radius: 20px;
+}
+.clickup-extension__task:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
 }
 .clickup-extension__task-header {
     display: grid;
@@ -120,8 +123,11 @@ h1 > span{
     grid-template-columns: 40px auto 50px;
     align-items: center;
     border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
+    transition: all 0.5 ease;
     padding: 10px;
+}
+.clickup-extension__task-header:hover{
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 5px;
 }
 .clickup-extension__img-container{
     width: 40px;

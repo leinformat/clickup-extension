@@ -83,7 +83,7 @@ function taskTemplate(data, clonedCard) {
 
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
     taskName.href = data.url;
-    taskName.textContent = data.name.slice(0, 60) + " ..."; 
+    taskName.textContent = data.name.slice(0, 55) + " ..."; 
     taskName.title = "Go to Task";
     taskName.target = '_blank';
 
