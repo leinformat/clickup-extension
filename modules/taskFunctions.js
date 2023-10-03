@@ -1,6 +1,6 @@
 import { tasksContainer, task, allTasks } from "./domElements.js";
 
-
+// Funtion to format dates
 const dateFormat = (unix, format)=>{
   if(!unix) throw new Error("Whoops! The unix is necesary");
   const codeUnix = new Date(Number(unix));
@@ -34,6 +34,18 @@ const dateFormat = (unix, format)=>{
   }
 }
 
+// Funtion to Time Format
+function convertToTimeFormat(seconds,format) {
+  if(!seconds) return '0h';
+  
+  if(format == 'h'){
+    // Calculate hours
+    const hours = seconds / 3600000;
+
+    // Return the time in "Xh" format
+    return hours + 'h';
+  }
+}
 
 function formatText(text) {
   // Replace line breaks with <br> tags
@@ -100,9 +112,11 @@ function taskTemplate(data, clonedCard) {
 
     clonedCard.querySelector(".clickup-extension__due-date").textContent = dateFormat(data.due_date,'month-day'); ;
 
-    clonedCard.querySelector(".clickup-extension__tracked").textContent = data.time_spent;
+    clonedCard.querySelector(".clickup-extension__tracked").textContent = convertToTimeFormat(data.time_spent,'h');
+    //clonedCard.querySelector(".clickup-extension__tracked").textContent = data.time_spent;
 
-    clonedCard.querySelector(".clickup-extension__estimated").textContent = data.time_estimate;
+    clonedCard.querySelector(".clickup-extension__estimated").textContent = convertToTimeFormat(data.time_estimate,'h') ;
+    //clonedCard.querySelector(".clickup-extension__estimated").textContent = data.time_estimate;
     clonedCard.querySelector(".clickup-extension__task-descripion").innerHTML = formatText(data.description) ;
 
 }

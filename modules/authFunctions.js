@@ -1,4 +1,5 @@
 import * as dom from './domElements.js';
+import { messages } from './typeMessages.js';
 
 // Function to handle key input change
 export function handleKeyInputChange() {
@@ -68,7 +69,13 @@ export function handleValidEmail() {
   dom.spinner.classList.remove("active");
   dom.authContainer.classList.remove("active");
   dom.dataContent.classList.remove('hide');
+
+  dom.authMessage.textContent = messages.authOk;
   chrome.runtime.sendMessage({ listTasks: true });
+  
+  setTimeout(()=>{
+    dom.authMessage.textContent = '';
+  },3000);  
 }
 
 // Function to reset all Dom authentication
