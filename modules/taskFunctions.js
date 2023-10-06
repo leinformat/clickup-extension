@@ -51,9 +51,14 @@ function convertToTimeFormat(seconds,format) {
 // Funtion GET CUSTOM fIELD
 function getCustomField(data,fieldName){
   if(data.length < 1) return 0;
+
   fieldName = fieldName.toLowerCase();
+
   const field = data.find(item=> item.name.toLowerCase()=== fieldName);
-  return field?.value[0]?? 0;
+  if(!!field.value) {
+    return field.value
+  }
+  return 0;
 }
 
 function formatText(text) {
@@ -87,9 +92,7 @@ function openTask(taskBtn){
   }
 }
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard,fieldData) {
-console.log('here->',fieldData);
-    
+function taskTemplate(data, clonedCard,fieldData) {    
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
 
@@ -99,7 +102,6 @@ console.log('here->',fieldData);
 
     // Add Listener to Copy Qa Comment
     const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
-
     copyTextkBtn.addEventListener("click",(e)=>{
       copyToClick(
         {
@@ -111,7 +113,7 @@ console.log('here->',fieldData);
         },
         e.target);
     });
-    
+  
     // Card
     clonedCard.style.border = `solid 2px ${data.status.color}`;
 
@@ -149,15 +151,16 @@ console.log('here->',fieldData);
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
-    console.log(tasks)
+    //console.log(tasks)
     tasksContainer.innerHTML="";
     tasks.forEach((data) => {
+      //console.log(data);
       const clonedCard = task.cloneNode(true);
 
       /* TASK RENDER */
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
-      
+      console.log(customField)
       taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });
