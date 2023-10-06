@@ -2,7 +2,8 @@ import { tasksContainer, task, allTasks } from "./domElements.js";
 
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
-  if(!unix) throw new Error("Whoops! The unix is necesary");
+  if(!unix) return 0;
+  
   const codeUnix = new Date(Number(unix));
   
   if(format=="month"){
