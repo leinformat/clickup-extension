@@ -189,6 +189,13 @@ h1 > span{
     transform: scale(1.2);
     opacity: .8;
 }
+.clickup-extension__count-all-tasks{
+    margin-top:20px;
+    display:grid;
+    grid-column-gap: 15px;
+    grid-row-gap: 20px;
+    grid-template-columns: repeat(3,1fr);
+}
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{

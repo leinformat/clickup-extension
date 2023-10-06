@@ -1,4 +1,4 @@
-import { tasksContainer, task, allTasks } from "./domElements.js";
+import { tasksContainer, task,countAllTasks } from "./domElements.js";
 import { copyToClick } from './copyText.js';
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
@@ -151,7 +151,8 @@ function taskTemplate(data, clonedCard,fieldData) {
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
-    //console.log(tasks)
+    console.log(tasks)
+    countAllTasks.textContent = tasks.length;
     tasksContainer.innerHTML="";
     tasks.forEach((data) => {
       //console.log(data);

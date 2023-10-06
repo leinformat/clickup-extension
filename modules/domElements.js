@@ -12,10 +12,11 @@ const dataContent = document.querySelector('.clickup-extension__content');
 const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll'); 
 const authMessage = document.querySelector('.clickup-extension__auth-message');
 
+
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
 const task = tasksContainer.querySelector('.clickup-extension__task');
-const allTasks = document.querySelectorAll('.clickup-extension__task');
+const countAllTasks = document.querySelector('.clickup-extension__all-count');
 
 export {
   authContainer,
@@ -31,6 +32,6 @@ export {
   btnResetAuthAll,
   tasksContainer,
   task,
-  allTasks,
   authMessage,
+  countAllTasks,
 };
