@@ -40,12 +40,15 @@
         </div>
       </form>
     </section>
-    <section class="clickup-extension__content hide">
+    <!-- hide -->
+    <section class="clickup-extension__content ">
         <p class="clickup-extension__auth-message"></p>
         <button class="clickup-extension__resetAuthAll">Reset Auth Data</button>
         <div class="clickup-extension__tasks-container">
           <!-- First Task -->
-          <div style="border: solid 1px red;" class="clickup-extension__task">
+
+          <!-- active -->
+          <div style="border: solid 1px red;" class="clickup-extension__task active">
             <!-- Task Header -->
             <header class="clickup-extension__task-header">
               <div class="clickup-extension__img-container">
@@ -71,9 +74,14 @@
             </header>
             <!-- Task Content -->
             <div class="clickup-extension__task-show-content">
-              <div class="clickup-extension__client-info">
-                <span class="clickup-extension__label">Qa:</span>
-                <span class="clickup-extension__qa-name">Manuel Martinez</span>
+              <div class="clickup-extension__qa-info">
+                <div class="clickup-extension__qa-container">
+                  <span class="clickup-extension__label">Qa:</span>
+                  <span class="clickup-extension__qa-name">Manuel Martinez</span>
+                </div>
+                <div class="clickup-extension__copy-container">
+                  <span class="clickup-extension__label">Copy Qa Comment: <i class="fa-solid fa-copy fa-beat clickup-extension--copy-qa-comment"></i></span>
+                </div>
               </div>
               <div class="clickup-extension__client-info">
                 <span class="clickup-extension__label"><i class="fa-solid fa-building"></i></span>

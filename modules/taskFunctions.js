@@ -1,5 +1,5 @@
 import { tasksContainer, task, allTasks } from "./domElements.js";
-
+import { copyToClick } from './copyText.js';
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
   if(!unix) return 0;
@@ -97,6 +97,21 @@ function taskTemplate(data, clonedCard,fieldData) {
       openTask(event.target);
     });
 
+    // Add Listener to Copy Qa Comment
+    const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
+
+    copyTextkBtn.addEventListener("click",(e)=>{
+      copyToClick(
+        {
+          pm:data.creator.username,
+          qa:fieldData.username,
+          url:data.url,
+          client:data.project.name,
+          subClient:data.list.name
+        },
+        e.target);
+    });
+    
     // Card
     clonedCard.style.border = `solid 2px ${data.status.color}`;
 

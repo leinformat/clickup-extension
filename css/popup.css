@@ -149,7 +149,8 @@ h1 > span{
     justify-content: center;
     align-items: center;
 }
-.clickup-extension__task-head-icon > i{
+.clickup-extension__task-head-icon > i,
+.clickup-extension--copy-qa-comment{
     color:var(--primary);
     cursor: pointer;
 }
@@ -160,7 +161,8 @@ h1 > span{
     border-radius: 0 0 20px 20px;
     padding: 10px;
 }
-.clickup-extension__date-info{
+.clickup-extension__date-info,
+.clickup-extension__qa-info{
     display:grid;
     grid-template-columns: repeat(2,1fr);
 }
@@ -179,6 +181,13 @@ h1 > span{
 }
 .clickup-extension__task-status{
     text-transform: capitalize;
+}
+.clickup-extension__copy-container{
+    transition:all .3s ease;
+}
+.clickup-extension__copy-container.copy--ok{
+    transform: scale(1.2);
+    opacity: .8;
 }
 /**************** End Task ******************/
 /* General Styles */
