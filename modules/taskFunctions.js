@@ -43,8 +43,16 @@ function convertToTimeFormat(seconds,format) {
     const hours = seconds / 3600000;
 
     // Return the time in "Xh" format
-    return hours + 'h';
+    return hours.toFixed(2) + 'h';
   }
+}
+
+// Funtion GET CUSTOM fIELD
+function getCustomField(data,fieldName){
+  if(data.length < 1) return;
+  fieldName = fieldName.toLowerCase();
+  const field = data.find(item=> item.name.toLowerCase()=== fieldName);
+  return field.value[0];
 }
 
 function formatText(text) {
@@ -78,7 +86,9 @@ function openTask(taskBtn){
   }
 }
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard) {
+function taskTemplate(data, clonedCard,fieldData) {
+
+    
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
 
@@ -101,6 +111,8 @@ function taskTemplate(data, clonedCard) {
 
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
+    
+    clonedCard.querySelector(".clickup-extension__qa-name").textContent = fieldData.username ? fieldData.username :'Unassigned';
 
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
@@ -108,20 +120,17 @@ function taskTemplate(data, clonedCard) {
 
     clonedCard.querySelector(".clickup-extension__created-date").textContent =  dateFormat(data.date_created,'large');
 
-    clonedCard.querySelector(".clickup-extension__start-date").textContent = dateFormat(data.start_date,'month-day');
+    clonedCard.querySelector(".clickup-extension--status").style.color = data.status.color;
 
     clonedCard.querySelector(".clickup-extension__due-date").textContent = dateFormat(data.due_date,'month-day'); ;
 
     clonedCard.querySelector(".clickup-extension__tracked").textContent = convertToTimeFormat(data.time_spent,'h');
-    //clonedCard.querySelector(".clickup-extension__tracked").textContent = data.time_spent;
 
     clonedCard.querySelector(".clickup-extension__estimated").textContent = convertToTimeFormat(data.time_estimate,'h') ;
-    //clonedCard.querySelector(".clickup-extension__estimated").textContent = data.time_estimate;
     clonedCard.querySelector(".clickup-extension__task-descripion").innerHTML = formatText(data.description) ;
-
 }
 
-// Function to handle Tasks
+// This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
     console.log(tasks)
@@ -130,7 +139,10 @@ export function handleTasks(tasks) {
       const clonedCard = task.cloneNode(true);
 
       /* TASK RENDER */
-      taskTemplate(data, clonedCard);
+      // Get QA DATA ...
+      const customField = getCustomField(data.custom_fields,'qa');
+      
+      taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });
   }

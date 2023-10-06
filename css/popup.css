@@ -35,7 +35,7 @@ h1 > span{
     color:var(--blue);
 }
 .clickup-extension__label{
-    font-size:1.02rem;
+    font-size:.8rem;
     color: var(--primary);
     font-weight: 700;
 }
@@ -166,7 +166,7 @@ h1 > span{
 }
 .clickup-extension__estimated-info{
     display:grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(2,1fr);
 }
 .clickup-extension__task-descripion{
     word-break: break-word;
@@ -176,6 +176,9 @@ h1 > span{
 }
 .clickup-extension__task.active .clickup-extension__task-header{
     box-shadow: none;
+}
+.clickup-extension__task-status{
+    text-transform: capitalize;
 }
 /**************** End Task ******************/
 /* General Styles */
