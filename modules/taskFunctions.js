@@ -50,10 +50,10 @@ function convertToTimeFormat(seconds,format) {
 
 // Funtion GET CUSTOM fIELD
 function getCustomField(data,fieldName){
-  if(data.length < 1) return;
+  if(data.length < 1) return 0;
   fieldName = fieldName.toLowerCase();
   const field = data.find(item=> item.name.toLowerCase()=== fieldName);
-  return field.value[0];
+  return field?.value[0]?? 0;
 }
 
 function formatText(text) {
@@ -88,7 +88,7 @@ function openTask(taskBtn){
 }
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData) {
-
+console.log('here->',fieldData);
     
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
@@ -104,7 +104,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       copyToClick(
         {
           pm:data.creator.username,
-          qa:fieldData.username,
+          qa:fieldData?.username ? fieldData.username :'Unassigned',
           url:data.url,
           client:data.project.name,
           subClient:data.list.name
@@ -128,7 +128,7 @@ function taskTemplate(data, clonedCard,fieldData) {
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
     
-    clonedCard.querySelector(".clickup-extension__qa-name").textContent = fieldData.username ? fieldData.username :'Unassigned';
+    clonedCard.querySelector(".clickup-extension__qa-name").textContent = fieldData?.username ? fieldData.username :'Unassigned';
 
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
