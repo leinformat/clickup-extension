@@ -1,5 +1,6 @@
 import { tasksContainer, task,countAllTasks } from "./domElements.js";
 import { copyToClick } from './copyText.js';
+import { orderTasks,tasksCounter } from "./typeMessages.js";
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
   if(!unix) return 0;
@@ -125,9 +126,28 @@ function taskTemplate(data, clonedCard,fieldData) {
         },
         e.target);
     });
-  
-    // Card
+
+    // Task Status
+    const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
+
+    // Card Container
     clonedCard.style.border = `solid 2px ${data.status.color}`;
+    clonedCard.classList.add('clickup-extension--status-'+taskStatus);
+
+    // Ordering Tasks
+    clonedCard.style.order = orderTasks[taskStatus];
+
+    // Incrent Counter Tasks
+    //tasksCounter[taskStatus] += 1;
+    /*
+    tasksCounter.forEach((item,index) =>{
+      if(item[taskStatus]) {
+        tasksCounter[index][taskStatus] = tasksCounter[index][taskStatus] +1
+      }else{
+        return tasksCounter.push({[taskStatus]: 1})
+      }
+    });
+    */
 
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     
@@ -166,7 +186,10 @@ function taskTemplate(data, clonedCard,fieldData) {
 export function handleTasks(tasks) {
   if (!!tasks.length){
     console.log(tasks)
+
+    // Counter All Tasks
     countAllTasks.textContent = tasks.length;
+    
     tasksContainer.innerHTML="";
     tasks.forEach((data) => {
       //console.log(data);
@@ -178,5 +201,6 @@ export function handleTasks(tasks) {
       taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });
+    console.log(tasksCounter);
   }
 }
