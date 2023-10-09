@@ -118,8 +118,8 @@ function taskTemplate(data, clonedCard,fieldData) {
     clonedCard.style.border = `solid 2px ${data.status.color}`;
 
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    assignedByImg.src = data.creator.profilePicture;
-    assignedByImg.alt = data.creator.username;
+    assignedByImg.src = data.creator.profilePicture ? data.creator.profilePicture : "./images/avatar.png" ;
+    assignedByImg.alt = data.creator.username ;
 
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
     taskName.href = data.url;
