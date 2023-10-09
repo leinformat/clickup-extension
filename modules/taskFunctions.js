@@ -61,6 +61,18 @@ function getCustomField(data,fieldName){
   return 0;
 }
 
+// Funtion GET QA data
+function getDataFromObject(object,value){
+  if(!object.length) return "Unassigned";
+
+  let data = "";
+  object.forEach((item,index) =>{
+    index < object.length -1 ? data += item[value] + ', ' : data += item[value]+ '.';
+  });
+
+  return data;
+}
+
 function formatText(text) {
   // Replace line breaks with <br> tags
   const startIndextText = text.toLowerCase().indexOf("what we need to do");
@@ -92,7 +104,7 @@ function openTask(taskBtn){
   }
 }
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard,fieldData) {    
+function taskTemplate(data, clonedCard,fieldData) {
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
 
@@ -106,7 +118,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       copyToClick(
         {
           pm:data.creator.username,
-          qa:fieldData?.username ? fieldData.username :'Unassigned',
+          qa:fieldData ? getDataFromObject(fieldData,'username') : 'Unassigned',
           url:data.url,
           client:data.project.name,
           subClient:data.list.name
@@ -118,6 +130,7 @@ function taskTemplate(data, clonedCard,fieldData) {
     clonedCard.style.border = `solid 2px ${data.status.color}`;
 
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
+    
     assignedByImg.src = data.creator.profilePicture ? data.creator.profilePicture : "./images/avatar.png" ;
     assignedByImg.alt = data.creator.username ;
 
@@ -129,8 +142,9 @@ function taskTemplate(data, clonedCard,fieldData) {
 
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
-    
-    clonedCard.querySelector(".clickup-extension__qa-name").textContent = fieldData?.username ? fieldData.username :'Unassigned';
+
+    // QA
+    fieldData ? clonedCard.querySelector(".clickup-extension__qa-name").textContent = getDataFromObject(fieldData,'username') : 'Unassigned';
 
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
@@ -161,7 +175,6 @@ export function handleTasks(tasks) {
       /* TASK RENDER */
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
-      console.log(customField)
       taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });
