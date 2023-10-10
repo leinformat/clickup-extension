@@ -8,9 +8,10 @@ export const orderTasks = {
     qa: -2,
     accepted: -1,
     "to-be-delivered": 0,
-    blocked: 1
+    blocked: 1,
+    "all-tasks":2,
 }
 
-export const tasksCounter = [
-    {allTasks: 0}
-]
+export const tasksCounter = {
+    "all-tasks": 0
+}

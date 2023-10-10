@@ -16,7 +16,7 @@ const authMessage = document.querySelector('.clickup-extension__auth-message');
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
 const task = tasksContainer.querySelector('.clickup-extension__task');
-const countAllTasks = document.querySelector('.clickup-extension__all-count');
+const countTasksContainer = document.querySelector('.clickup-extension__counter-tasks');
 
 export {
   authContainer,
@@ -33,5 +33,5 @@ export {
   tasksContainer,
   task,
   authMessage,
-  countAllTasks,
+  countTasksContainer,
 };

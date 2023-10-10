@@ -1,4 +1,4 @@
-import { tasksContainer, task,countAllTasks } from "./domElements.js";
+import { tasksContainer, task,countTasksContainer } from "./domElements.js";
 import { copyToClick } from './copyText.js';
 import { orderTasks,tasksCounter } from "./typeMessages.js";
 // Funtion to format dates
@@ -100,10 +100,22 @@ function openTask(taskBtn){
     if(document.querySelector('.clickup-extension__task.active') !== null){
       document.querySelector('.clickup-extension__task.active').classList.remove('active');
     }
-    
     parentContainer.classList.add('active');
   }
 }
+
+// Function to counter tasks
+function handlerCounterTask(taskData,node){
+  node.innerHTML = '';
+  for (const task in taskData) {
+    node.innerHTML += `<div class="clickup-extension__count-task" style="order:${orderTasks[task]}">
+                          <span class="clickup-extension__label">${task.replace(/-/g, " ")}: </span>
+                          <span class="clickup-extension__count">${taskData[task]}</span>
+                        </div>`;
+
+  }
+}
+
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData) {
     // Add Listener to All Tasks
@@ -138,16 +150,8 @@ function taskTemplate(data, clonedCard,fieldData) {
     clonedCard.style.order = orderTasks[taskStatus];
 
     // Incrent Counter Tasks
-    //tasksCounter[taskStatus] += 1;
-    /*
-    tasksCounter.forEach((item,index) =>{
-      if(item[taskStatus]) {
-        tasksCounter[index][taskStatus] = tasksCounter[index][taskStatus] +1
-      }else{
-        return tasksCounter.push({[taskStatus]: 1})
-      }
-    });
-    */
+    tasksCounter['all-tasks']++;
+    tasksCounter[taskStatus] ? tasksCounter[taskStatus]++ : tasksCounter[taskStatus] = 1;
 
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     
@@ -186,9 +190,6 @@ function taskTemplate(data, clonedCard,fieldData) {
 export function handleTasks(tasks) {
   if (!!tasks.length){
     console.log(tasks)
-
-    // Counter All Tasks
-    countAllTasks.textContent = tasks.length;
     
     tasksContainer.innerHTML="";
     tasks.forEach((data) => {
@@ -201,6 +202,8 @@ export function handleTasks(tasks) {
       taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });
-    console.log(tasksCounter);
+    
+    // Counter All Tasks
+    handlerCounterTask(tasksCounter,countTasksContainer)
   }
 }

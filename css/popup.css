@@ -189,13 +189,16 @@ h1 > span{
     transform: scale(1.2);
     opacity: .8;
 }
-.clickup-extension__count-all-tasks{
-    margin-top:20px;
-    display:grid;
-    grid-column-gap: 15px;
-    grid-row-gap: 20px;
-    grid-template-columns: repeat(3,1fr);
+.clickup-extension__counter-tasks{
+    margin:20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
+.clickup-extension__label{
+    text-transform: capitalize;
+}
+
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{
