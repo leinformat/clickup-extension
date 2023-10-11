@@ -104,16 +104,40 @@ function openTask(taskBtn){
   }
 }
 
+// Function to Select tab tasks
+function handlerTaskTab(statusData){
+  const status = statusData.dataset.status;
+
+  const allTasks = document.querySelectorAll(`.clickup-extension__task`);
+
+  allTasks.forEach(task =>{
+    if(status !== 'all-tasks'){
+      if(task.classList.contains(`clickup-extension--status-${status}`)){
+        task.classList.add('show-only');
+      }else{
+        task.classList.remove('show-only');
+      }
+    }else{
+      task.classList.add('show-only');
+    }
+  });
+}
+
 // Function to counter tasks
 function handlerCounterTask(taskData,node){
   node.innerHTML = '';
   for (const task in taskData) {
-    node.innerHTML += `<div class="clickup-extension__count-task" style="order:${orderTasks[task]}">
+    node.innerHTML += `<div class="clickup-extension__count-task" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
                           <span class="clickup-extension__label">${task.replace(/-/g, " ")}: </span>
                           <span class="clickup-extension__count">${taskData[task]}</span>
                         </div>`;
-
   }
+  const allTasksStatus = node.querySelectorAll('.clickup-extension__count-task');
+  allTasksStatus.forEach( status => {
+    status.addEventListener("click",(event)=>{
+      handlerTaskTab(status);
+    });
+  })
 }
 
 // this Redndered each Task whit its content
@@ -170,6 +194,9 @@ function taskTemplate(data, clonedCard,fieldData) {
     // QA
     fieldData ? clonedCard.querySelector(".clickup-extension__qa-name").textContent = getDataFromObject(fieldData,'username') : 'Unassigned';
 
+    // Poinst
+    clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
+
     clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
     clonedCard.querySelector(".clickup-extension__client-name").textContent = `${data.project.name} | ${data.list.name}`;
@@ -196,9 +223,10 @@ export function handleTasks(tasks) {
       //console.log(data);
       const clonedCard = task.cloneNode(true);
 
-      /* TASK RENDER */
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
+
+      /* TASK RENDER */
       taskTemplate(data, clonedCard,customField);
       tasksContainer.appendChild(clonedCard);
     });

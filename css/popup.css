@@ -168,7 +168,9 @@ h1 > span{
 }
 .clickup-extension__estimated-info{
     display:grid;
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 10px;
+    row-gap: 10px;
 }
 .clickup-extension__task-descripion{
     word-break: break-word;
@@ -198,7 +200,12 @@ h1 > span{
 .clickup-extension__label{
     text-transform: capitalize;
 }
-
+.clickup-extension__count-task{
+    cursor: pointer;
+}
+.clickup-extension__task:not(.show-only){
+    display:none;
+}
 /**************** End Task ******************/
 /* General Styles */
 .clickup-extension__content.hide{

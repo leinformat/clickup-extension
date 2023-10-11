@@ -1,4 +1,4 @@
-console.log('aqui')
+//console.log('aqui')
 
 chrome.runtime.onMessage.addListener(async function (request, sender, sendResponse) {
     if (request.notification) {
