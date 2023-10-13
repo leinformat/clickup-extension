@@ -1,0 +1,8 @@
+/******* General *******/
+@import "../general.css";
+
+/*** Authentication ***/
+@import "./authentication.css";
+
+/******* Tasks *******/
+@import "./tasks.css";

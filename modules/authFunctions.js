@@ -40,7 +40,7 @@ export function handleValidKey(teams) {
   dom.keyInput.classList.remove("clickup-extension__error");
   dom.keyInput.classList.add("clickup-extension__valid");
   dom.keyInput.readOnly = true;
-  dom.teamOptions.classList.add("active");
+  dom.teamContainer.classList.add("active");
   dom.keyError.textContent = "";
   
   dom.teamOptions.innerHTML = '';
@@ -91,10 +91,5 @@ export const handleResetAll = () =>{
 
 // Function to handle reset all authentication data
 export function handleResetAuthData() {
-  chrome.runtime.sendMessage({ resetAuthDataAll: true }, async(res) => {
-    const response = await res;
-    if(response.resetAuthAll){
-      handleResetAll();
-    }
-  });
+  chrome.runtime.sendMessage({ resetAuthDataAll: true });
 }

@@ -1,0 +1,105 @@
+.clickup-extension__user-auth-data{
+    position: relative;
+    padding-top: 10px;
+    display: none;
+}
+.clickup-extension__user-auth-data.active{
+    display: block;
+}
+.clickup-extension__team-options-container,
+.clickup-extension__submit-content,
+.clickup-extension__email-content{
+    display: none;
+}
+.clickup-extension__spinner{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    position: absolute;
+    top:0;
+    bottom:0;
+    left: 0;
+    right:0;
+    z-index: -1;
+}
+.clickup-extension__spinner.active{
+    display: flex;
+    z-index: 1;
+}
+.clickup-extension__key,
+.clickup-extension__email{
+    border: solid 1px var(--body);
+    border-radius:5px;
+    padding: 10px;
+    font-weight: 700;
+    color: var(--body);
+}
+.clickup-extension__key:focus,
+.clickup-extension__email:focus{
+    border: solid 2px var(--blue);
+}
+.clickup-extension__key::placeholder,
+.clickup-extension__email::placeholder{
+    color: var(--secondary);
+    font-weight: 700;
+}
+.clickup-extension__key-content,
+.clickup-extension__team-options-container.active,
+.clickup-extension__team-options,
+.clickup-extension__submit-content.active,
+.clickup-extension__email-content.active{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+}
+.clickup-extension__email-content.active{
+    padding-top: 10px;
+}
+.clickup-extension__email-content.active > label{
+    padding-top: 5px;
+}
+.clickup-extension__team-options-container.active,
+.clickup-extension__submit-content.active{
+    padding-top: 20px;
+}
+.clickup-extension__error{
+    border: 3px solid var(--error);
+    color: var(--error);
+}
+.clickup-extension__key-error,
+.clickup-extension__email-error{
+    color: var(--error);
+    font-weight: 700;
+}
+.clickup-extension__valid{
+    border: 3px solid var(--green);
+}
+.clickup-extension__radio-opt{
+    display: flex;
+    gap: 10px;
+}
+.clickup-extension__radio-opt img{
+    width:20px;
+    height:20px;
+}
+.clickup-extension__submit{
+    width: fit-content;
+    padding: 8px 12px;
+    border: none;
+    background-color: var(--blue);
+    border-radius: 5px;
+    color: var(--white);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.clickup-extension__resetAuthAll{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    top: 20px;
+    border:none;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--blue);
+}

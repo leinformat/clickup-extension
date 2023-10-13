@@ -5,7 +5,7 @@
   <!-- Fontawesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Styles -->
-  <link rel="stylesheet" href="./css/popup.css">
+  <link rel="stylesheet" href="./css//popup/popup.css">
 </head>
 <body>
   
@@ -17,23 +17,22 @@
           <img src="./images/spinner.gif" alt="spiner">
         </div>
         <div class="clickup-extension__key-content">
-          <label for="api-key">
-            Your Api Key
+          <label class="clickup-extension__label" for="api-key">
             <span class="clickup-extension__key-error"></span>
           </label>
-          <input id="api-key" class="clickup-extension__key" type="text" name="key" placeholder="Enter your Api Key" required autofocus>
+          <input id="api-key" class="clickup-extension__key" type="text" name="key" placeholder="Enter your API Token" required autofocus>
         </div>
-
-        <div class="clickup-extension__team-options">
-          <p>Please Select a Workspace</p>
-          <!-- Team Options -->
+        <div class="clickup-extension__team-options-container">
+          <p class="clickup-extension__label-2">Please Select a Workspace</p>
+          <div class="clickup-extension__team-options">
+            <!-- Team Options -->
+          </div>
         </div>
         <div class="clickup-extension__email-content">
           <label>
-            Enter Your Email
             <span class="clickup-extension__email-error"></span>
           </label>
-          <input class="clickup-extension__email" type="email" name="email" required>
+          <input class="clickup-extension__email" type="email" name="email" placeholder="Enter Your Email" required>
         </div>
         <div class="clickup-extension__submit-content">
           <input class="clickup-extension__submit" type="submit" value="Save">
@@ -43,7 +42,7 @@
     <!-- hide -->
     <section class="clickup-extension__content hide">
         <p class="clickup-extension__auth-message"></p>
-        <button class="clickup-extension__resetAuthAll">Reset Auth Data</button>
+        <button title="Settings" class="clickup-extension__resetAuthAll"><i class="fa-solid fa-gear fa-xl"></i></button>
         <header class="clickup-extension__counter-tasks">
           <!-- Counter Tasks -->
         </header>

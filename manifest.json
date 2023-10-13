@@ -34,5 +34,6 @@
       "js": ["content-script.js"],
       "type": "module"
     }
-  ]
+  ],
+  "options_page": "options.html"
 }

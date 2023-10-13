@@ -75,12 +75,13 @@ function getDataFromObject(object,value){
 }
 
 function formatText(text) {
-  // Replace line breaks with <br> tags
+  // Find the start and end text
   const startIndextText = text.toLowerCase().indexOf("what we need to do");
   const endIndextText = text.toLowerCase().indexOf("platform");
 
   if (startIndextText !== -1) {
     let newText = text.substring(startIndextText,endIndextText);
+    // Replace line breaks with <br> tags
     newText =  newText.replace(/\n/g, "<br>");
     // Remove asterisks around the text
     newText = newText.replace(/\*+/g, "");
@@ -177,11 +178,13 @@ function taskTemplate(data, clonedCard,fieldData) {
     tasksCounter['all-tasks']++;
     tasksCounter[taskStatus] ? tasksCounter[taskStatus]++ : tasksCounter[taskStatus] = 1;
 
+    // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    
     assignedByImg.src = data.creator.profilePicture ? data.creator.profilePicture : "./images/avatar.png" ;
-    assignedByImg.alt = data.creator.username ;
+    assignedByImg.alt = data.creator.username;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
 
+    // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
     taskName.href = data.url;
     taskName.textContent = data.name.slice(0, 55) + " ..."; 
@@ -196,8 +199,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
-
-    clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
+    
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
     clonedCard.querySelector(".clickup-extension__client-name").textContent = `${data.project.name} | ${data.list.name}`;
 
