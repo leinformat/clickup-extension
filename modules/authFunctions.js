@@ -1,5 +1,7 @@
 import * as dom from './domElements.js';
+import { renderUserData } from './settings/settingsFunctions.js';
 import { messages } from './typeMessages.js';
+
 
 // Function to handle key input change
 export function handleKeyInputChange() {
@@ -92,4 +94,5 @@ export const handleResetAll = () =>{
 // Function to handle reset all authentication data
 export function handleResetAuthData() {
   chrome.runtime.sendMessage({ resetAuthDataAll: true });
+  renderUserData({});
 }

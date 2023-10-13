@@ -22,6 +22,18 @@
     padding-bottom: 5px;
     border-bottom: 1px solid #00000015;
 }
+.clickup-settings__profile-info {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.clickup-settings__user-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
 @media(min-width:600px){
     .clickup-settings__container {
         min-width: 600px;
