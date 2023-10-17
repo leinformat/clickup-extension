@@ -1,6 +1,8 @@
 import {apiUrl} from './auth.js';
+import { handlerNotifications } from './notification.js';
 
-export const gettingTasks = () =>{
+
+export const gettingTasks = (action) =>{
   chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], async (result) => {
   try {
       const {apiKey,teamId,userId} = await result;
@@ -17,7 +19,14 @@ export const gettingTasks = () =>{
         console.log(response.err);
         return chrome.runtime.sendMessage({ gettingTaskErr: 'Error to getting Tasks' });
       }
-      chrome.runtime.sendMessage({ allDataTasks: response.tasks });
+
+      // getting notification
+      if(action === 'notification'){
+        handlerNotifications(response.tasks);
+      }else{
+        console.log('entré tasks');
+        chrome.runtime.sendMessage({ allDataTasks: response.tasks });
+      }
     }catch(err){
         console.log("We've had an Error: "+err);
     }

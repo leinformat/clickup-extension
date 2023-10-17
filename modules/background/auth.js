@@ -49,7 +49,7 @@ export async function handleFormData({ team, email, key }) {
       chrome.runtime.sendMessage({ invalidEmail: "Invalid Email" });
     } else {
       const { username, id, profilePicture } = userData.user;
-      chrome.runtime.sendMessage({ validEmail: email });
+      chrome.runtime.sendMessage({ validEmail: {userAvatar : profilePicture, userEmail : email, userName : username} });
 
       chrome.storage.local.set(
         {

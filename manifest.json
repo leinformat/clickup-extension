@@ -14,7 +14,8 @@
     "tabs",
     "webNavigation",
     "contextMenus",
-    "scripting"
+    "scripting",
+    "offscreen"
   ],
   "background": {
     "service_worker": "background.js",
@@ -31,9 +32,17 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content-script.js"],
-      "type": "module"
+      "css": ["./plugins/sweetalert/sweetalert2.min.css"],
+      "js": ["./plugins/sweetalert/sweetalert2.all.min.js","content-script.js"]
+    
     }
   ],
-  "options_page": "options.html"
+  "options_page": "options.html",
+  "web_accessible_resources": [
+    {
+      "resources": ["audio/tarea-actualizada.mp3"],
+      "matches": [ "<all_urls>" ],
+      "run_at": "document_idle"
+    }
+  ]
 }

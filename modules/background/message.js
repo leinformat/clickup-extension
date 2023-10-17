@@ -16,10 +16,7 @@ export function handleMessage(request, sender, sendResponse) {
   if(request.listTasks){
     gettingTasks();
   }
-  if(request.notification){
-    //console.log(request);
-  }
 }
 
 // Add listener to handle messages
-chrome.runtime.onMessage.addListener(handleMessage);
+//chrome.runtime.onMessage.addListener(handleMessage);

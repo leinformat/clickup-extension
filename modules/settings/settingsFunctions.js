@@ -8,10 +8,7 @@ export const goToSettings = () =>{
 export const renderUserData = (data) =>{
   if( data == {}) return null;
 
-  console.log(data)
   const {userAvatar : avatar, userEmail : email, userName : name} = data;
-
-  console.log(email)
 
   userAvatar.src = avatar ? avatar : './images/avatar.png';
   userName.textContent = name ? name : 'Undefined';
