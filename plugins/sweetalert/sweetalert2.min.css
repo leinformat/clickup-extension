@@ -20,11 +20,13 @@
     color: #fff!important;
     text-transform: capitalize;
     font-size: 14px!important;
+    margin:0!important;
 }
 .colored-toast .task__notification-container a{
     text-decoration: underline;
     transition: all .05s ease!important;
     font-size: 14px!important;
+    margin:0!important;
 }
 .colored-toast .task__notification-container a:hover{
     color:#ffffff99!important;
@@ -33,6 +35,7 @@
     font-weight: 700;
     color:#fff!important;
     font-size: 14px!important;
+    margin:0!important;
 }
 .colored-toast .swal2-close{
     position: absolute!important;

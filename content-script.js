@@ -34,10 +34,11 @@ const formatMessage = (dataMessage) =>{
   let message = '';
   dataMessage.forEach(item =>{
     message += `<div class="task__notification-container">
+                  <p><span class="task__bold">PM:</span> ${ item.creator.username }</p>
                   <p><span class="task__bold">Task Status:</span> ${ item.status.status }</p>
                   <p>
                     <span class="task__bold">Task Name:</span>
-                    <span><a target="__blank" href="${item.url}">${ item.name }</a></span> 
+                    <span><a target="__blank" href="${item.url}"> ${ item.name }</a></span> 
                   </p>
                 </div>`;
   });
