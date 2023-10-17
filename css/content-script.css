@@ -1,0 +1,6 @@
+.button--developer-mode{
+    position: absolute;
+    z-index: 100;
+    right: 25%;
+    top: 12px;
+}
