@@ -50,3 +50,9 @@ h1 > span{
     min-height: var(--height);
     padding: 20px;
 }
+.button--developer-mode{
+    position: absolute;
+    z-index: 100;
+    right: 200px;
+    top: 12px;
+}

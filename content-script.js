@@ -57,3 +57,16 @@ const formatMessage = (dataMessage) =>{
     }
   });
 })();
+
+window.addEventListener('load', (e)=> {
+const currentUrl = window.location.href;
+if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")){
+  const buttonContainer = document.body;
+  console.log(buttonContainer);
+  const dvmButton = document.createElement("a");
+  dvmButton.classList.add('button--developer-mode','private-button','private-button--secondary--ghost','private-button--sm');
+  dvmButton.href = `${currentUrl}?developerMode=true`;
+  dvmButton.textContent = 'Developer Mode';
+  buttonContainer.prepend(dvmButton);
+}
+});
