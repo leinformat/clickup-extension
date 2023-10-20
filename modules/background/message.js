@@ -1,5 +1,6 @@
 // message.js
 import { handleDataKey, handleFormData, handleResetAuthAll } from "./auth.js";
+import { pageReload } from "./developer.js";
 import { gettingTasks } from "./tasks.js";
 
 // Function to handle incoming messages
@@ -16,7 +17,7 @@ export function handleMessage(request, sender, sendResponse) {
   if(request.listTasks){
     gettingTasks();
   }
+  if(request.pageToreload){
+    pageReload(request.pageToreload);
+  }
 }
-
-// Add listener to handle messages
-//chrome.runtime.onMessage.addListener(handleMessage);

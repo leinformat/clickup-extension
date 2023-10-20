@@ -65,13 +65,26 @@ const formatMessage = (dataMessage) =>{
 
 window.addEventListener('load', (e)=> {
 const currentUrl = window.location.href;
-if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")){
-  const buttonContainer = document.body;
-  console.log(buttonContainer);
-  const dvmButton = document.createElement("a");
-  dvmButton.classList.add('button--developer-mode','private-button','private-button--secondary--ghost','private-button--sm');
-  dvmButton.href = `${currentUrl}?developerMode=true`;
-  dvmButton.textContent = 'Developer Mode';
-  buttonContainer.prepend(dvmButton);
-}
+  if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")){
+    const buttonContainer = document.body;
+    console.log(buttonContainer);
+    const dvmButton = document.createElement("a");
+    dvmButton.classList.add('button--developer-mode','private-button','private-button--secondary--ghost','private-button--sm');
+    dvmButton.href = `${currentUrl}?developerMode=true`;
+    dvmButton.textContent = 'Developer Mode';
+    buttonContainer.prepend(dvmButton);
+  }
+});
+
+document.addEventListener('keydown', function(event) {
+  const currentUrl = window.location.href;
+  if (event.ctrlKey && event.keyCode === 83) {
+    if (currentUrl.includes("https://app.hubspot.com/pages/")) {
+        const match = currentUrl.match(/\/editor\/(\d+)/);
+        const pageId =match[1];
+        console.log(pageId);
+        // Send message to background
+        chrome.runtime.sendMessage({ pageToreload: pageId });
+    }
+  }
 });
