@@ -82,9 +82,12 @@ document.addEventListener('keydown', function(event) {
     if (currentUrl.includes("https://app.hubspot.com/pages/")) {
         const match = currentUrl.match(/\/editor\/(\d+)/);
         const pageId =match[1];
-        console.log(pageId);
-        // Send message to background
-        chrome.runtime.sendMessage({ pageToreload: pageId });
+        
+        // Delay 2 seconds
+        setTimeout(() => {
+          // Send message to background
+          chrome.runtime.sendMessage({ pageToreload: pageId });
+        }, 2000); 
     }
   }
 });
