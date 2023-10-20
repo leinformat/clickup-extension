@@ -43,10 +43,15 @@ export const getTasks = (data) => {
   });
   
   console.log(taskSData);
-
   !!message.length && handlerNotificationMessage(message);
 };
 
 export const handlerNotifications = (data) =>{
     getTasks(data);
+  // Sound Notification Actived
+  chrome.storage.local.get(["offNotification"], function (result) {
+    if (!!Object.keys(result).length) {
+      console.log("aqui", result.offNotification);
+    }
+  });
 }

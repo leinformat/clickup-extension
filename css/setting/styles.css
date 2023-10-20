@@ -33,6 +33,16 @@
     height: 80px;
     border-radius: 50%;
 }
+.clickup-settings__container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.clickup-settings__sound-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0 10px;
+}
 
 @media(min-width:600px){
     .clickup-settings__container {

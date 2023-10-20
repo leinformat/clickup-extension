@@ -77,6 +77,7 @@ export async function handleFormData({ team, email, key }) {
 
 // Function to reset all authentication data
 export function handleResetAuthAll(sendResponse) {
-    chrome.storage.local.clear()
+    chrome.storage.local.remove(["teamId","userEmail","userName","userId","userAvatar","apiKey"])
+    //chrome.storage.local.clear()
     sendResponse({ resetAuthAll: true });
 }

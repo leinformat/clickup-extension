@@ -53,7 +53,12 @@ const formatMessage = (dataMessage) =>{
         icon: "info",
         html: message,
       });
-      soundNotification();
+      // Sound Notification Actived
+      chrome.storage.local.get(["offNotification"], function (result){
+        if (!!Object.keys(result).length){
+          !result.offNotification && soundNotification();
+        }
+      });
     }
   });
 })();

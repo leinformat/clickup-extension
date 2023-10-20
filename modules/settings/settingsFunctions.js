@@ -1,5 +1,4 @@
-import { userAvatar, userName, userEmail } from "./settingsDomElements.js";
-
+import { userAvatar, userName, userEmail,inputsOption } from "./settingsDomElements.js";
 
 export const goToSettings = () =>{
     chrome.runtime.openOptionsPage();
@@ -22,4 +21,19 @@ export const getUserData = () =>{
         } 
         renderUserData(result);
       });
+}
+
+export const handlerOptions = ()=>{
+  chrome.storage.local.get(["offNotification"], function (result){
+    if (!!Object.keys(result).length){
+      console.log('Handler Notification',result)
+      inputsOption.forEach(input =>{
+        console.log(!!input.classList.contains('clickup-settings__bt-notification'))
+        // Sound Notification
+        if (!!input.classList.contains('clickup-settings__bt-notification')){
+          !!result.offNotification ? input.checked = true : input.checked = false;
+        }
+      });
+    }
+  });
 }
