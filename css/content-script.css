@@ -7,13 +7,14 @@
     padding: 12px;
     gap:20px;
     position:absolute;
-    left: 0;
-    right: 0;
     border-bottom: solid 1px #fff;
     z-index: -1;
     top: -20%;
     transition: all .8s ease-in-out;
     transform-origin: top;
+    left: 50%;
+    transform: translate(-50%, -7%);
+    width: 500px;
 }
 .container--developer-mode.active{
     z-index: 100;
@@ -56,6 +57,7 @@
     transform: translate(-50%, -50%);
     z-index: 102;
     cursor: pointer;
+    transition: color .8s ease-in-out;
 }
 .button--show-controls::before {
     content: "";
@@ -76,7 +78,7 @@
     color:#F66129;
     font-size: 20px;
     top:20px;
-    left:20px;
+    left:38%;
 }
 .button--show-controls.active:hover{
     color:#fff;
