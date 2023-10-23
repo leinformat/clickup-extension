@@ -65,10 +65,10 @@ const formatMessage = (dataMessage) =>{
 
 const createButton = (data) =>{
   const button = document.createElement(data.type);
-  button.classList.add(data.class);
-  button.href = data.url;
+  button.classList.add(data.class,"active");
+  if(!!data.url && data.type == 'a') button.href = data.url;
+  if(!!data.title) button.title = data.title;
   button.textContent = data.text;
-
   return button;
 }
 
@@ -81,9 +81,12 @@ const getPageId = (url) => {
 window.addEventListener("load", (e) => {
   const currentUrl = window.location.href;
   if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true") || currentUrl.includes("https://app.hubspot.com/blog/")) {
+    // Body
     const bodyContainer = document.body;
+    
+    // Developer Mode Container
     const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("container--developer-mode");
+    buttonContainer.classList.add("container--developer-mode","active");
 
     // Developer Mode Button
     const dvmButton = createButton({
@@ -101,6 +104,7 @@ window.addEventListener("load", (e) => {
       type: 'a'
     });
 
+    // --> Live Reload Listener
     liveReload.addEventListener("click", () => {
       const image = chrome.runtime.getURL("images/loader2.gif")
       const pageId = getPageId(currentUrl);
@@ -114,39 +118,53 @@ window.addEventListener("load", (e) => {
       }, 2000);
     });
 
+    // Developer Mode Show Controls
+    const ShowControls = createButton({
+      class:"button--show-controls",
+      text: "X",
+      title:"Show Dev Controls",
+      type: 'div'
+    });
+    //--> Show Listener
+    ShowControls.addEventListener("click",()=>{
+      ShowControls.classList.toggle('active');
+      buttonContainer.classList.toggle('active');
+      !!ShowControls.classList.contains('active') ? ShowControls.textContent = "X" : ShowControls.textContent = ""
+    });
 
     buttonContainer.append(dvmButton);
     buttonContainer.append(liveReload);
     bodyContainer.prepend(buttonContainer);
+    bodyContainer.prepend(ShowControls);
   }
 });
 
 document.addEventListener("keydown", function (event) {
   const currentUrl = window.location.href;
-  if (event.ctrlKey){
-    if (event.key.toLowerCase() === 's') {
-      event.preventDefault();
-      event.stopPropagation();
-      // Control + s
-      if (currentUrl.includes("https://app.hubspot.com/pages/") || currentUrl.includes("https://app.hubspot.com/global-content/")) {
-        const pageId = getPageId(currentUrl);
-        const buttonReload = document.querySelector('.button--live-reload');
-        if (!!buttonReload) {
-          const image = chrome.runtime.getURL("images/loader2.gif");
-          buttonReload.classList.add("reload");
-          buttonReload.style.backgroundImage = `url(${image})`;
-        }
-        console.log('yes',pageId)
-        // Delay 2 seconds
-        setTimeout(() => {
-          // Send message to background
-          chrome.runtime.sendMessage({ pageToreload: pageId });
+  if (currentUrl.includes("https://app.hubspot.com/pages/") || currentUrl.includes("https://app.hubspot.com/blog/") || currentUrl.includes("https://app.hubspot.com/global-content/")) {
+    if (event.ctrlKey){
+      if (event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        event.stopPropagation();
+        // Control + s
+          const pageId = getPageId(currentUrl);
+          const buttonReload = document.querySelector('.button--live-reload');
           if (!!buttonReload) {
-            buttonReload.style.backgroundImage = "none";
-            buttonReload.classList.remove("reload");
+            const image = chrome.runtime.getURL("images/loader2.gif");
+            buttonReload.classList.add("reload");
+            buttonReload.style.backgroundImage = `url(${image})`;
           }
-        }, 2000);
+          console.log('yes',pageId)
+          // Delay 2 seconds
+          setTimeout(() => {
+            // Send message to background
+            chrome.runtime.sendMessage({ pageToreload: pageId });
+            if (!!buttonReload) {
+              buttonReload.style.backgroundImage = "none";
+              buttonReload.classList.remove("reload");
+            }
+          }, 2000);
+        }
       }
-    }
-  }
+   }
 });
