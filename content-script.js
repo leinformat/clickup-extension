@@ -63,31 +63,90 @@ const formatMessage = (dataMessage) =>{
   });
 })();
 
-window.addEventListener('load', (e)=> {
-const currentUrl = window.location.href;
-  if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")){
-    const buttonContainer = document.body;
-    console.log(buttonContainer);
-    const dvmButton = document.createElement("a");
-    dvmButton.classList.add('button--developer-mode','private-button','private-button--secondary--ghost','private-button--sm');
-    dvmButton.href = `${currentUrl}?developerMode=true`;
-    dvmButton.textContent = 'Developer Mode';
-    buttonContainer.prepend(dvmButton);
+const createButton = (data) =>{
+  const button = document.createElement(data.type);
+  button.classList.add(data.class);
+  button.href = data.url;
+  button.textContent = data.text;
+
+  return button;
+}
+
+const getPageId = (url) => {
+  const match = url.match(/\/editor\/(\d+)/);
+  const pageId = match[1];
+  return pageId;
+};
+
+window.addEventListener("load", (e) => {
+  const currentUrl = window.location.href;
+  if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true") || currentUrl.includes("https://app.hubspot.com/blog/")) {
+    const bodyContainer = document.body;
+    const buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("container--developer-mode");
+
+    // Developer Mode Button
+    const dvmButton = createButton({
+      url: `${currentUrl}?developerMode=true`,
+      class:"button--developer-mode",
+      text: "Developer Mode",
+      type: 'a'
+    });
+
+    // Live Reload Button
+    const liveReload = createButton({
+      url: "javascript:;",
+      class:"button--live-reload",
+      text: "Live Reload",
+      type: 'a'
+    });
+
+    liveReload.addEventListener("click", () => {
+      const image = chrome.runtime.getURL("images/loader2.gif")
+      const pageId = getPageId(currentUrl);
+      liveReload.classList.add('reload');
+      liveReload.style.backgroundImage = `url(${image})`;
+      setTimeout(() => {
+        // Send message to background
+        chrome.runtime.sendMessage({ pageToreload: pageId });
+        liveReload.style.backgroundImage = 'none';
+        liveReload.classList.remove('reload');
+      }, 2000);
+    });
+
+
+    buttonContainer.append(dvmButton);
+    buttonContainer.append(liveReload);
+    bodyContainer.prepend(buttonContainer);
   }
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener("keydown", function (event) {
   const currentUrl = window.location.href;
-  if (event.ctrlKey && event.keyCode === 83) {
-    if (currentUrl.includes("https://app.hubspot.com/pages/")) {
-        const match = currentUrl.match(/\/editor\/(\d+)/);
-        const pageId =match[1];
-        
+  if (event.ctrlKey){
+    if (event.key.toLowerCase() === 's') {
+      event.preventDefault();
+      event.stopPropagation();
+      // Control + s
+      if (currentUrl.includes("https://app.hubspot.com/pages/") || currentUrl.includes("https://app.hubspot.com/global-content/")) {
+        const pageId = getPageId(currentUrl);
+        const buttonReload = document.querySelector('.button--live-reload');
+        if (!!buttonReload) {
+          const image = chrome.runtime.getURL("images/loader2.gif");
+          buttonReload.classList.add("reload");
+          buttonReload.style.backgroundImage = `url(${image})`;
+        }
+        console.log('yes',pageId)
         // Delay 2 seconds
         setTimeout(() => {
           // Send message to background
           chrome.runtime.sendMessage({ pageToreload: pageId });
-        }, 2000); 
+          if (!!buttonReload) {
+            buttonReload.style.backgroundImage = "none";
+            buttonReload.classList.remove("reload");
+          }
+        }, 2000);
+      }
     }
   }
 });

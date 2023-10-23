@@ -1,6 +1,39 @@
-.button--developer-mode{
-    position: absolute;
-    z-index: 100;
-    right: 25%;
-    top: 12px;
+.container--developer-mode{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #253342;
+    padding: 12px 12px 0;
+    gap:20px;
+}
+.container--developer-mode > a{
+    padding: 5px 10px;
+    border: solid #fff 1px;
+    border-radius: 3px;
+    color:#fff;
+    transition: background-color .3s ease, color .3s ease;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.container--developer-mode > a:hover{
+    color:#fff;
+    text-decoration: none;
+}
+.button--live-reload{
+    background-color: #F66129;
+}
+.button--developer-mode:hover{
+    background-color: hsla(0,0%,100%,.05);
+}
+.button--live-reload:hover{
+    background-color: #f47f55;
+}
+.button--live-reload.reload{
+    background-size: 26px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    background-position: 50%;
+    color: transparent!important;
 }

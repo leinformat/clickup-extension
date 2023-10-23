@@ -41,7 +41,7 @@
   "options_page": "options.html",
   "web_accessible_resources": [
     {
-      "resources": ["audio/tarea-actualizada.mp3"],
+      "resources": ["audio/tarea-actualizada.mp3","images/loader2.gif"],
       "matches": [ "<all_urls>" ],
       "run_at": "document_idle"
     }

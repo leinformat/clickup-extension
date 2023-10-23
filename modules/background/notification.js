@@ -51,7 +51,7 @@ export const handlerNotifications = (data) =>{
   // Sound Notification Actived
   chrome.storage.local.get(["offNotification"], function (result) {
     if (!!Object.keys(result).length) {
-      console.log("aqui", result.offNotification);
+      console.log("Disabled Sound Notifications", result.offNotification);
     }
   });
 }

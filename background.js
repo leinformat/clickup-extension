@@ -8,10 +8,12 @@ const tabsInfo = tabs.map(tab => ({ url: tab.url, title: tab.title,id:tab.id }))
 console.log(tabsInfo);
 });
 
+chrome.runtime.onStartup.addListener(() =>{
+  console.log('Start Extension')
+});
+  setInterval(() => {
+      gettingTasks('notification');
+  }, 15000);
 
-setInterval(() => {
-    gettingTasks('notification');
-}, 15000);
 
-// Add listener to handle messages
-chrome.runtime.onMessage.addListener(handleMessage); 
+chrome.runtime.onMessage.addListener(handleMessage);
