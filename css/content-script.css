@@ -16,7 +16,7 @@
     transform-origin: top;
 }
 .container--developer-mode.active{
-    z-index: 10;
+    z-index: 100;
     top:0;
 }
 .container--developer-mode > a{
@@ -54,7 +54,7 @@
     top: 0;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 12;
+    z-index: 102;
     cursor: pointer;
 }
 .button--show-controls::before {
