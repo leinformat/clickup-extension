@@ -1,6 +1,7 @@
 import { tasksContainer, task,countTasksContainer } from "./domElements.js";
 import { copyToClick } from './copyText.js';
 import { orderTasks,tasksCounter } from "./typeMessages.js";
+
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
   if(!unix) return 0;
@@ -218,9 +219,6 @@ function taskTemplate(data, clonedCard,fieldData) {
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
-    console.log(tasks)
-    
-    tasksContainer.innerHTML="";
     tasks.forEach((data) => {
       //console.log(data);
       const clonedCard = task.cloneNode(true);
@@ -234,6 +232,9 @@ export function handleTasks(tasks) {
     });
     
     // Counter All Tasks
-    handlerCounterTask(tasksCounter,countTasksContainer)
+    handlerCounterTask(tasksCounter,countTasksContainer);
+    
+  }else{
+    tasksContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
   }
 }

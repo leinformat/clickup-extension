@@ -11,9 +11,8 @@ console.log(tabsInfo);
 chrome.runtime.onStartup.addListener(() =>{
   console.log('Start Extension')
 });
-  setInterval(() => {
-      gettingTasks('notification');
-  }, 15000);
-
+setInterval(() => {
+    gettingTasks('notification');
+}, 15000);
 
 chrome.runtime.onMessage.addListener(handleMessage);
