@@ -80,7 +80,11 @@ const getPageId = (url) => {
 
 window.addEventListener("load", (e) => {
   const currentUrl = window.location.href;
-  if (currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true") || currentUrl.includes("https://app.hubspot.com/blog/")) {
+  if (
+    currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true") || 
+    currentUrl.includes("https://app.hubspot.com/blog/") ||
+    currentUrl.includes("https://app-eu1.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")
+    ) {
     // Body
     const bodyContainer = document.body;
     
@@ -141,7 +145,12 @@ window.addEventListener("load", (e) => {
 
 document.addEventListener("keydown", function (event) {
   const currentUrl = window.location.href;
-  if (currentUrl.includes("https://app.hubspot.com/pages/") || currentUrl.includes("https://app.hubspot.com/blog/") || currentUrl.includes("https://app.hubspot.com/global-content/")) {
+  if (
+    currentUrl.includes("https://app.hubspot.com/pages/") ||
+    currentUrl.includes("https://app.hubspot.com/blog/") ||
+    currentUrl.includes("https://app-eu1.hubspot.com/pages/") ||
+    currentUrl.includes("https://app.hubspot.com/global-content/")
+    ) {
     if (event.ctrlKey){
       if (event.key.toLowerCase() === 's') {
         event.preventDefault();

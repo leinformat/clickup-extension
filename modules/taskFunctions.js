@@ -219,6 +219,8 @@ function taskTemplate(data, clonedCard,fieldData) {
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
+    console.log(tasks)
+    tasksContainer.innerHTML = "";
     tasks.forEach((data) => {
       //console.log(data);
       const clonedCard = task.cloneNode(true);

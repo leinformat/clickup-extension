@@ -83,16 +83,7 @@
     width:20px;
     height:20px;
 }
-.clickup-extension__submit{
-    width: fit-content;
-    padding: 8px 12px;
-    border: none;
-    background-color: var(--blue);
-    border-radius: 5px;
-    color: var(--white);
-    font-weight: 700;
-    text-transform: uppercase;
-}
+
 .clickup-extension__resetAuthAll{
     position: absolute;
     top: 0;

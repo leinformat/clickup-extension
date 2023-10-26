@@ -6,6 +6,7 @@
     --secondary: #FFA07A;
     --tertiary: #FF6B6B;
     --blue:#4B0082;
+    --blue2:#6d0bb3;
     --green:#6B8E23;
     --yellow:#FFD700;
     --white: #F4F4F4;
@@ -49,4 +50,29 @@ h1 > span{
     width: var(--width);
     min-height: var(--height);
     padding: 20px;
+}
+.button--primary{
+    width: fit-content;
+    padding: 8px 12px;
+    border: none;
+    background-color: var(--blue);
+    border-radius: 5px;
+    color: var(--white);
+    font-weight: 700;
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: all .3s ease;
+    font-size: 12px;
+    margin-top: 5px;
+}
+.button--primary:hover{
+    background-color: var(--blue2);
+}
+.clickup-extension--border{
+    height: 1px;
+    background-color: #00000015;
+    width: 100%;
+}
+.clickup-settings--bold{
+    font-weight: 700;
 }

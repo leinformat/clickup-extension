@@ -8,6 +8,6 @@ const comment = `Client: ${data.client} | ${data.subClient}\nURL:${data.url}\nRe
       node.closest('.clickup-extension__copy-container').classList.remove('copy--ok');
     },200);
   } catch (error) {
-    console.log(error);
+    console.log("We've been an Error to copy Comment: "+error);
   }
 };
