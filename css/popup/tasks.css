@@ -1,4 +1,5 @@
-.clickup-extension__tasks-container {
+.clickup-extension__tasks-container,
+.clickup-extension__tasks-toQa-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
