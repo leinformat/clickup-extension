@@ -76,3 +76,6 @@ h1 > span{
 .clickup-settings--bold{
     font-weight: 700;
 }
+.clickup--container{
+    margin-top: 20px;
+}

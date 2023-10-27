@@ -92,14 +92,35 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+.clickup-extension__count{
+    font-weight: 700;
+    transition: all .3s ease;
+}
+.clickup-extension__count-task:hover{
+    background-color: var(--blue);
+}
+.clickup-extension__count-task:hover > span{
+    background-color: var(--blue);
+    color: #fff;
+}
 .clickup-extension__label{
     text-transform: capitalize;
+    transition: all .3s ease;
 }
 .clickup-extension__count-task{
     cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 3px;
+    transition: all .3s ease;
 }
 .clickup-extension__task:not(.show-only){
     display:none;
+}
+.active--tab>span {
+    color: #fff;
+}
+.active--tab {
+    background-color: var(--blue);
 }
 /**************** End Task ******************/
 /* General Styles */

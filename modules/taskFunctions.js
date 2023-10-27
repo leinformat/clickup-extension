@@ -108,6 +108,10 @@ function openTask(taskBtn){
 
 // Function to Select tab tasks
 function handlerTaskTab(statusData){
+  const active = document.querySelector('.clickup-extension__count-task.active--tab');
+  !!active && active.classList.remove('active--tab');
+
+  statusData.classList.add('active--tab');
   const status = statusData.dataset.status;
 
   const allTasks = document.querySelectorAll(`.clickup-extension__task`);
@@ -129,7 +133,8 @@ function handlerTaskTab(statusData){
 function handlerCounterTask(taskData,node){
   node.innerHTML = '';
   for (const task in taskData) {
-    node.innerHTML += `<div class="clickup-extension__count-task" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
+    console.log(task)
+    node.innerHTML += `<div class="clickup-extension__count-task ${task === 'all-tasks' ? 'active--tab': null}" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
                           <span class="clickup-extension__label">${task.replace(/-/g, " ")}: </span>
                           <span class="clickup-extension__count">${taskData[task]}</span>
                         </div>`;
@@ -219,7 +224,6 @@ function taskTemplate(data, clonedCard,fieldData) {
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   if (!!tasks.length){
-    console.log(tasks)
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {
       //console.log(data);
