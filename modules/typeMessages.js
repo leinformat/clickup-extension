@@ -12,6 +12,9 @@ export const orderTasks = {
     "all-tasks":2,
 }
 
-export const tasksCounter = {
+export let tasksCounter = {
+    "all-tasks": 0
+}
+export let tasksCounterToQa = {
     "all-tasks": 0
 }

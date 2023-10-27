@@ -11,6 +11,10 @@
   
   <main class="clickup-extension">
     <h1><span>Clickup Extension</span> for Chrome</h1>
+    <header class="clickup-extension__spaces">
+      <button class="button--secondary clickup-extension__qa-assigned-btn" data-type="tasks-to-qa">QA Assigned</button>
+      <button class="button--secondary clickup-extension__implementor-btn active" data-type="tasks-implentor">Implementor</button>
+    </header>
     <section class="clickup-extension__user-auth-data">
       <form class="clickup-extension__form">
         <div class="clickup-extension__spinner">
@@ -39,14 +43,14 @@
         </div>
       </form>
     </section>
-    <!-- hide -->
-    <section class="clickup-extension__content hide">
+    <!-- IMPLEMENTOR TASKS hide -->
+    <section class="clickup-extension__content hide tasks-implentor">
         <p class="clickup-extension__auth-message"></p>
         <button title="Settings" class="clickup-extension__resetAuthAll"><i class="fa-solid fa-gear fa-xl"></i></button>
-        <header class="clickup-extension__counter-tasks">
+        <header class="clickup-extension__counter-tasks to-implementor">
           <!-- Counter Tasks -->
         </header>
-        <div class="clickup-extension__tasks-container">
+        <div class="clickup-extension__tasks-container to-implementor">
           <!-- First Task -->
 
           <!-- active -->
@@ -128,6 +132,16 @@
             </div>
           </div>
         </div>
+    </section>
+
+    <!-- QA TASKS hide -->
+    <section class="clickup-extension__content hide tasks-to-qa">
+      <header class="clickup-extension__counter-tasks to-qa">
+        <!-- Counter Tasks -->
+      </header>
+      <div class="clickup-extension__tasks-toQa-container">
+        <!-- First Task -->
+      </div>
     </section>
     <script defer type="module" src="./main.js"></script>
   </main>

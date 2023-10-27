@@ -14,6 +14,6 @@ chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], function (
     initializeTasks();
     
     // QA Tasks
-    gettingTasksToQa();
+    //gettingTasksToQa();
   }
 });

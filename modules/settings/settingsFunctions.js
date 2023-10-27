@@ -1,4 +1,4 @@
-import { userAvatar, userName, userEmail,inputsOption } from "./settingsDomElements.js";
+import { userAvatar, userName, userEmail,inputsOption,teamsContainer } from "./settingsDomElements.js";
 
 export const goToSettings = () =>{
     chrome.runtime.openOptionsPage();
@@ -12,6 +12,37 @@ export const renderUserData = (data) =>{
   userAvatar.src = avatar ? avatar : './images/avatar.png';
   userName.textContent = name ? name : 'Undefined';
   userEmail.textContent = email ? email : 'Undefined';
+}
+
+const createNode = (object) =>{
+  const node = document.createElement(object.nodeType);
+
+  if(!!object.class) node.classList.add(object.class);
+
+  if(!!object.url && object.type == 'a') node.href = object.url;
+
+  if(!!object.type && object.nodeType == 'input') node.type = object.type;
+  if(!!object.value && object.nodeType == 'input') node.value = object.value;
+
+  if(!!object.title) node.title = object.title;
+
+  if(!!object.text) node.textContent = object.text;
+  
+  return node;
+
+}
+
+export const renderTeamsData = (data) =>{
+   data.forEach( team =>{
+    const container = createNode({nodeType:"div",class:"clickup-settings__team-container"});
+
+    const label = createNode({nodeType: "label",text: team.name });
+    const input = createNode({nodeType: "input",type:"checkbox", value:team.id});
+
+    container.append(label,input);
+
+    teamsContainer.append(container);
+   });
 }
 
 export const getUserData = () =>{

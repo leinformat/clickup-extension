@@ -1,6 +1,8 @@
-import { tasksContainer, task,countTasksContainer } from "./domElements.js";
+import { tasksContainer, task,tasksToQaContainer,countTasksToQaContainer } from "./domElements.js";
 import { copyToClick } from './copyText.js';
-import { orderTasks,tasksCounter } from "./typeMessages.js";
+import { orderTasks,tasksCounterToQa } from "./typeMessages.js";
+
+
 
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
@@ -13,7 +15,7 @@ const dateFormat = (unix, format)=>{
     return date;
   }
   else if(format=="day"){
-    const date = codeUnix.toLocaleDateString('en-US',{ day: 'numeric' });
+    const date = codeUnix.toLocaleDateString('en-US',{ day: 'numeric' }); 
     return date;
   }
   else if(format=="month-day"){
@@ -108,16 +110,15 @@ function openTask(taskBtn){
 
 // Function to Select tab tasks
 function handlerTaskTab(statusData){
-  const active = document.querySelector('.clickup-extension__counter-tasks.to-implementor .clickup-extension__count-task.active--tab');
+  const active = document.querySelector('.clickup-extension__counter-tasks.to-qa .clickup-extension__count-task.active--tab');
   !!active && active.classList.remove('active--tab');
 
   statusData.classList.add('active--tab');
   const status = statusData.dataset.status;
 
-  const allTasks = document.querySelectorAll(`.clickup-extension__tasks-container.to-implementor .clickup-extension__task`);
-  console.log(allTasks)
+  const allTasks = document.querySelectorAll(`.clickup-extension__tasks-container.to-qa .clickup-extension__task`);
 
-  allTasks.forEach(task =>{ 
+  allTasks.forEach(task =>{
     if(status !== 'all-tasks'){
       if(task.classList.contains(`clickup-extension--status-${status}`)){
         task.classList.add('show-only');
@@ -134,8 +135,7 @@ function handlerTaskTab(statusData){
 function handlerCounterTask(taskData,node){
   node.innerHTML = '';
   for (const task in taskData) {
-    //console.log(task)
-    node.innerHTML += `<div class="clickup-extension__count-task ${task === 'all-tasks' ? 'active--tab': ''}" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
+    node.innerHTML += `<div class="clickup-extension__count-task to-qa ${task === 'all-tasks' ? 'active--tab': null}" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
                           <span class="clickup-extension__label">${task.replace(/-/g, " ")}: </span>
                           <span class="clickup-extension__count">${taskData[task]}</span>
                         </div>`;
@@ -182,8 +182,8 @@ function taskTemplate(data, clonedCard,fieldData) {
     clonedCard.style.order = orderTasks[taskStatus];
 
     // Incrent Counter Tasks
-    tasksCounter['all-tasks']++;
-    tasksCounter[taskStatus] ? tasksCounter[taskStatus]++ : tasksCounter[taskStatus] = 1;
+    tasksCounterToQa['all-tasks']++;
+    tasksCounterToQa[taskStatus] ? tasksCounterToQa[taskStatus]++ : tasksCounterToQa[taskStatus] = 1;
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
@@ -201,9 +201,9 @@ function taskTemplate(data, clonedCard,fieldData) {
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
 
-    // QA
-    fieldData ? clonedCard.querySelector(".clickup-extension__qa-name").textContent = getDataFromObject(fieldData,'username') : 'Unassigned';
-
+    // Assignees
+    clonedCard.querySelector(".clickup-extension__qa-name").textContent = data.assignees[0].username;
+    
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
     
@@ -223,9 +223,9 @@ function taskTemplate(data, clonedCard,fieldData) {
 }
 
 // This is a Main Funtion Function to handle Tasks
-export function handleTasks(tasks) {
+export function handlerTasksToQa(tasks) {
   if (!!tasks.length){
-    tasksContainer.innerHTML = "";
+    tasksToQaContainer.innerHTML = "";
     tasks.forEach((data) => {
       //console.log(data);
       const clonedCard = task.cloneNode(true);
@@ -235,12 +235,12 @@ export function handleTasks(tasks) {
 
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField);
-      tasksContainer.appendChild(clonedCard);
+      tasksToQaContainer.appendChild(clonedCard);
     });
     // Counter All Tasks
-    handlerCounterTask(tasksCounter,countTasksContainer);
+    handlerCounterTask(tasksCounterToQa,countTasksToQaContainer);
     
   }else{
-    tasksContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
+    tasksToQaContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
   }
 }

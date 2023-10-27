@@ -3,7 +3,7 @@ const taskSData = [];
 const handlerNotificationMessage = (message) => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const activeTab = tabs[0];
-    console.log(message);
+    //console.log(message);
     if (activeTab) {
       // Send a message to the active tab
       chrome.tabs.sendMessage(activeTab.id,{
@@ -42,7 +42,7 @@ export const getTasks = (data) => {
     }
   });
   
-  console.log(taskSData);
+  //console.log(taskSData);
   !!message.length && handlerNotificationMessage(message);
 };
 
@@ -51,7 +51,7 @@ export const handlerNotifications = (data) =>{
   // Sound Notification Actived
   chrome.storage.local.get(["offNotification"], function (result) {
     if (!!Object.keys(result).length) {
-      console.log("Disabled Sound Notifications", result.offNotification);
+      //console.log("Disabled Sound Notifications", result.offNotification);
     }
   });
 }

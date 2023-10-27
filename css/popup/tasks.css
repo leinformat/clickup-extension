@@ -100,7 +100,6 @@
     background-color: var(--blue);
 }
 .clickup-extension__count-task:hover > span{
-    background-color: var(--blue);
     color: #fff;
 }
 .clickup-extension__label{
@@ -121,6 +120,11 @@
 }
 .active--tab {
     background-color: var(--blue);
+}
+.clickup-extension__spaces{
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }
 /**************** End Task ******************/
 /* General Styles */

@@ -17,7 +17,7 @@ const filterTasks = (tasks, userId)=>{
     // If "qaField" doesn't exist or "value" is not an array, return false
     return false;
   });
-  console.log(filteredData);
+  return filteredData;
 }
 
 export const gettingTasksToQa = () =>{
@@ -31,7 +31,7 @@ export const gettingTasksToQa = () =>{
 
       while (!lastPage){
         try {
-          const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[ { "field_id": "35dfb9e8-144b-498a-a407-8bff6217231c", "operator": "=", "value":"9ac05bc7-f227-4a4a-a26b-29503fe4b6d8"}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
+          const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[{"field_id": "35dfb9e8-144b-498a-a407-8bff6217231c", "operator": "=", "value":"9ac05bc7-f227-4a4a-a26b-29503fe4b6d8"}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
               method: "GET",
               headers: {
                   Authorization: apiKey,
@@ -50,8 +50,10 @@ export const gettingTasksToQa = () =>{
           break;
         }
       }
-      // Ahora tienes todos los datos en el array dataArray
-      filterTasks(allTasks,userId);
-      //console.log('Datos completos:', allTasks);
+      // All DataTaks
+      const taskToQa  = filterTasks(allTasks,userId);
+
+      // Send Message to Front
+      chrome.runtime.sendMessage({ allDataTasksToQa: taskToQa });
   });
 }

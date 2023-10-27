@@ -6,6 +6,7 @@ import {
 } from './authFunctions.js';
 
 import {handleTasks} from './taskFunctions.js';
+import { handlerTasksToQa } from './taskToQaFunctions.js';
 
 // Function to handle messages from the background
 export function handleMessage(request, sender, sendResponse) {
@@ -21,7 +22,12 @@ export function handleMessage(request, sender, sendResponse) {
     if (request.validEmail) {
         handleValidEmail();
     }
+    // Task To IM
     if (request.allDataTasks) {
         handleTasks(request.allDataTasks);
+    }
+    // Task To QA
+    if (request.allDataTasksToQa) {
+        handlerTasksToQa(request.allDataTasksToQa);
     }
 }

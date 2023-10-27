@@ -1,6 +1,4 @@
 import { btnResetAuthAll,inputsOption }from './settingsDomElements.js';
-
-  
 import { handleResetAuthData } from '../authFunctions.js';
 
 // Reset data
