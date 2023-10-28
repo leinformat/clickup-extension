@@ -1,4 +1,5 @@
 import {apiUrl} from './auth.js';
+import { teamsData } from './teams.js';
 
 const filterTasks = (tasks, userId)=>{
 
@@ -21,17 +22,29 @@ const filterTasks = (tasks, userId)=>{
 }
 
 export const gettingTasksToQa = () =>{
-  chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], async (result) => {
-
+  chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa"], async (result) => {
       const allTasks = [];
       let page = 0;
       let lastPage = false;
 
+      let customField = "";
+
+      for (const team in result) {
+        if(team && team !=='teamId' && team !== 'userEmail' && team !== 'userEmail' && team !== 'apiKey' && team !== 'userId'){
+             if(!!result[team]){
+              customField+=`{"field_id":"${teamsData.id}","operator":"=","value":"${result[team]}"},`;
+
+             }
+        }
+      }
+      customField = customField.slice(0, -1);
       const {apiKey,teamId,userId} = await result;
 
+      if(!customField ) return chrome.runtime.sendMessage({ allDataTasksToQa: [] });
+  
       while (!lastPage){
         try {
-          const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[{"field_id": "35dfb9e8-144b-498a-a407-8bff6217231c", "operator": "=", "value":"9ac05bc7-f227-4a4a-a26b-29503fe4b6d8"}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
+          const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[${customField}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
               method: "GET",
               headers: {
                   Authorization: apiKey,

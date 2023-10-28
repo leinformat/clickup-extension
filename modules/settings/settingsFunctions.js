@@ -1,4 +1,4 @@
-import { userAvatar, userName, userEmail,inputsOption,teamsContainer } from "./settingsDomElements.js";
+import { userAvatar, userName, userEmail,teamsContainer } from "./settingsDomElements.js";
 
 export const goToSettings = () =>{
     chrome.runtime.openOptionsPage();
@@ -13,7 +13,6 @@ export const renderUserData = (data) =>{
   userName.textContent = name ? name : 'Undefined';
   userEmail.textContent = email ? email : 'Undefined';
 }
-
 const createNode = (object) =>{
   const node = document.createElement(object.nodeType);
 
@@ -23,13 +22,19 @@ const createNode = (object) =>{
 
   if(!!object.type && object.nodeType == 'input') node.type = object.type;
   if(!!object.value && object.nodeType == 'input') node.value = object.value;
+  if(!!object.name && object.nodeType == 'input') node.name = object.name;
 
   if(!!object.title) node.title = object.title;
 
   if(!!object.text) node.textContent = object.text;
   
   return node;
+}
 
+const handlerTeamsOptions = (input) =>{
+  const teamId = input.value;
+  const name = input.name;
+  !!input.checked ? chrome.storage.local.set({[name]:teamId}) : chrome.storage.local.set({[name]:false});
 }
 
 export const renderTeamsData = (data) =>{
@@ -37,10 +42,16 @@ export const renderTeamsData = (data) =>{
     const container = createNode({nodeType:"div",class:"clickup-settings__team-container"});
 
     const label = createNode({nodeType: "label",text: team.name });
-    const input = createNode({nodeType: "input",type:"checkbox", value:team.id});
+
+    const name = team.name.toLowerCase().replace(/ /g, "-");
+    const input = createNode({nodeType: "input",type:"checkbox", value:team.id,name:name });
+    
+    // Handler Change
+    input.addEventListener("click",()=>{
+      handlerTeamsOptions(input);
+    });
 
     container.append(label,input);
-
     teamsContainer.append(container);
    });
 }
@@ -55,14 +66,17 @@ export const getUserData = () =>{
 }
 
 export const handlerOptions = ()=>{
-  chrome.storage.local.get(["offNotification"], function (result){
+  chrome.storage.local.get(["offNotification","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa"], function (result){
     if (!!Object.keys(result).length){
-      console.log('Handler Notification',result)
-      inputsOption.forEach(input =>{
-        console.log(!!input.classList.contains('clickup-settings__bt-notification'))
+      const optionInputs = document.querySelectorAll('.clickup-settings input');
+      console.log(result)
+      optionInputs.forEach(input =>{
         // Sound Notification
         if (!!input.classList.contains('clickup-settings__bt-notification')){
           !!result.offNotification ? input.checked = true : input.checked = false;
+        }
+        else if(input.id !== 'sound-notification'){
+          !!result[input.name] ? input.checked = true : input.checked = false;
         }
       });
     }
