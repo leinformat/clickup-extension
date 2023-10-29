@@ -225,7 +225,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
   implementorSpinner.classList.add('hide');
-  goSettings.style.opacity = "1";
+  goSettings.classList.add('active');
   if (!!tasks.length){
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {

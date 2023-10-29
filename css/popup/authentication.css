@@ -83,14 +83,16 @@
     width:20px;
     height:20px;
 }
-
 .clickup-extension__resetAuthAll{
     position: absolute;
-    top: -45%;
-    right: 0;
+    top: 20px;
+    right: 20px;
     border:none;
-    background-color: transparent;
     cursor: pointer;
     color: var(--blue);
-    opacity: 0;
+    display: none;;
+}
+.clickup-extension__resetAuthAll.active{
+    display: block;
+    background-color: transparent;
 }
