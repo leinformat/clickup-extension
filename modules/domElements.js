@@ -19,12 +19,13 @@ const authMessage = document.querySelector('.clickup-extension__auth-message');
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
 const task = document.querySelector('.clickup-extension__task');
 const countTasksContainer = document.querySelector('.clickup-extension__counter-tasks.to-implementor');
+const implementorSpinner = document.querySelector('.clickup-extension--implementor-spinner');
 
 // Tasks to QA
 const tasksToQaContainer = document.querySelector('.clickup-extension__tasks-toQa-container');
 const toQaButton = document.querySelectorAll('.clickup-extension__spaces > button');
 const countTasksToQaContainer = document.querySelector('.clickup-extension__counter-tasks.to-qa');
-
+const toQaSpinner = document.querySelector('.clickup-extension--to-qa-spinner');
 
 export {
   authContainer,
@@ -45,5 +46,7 @@ export {
   teamContainer,
   tasksToQaContainer,
   toQaButton,
-  countTasksToQaContainer
+  countTasksToQaContainer,
+  implementorSpinner,
+  toQaSpinner
 };

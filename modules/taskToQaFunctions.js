@@ -1,4 +1,4 @@
-import { tasksContainer, task,tasksToQaContainer,countTasksToQaContainer } from "./domElements.js";
+import { tasksContainer, task,tasksToQaContainer,countTasksToQaContainer,toQaSpinner } from "./domElements.js";
 import { copyToClick } from './copyText.js';
 import { orderTasks,tasksCounterToQa } from "./typeMessages.js";
 
@@ -224,6 +224,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 
 // This is a Main Funtion Function to handle Tasks
 export function handlerTasksToQa(tasks) {
+  toQaSpinner.classList.add('hide');
   if (!!tasks.length){
     tasksToQaContainer.innerHTML = "";
     tasks.forEach((data) => {

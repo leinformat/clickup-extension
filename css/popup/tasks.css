@@ -5,8 +5,10 @@
     gap: 10px;
     margin-top:10px;
 }
+.clickup-extension__content{
+    position: relative;
+}
 .clickup-extension__task{
-    
     border-radius: 20px;
 }
 .clickup-extension__task:hover{
@@ -126,6 +128,23 @@
     display: flex;
     gap: 10px;
     margin-top: 10px;
+}
+.clickup-extension--implementor-spinner,
+.clickup-extension--to-qa-spinner{
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right:0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    z-index: 50;
+}
+.clickup-extension--implementor-spinner.hide,
+.clickup-extension--to-qa-spinner.hide{
+    display: none;
 }
 /**************** End Task ******************/
 /* General Styles */

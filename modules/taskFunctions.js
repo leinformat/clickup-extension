@@ -1,4 +1,4 @@
-import { tasksContainer, task,countTasksContainer } from "./domElements.js";
+import { tasksContainer, task,countTasksContainer,implementorSpinner,goSettings } from "./domElements.js";
 import { copyToClick } from './copyText.js';
 import { orderTasks,tasksCounter } from "./typeMessages.js";
 
@@ -224,6 +224,8 @@ function taskTemplate(data, clonedCard,fieldData) {
 
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
+  implementorSpinner.classList.add('hide');
+  goSettings.style.opacity = "1";
   if (!!tasks.length){
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {

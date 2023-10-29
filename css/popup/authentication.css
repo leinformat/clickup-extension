@@ -86,11 +86,11 @@
 
 .clickup-extension__resetAuthAll{
     position: absolute;
-    top: 0;
-    right: 20px;
-    top: 20px;
+    top: -45%;
+    right: 0;
     border:none;
     background-color: transparent;
     cursor: pointer;
     color: var(--blue);
+    opacity: 0;
 }
