@@ -1,7 +1,20 @@
 export const copyToClick = async (data,node) => {
-const comment = `Client: ${data.client} | ${data.subClient}\nURL:${data.url}\nResponsible: @${data.qa}\nDeliver date:  Today or  Tomorrow, please :handshake:\nPM: @${data.pm}`;
+const comment = `<p><strong>Client: </strong>${data.client} | ${data.subClient}</p>
+                 <p><strong>URL: </strong>${data.url}</p>
+                 <p><strong>Responsible: </strong>@${data.qa}</p>
+                 <p><strong>Deliver date: </strong>Today or  Tomorrow, please :handshake:</p>
+                 <p><strong>PM: <strong>@${data.pm}</p>`;
+//const comment = `<strong>Client:</strong> ${data.client} | ${data.subClient}\nURL:${data.url}\n<strong>Responsible:</strong> @${data.qa}\n<strong>Deliver date:</strong>  Today or  Tomorrow, please :handshake:\n<strong>PM:<strong> @${data.pm}`;
   try {
-    await navigator.clipboard.writeText(comment);
+    const blobHtml = new Blob([comment], { type: "text/html" });
+    const blobText = new Blob([comment], { type: "text/plain" });
+    const data = [new ClipboardItem({
+        ["text/plain"]: blobText,
+        ["text/html"]: blobHtml,
+    })];
+
+    await navigator.clipboard.write(data);
+    
     node.classList.remove('fa-beat')
     node.closest('.clickup-extension__copy-container').classList.add('copy--ok');
     setTimeout(() => {

@@ -16,9 +16,35 @@ const test = async() =>{
       console.log(err);
     }
   }
-  test()
+  //test()
 
-  /*
-  let dataSaveId = crypto.randomUUID();
-  console.log(dataSaveId)
-  */
+const pasteButton = document.querySelector('button');
+const pasteArticle = document.querySelector('div');
+
+pasteButton.addEventListener('click', async (event) => {
+    //pasteArticle.textContent = '';
+    // using 'await' to easily resolve the result of the promise
+    const data = await navigator.clipboard.read();
+    // data is an array of clipboard items
+    // the actual clipboard content is in the first element.
+    const clipboardContent = data[0]
+    // clipboardContent could be an image or text
+    try{
+        // assuming the clipboard content is an image
+        const imgBlob = await clipboardContent.getType('image/png')
+        // retrieving the url for our blob
+        const blobUrl = window.URL.createObjectURL(imageBlob);
+        // load the blob into an image tag
+        const img = document.createElement('img');
+        img.setAttribute('src', blobUrl);
+        // append the image element to pasteArticle
+        pasteArticle.appendChild(img)
+    }catch(err){
+        console.log(err);
+        // clipboard has text data
+        // set pasteArticle to textContent
+        const text = await navigator.clipboard.readText();
+        pasteArticle.textContent = text;
+    }
+}); 
+
