@@ -116,8 +116,7 @@ function handlerTaskTab(statusData){
   statusData.classList.add('active--tab');
   const status = statusData.dataset.status;
 
-  const allTasks = document.querySelectorAll(`.clickup-extension__tasks-container.to-qa .clickup-extension__task`);
-
+  const allTasks = document.querySelectorAll(`.clickup-extension__tasks-toQa-container .clickup-extension__task`);
   allTasks.forEach(task =>{
     if(status !== 'all-tasks'){
       if(task.classList.contains(`clickup-extension--status-${status}`)){
