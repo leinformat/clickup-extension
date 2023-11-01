@@ -66,13 +66,12 @@ function getCustomField(data,fieldName){
 // Funtion GET QA data
 function getDataFromObject(object,value){
   if(!object.length) return "Unassigned";
-
   let data = "";
   object.forEach((item,index) =>{
-    index < object.length -1 ? data += item[value] + ', ' : data += item[value]+ '.';
+    data += item[value] || item['name'] + ', ';
   });
-
-  return data;
+  console.log(data)
+  return data.slice(0, -2);
 }
 
 function formatText(text) {
@@ -115,7 +114,6 @@ function handlerTaskTab(statusData){
   const status = statusData.dataset.status;
 
   const allTasks = document.querySelectorAll(`.clickup-extension__tasks-container.to-implementor .clickup-extension__task`);
-  console.log(allTasks)
 
   allTasks.forEach(task =>{ 
     if(status !== 'all-tasks'){
@@ -160,10 +158,13 @@ function taskTemplate(data, clonedCard,fieldData) {
     // Add Listener to Copy Qa Comment
     const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
     copyTextkBtn.addEventListener("click",(e)=>{
+      let qaField = getDataFromObject(fieldData,'username');
+      qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+
       copyToClick(
         {
           pm:data.creator.username,
-          qa:fieldData ? getDataFromObject(fieldData,'username') : 'Unassigned',
+          qa:fieldData ? qaField : 'Unassigned',
           url:data.url,
           client:data.project.name,
           subClient:data.list.name
@@ -224,6 +225,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
+  console.log(tasks)
   implementorSpinner.classList.add('hide');
   goSettings.classList.add('active');
   if (!!tasks.length){
