@@ -70,7 +70,6 @@ function getDataFromObject(object,value){
   object.forEach((item,index) =>{
     data += item[value] || item['name'] + ', ';
   });
-  console.log(data)
   return data.slice(0, -2);
 }
 
