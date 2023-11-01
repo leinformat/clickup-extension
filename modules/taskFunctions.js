@@ -67,9 +67,10 @@ function getCustomField(data,fieldName){
 function getDataFromObject(object,value){
   if(!object.length) return "Unassigned";
   let data = "";
-  object.forEach((item,index) =>{
-    data += item[value] || item['name'] + ', ';
+  object.forEach((item) =>{
+    data += item[value]+ ', ' || item['name'] + ', ';
   });
+  console.log(data)
   return data.slice(0, -2);
 }
 
