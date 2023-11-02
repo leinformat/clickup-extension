@@ -48,7 +48,7 @@
     align-items: center;
 }
 .clickup-extension__task-head-icon > i,
-.clickup-extension--copy-qa-comment{
+.clickup-extension--copy-comment{
     color:var(--primary);
     cursor: pointer;
 }
@@ -64,7 +64,8 @@
     display:grid;
     grid-template-columns: repeat(2,1fr);
 }
-.clickup-extension__estimated-info{
+.clickup-extension__estimated-info,
+.clickup-extension__comments{
     display:grid;
     grid-template-columns: repeat(3,1fr);
     column-gap: 10px;

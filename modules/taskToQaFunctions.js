@@ -1,5 +1,5 @@
 import { tasksContainer, task,tasksToQaContainer,countTasksToQaContainer,toQaSpinner } from "./domElements.js";
-import { copyToClick } from './copyText.js';
+import { copyToSlack } from './copyText.js';
 import { orderTasks,tasksCounterToQa } from "./typeMessages.js";
 
 
@@ -159,7 +159,7 @@ function taskTemplate(data, clonedCard,fieldData) {
     // Add Listener to Copy Qa Comment
     const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
     copyTextkBtn.addEventListener("click",(e)=>{
-      copyToClick(
+      copyToSlack(
         {
           pm:data.creator.username,
           qa:fieldData ? getDataFromObject(fieldData,'username') : 'Unassigned',

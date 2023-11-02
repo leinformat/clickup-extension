@@ -29,6 +29,7 @@ export const gettingTasks = (action) =>{
       }
     }catch(err){
         console.log("We've had an Error: "+err);
+        chrome.runtime.sendMessage({ gettingTaskErr: 'Error to getting Tasks' });
     }
   });
 }

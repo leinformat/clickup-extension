@@ -1,5 +1,5 @@
 import { tasksContainer, task,countTasksContainer,implementorSpinner,goSettings } from "./domElements.js";
-import { copyToClick } from './copyText.js';
+import { copyToSlack, copyEstimation,copydeliverToQA } from './copyText.js';
 import { orderTasks,tasksCounter } from "./typeMessages.js";
 
 // Funtion to format dates
@@ -156,21 +156,59 @@ function taskTemplate(data, clonedCard,fieldData) {
     });
 
     // Add Listener to Copy Qa Comment
-    const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
-    copyTextkBtn.addEventListener("click",(e)=>{
-      let qaField = getDataFromObject(fieldData,'username');
-      qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+    const copyTextkBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
+    copyTextkBtn.forEach( item =>{
+      item.addEventListener("click",(e)=>{
+        // Slack Comment
+        if(item.dataset.comment === 'qa-slack'){
+          let qaField = getDataFromObject(fieldData,'username');
+          qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
 
-      copyToClick(
-        {
-          pm:data.creator.username,
-          qa:fieldData ? qaField : 'Unassigned',
-          url:data.url,
-          client:data.project.name,
-          subClient:data.list.name
-        },
-        e.target);
+          copyToSlack(
+            {
+              pm:data.creator.username,
+              qa:fieldData ? qaField : 'Unassigned',
+              url:data.url,
+              client:data.project.name,
+              subClient:data.list.name
+            },
+            e.target);
+        }
+        // Slack Comment
+        else if(item.dataset.comment === 'estimation'){
+          let qaField = getDataFromObject(fieldData,'username');
+          const qaId = getDataFromObject(fieldData,'id');
+          const dueDate = dateFormat(data.due_date,'month-day');
+          qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+
+          copyEstimation(
+            {
+              pmId:data.creator.id,
+              pm:data.creator.username,
+              qa:fieldData ? qaField : 'Unassigned',
+              qaId,
+              dueDate
+            },
+            e.target);
+        }
+        // Deliver to QA Comment
+        else if(item.dataset.comment === 'deliver-to-qa'){
+          let qaField = getDataFromObject(fieldData,'username');
+          const qaId = getDataFromObject(fieldData,'id');
+          qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+
+          copydeliverToQA(
+            {
+              pmId:data.creator.id,
+              pm:data.creator.username,
+              qa:fieldData ? qaField : 'Unassigned',
+              qaId,
+            },
+            e.target);
+        }
+      });
     });
+    
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
@@ -215,7 +253,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 
     clonedCard.querySelector(".clickup-extension--status").style.color = data.status.color;
 
-    clonedCard.querySelector(".clickup-extension__due-date").textContent = dateFormat(data.due_date,'month-day'); ;
+    clonedCard.querySelector(".clickup-extension__due-date").textContent = dateFormat(data.due_date,'month-day');
 
     clonedCard.querySelector(".clickup-extension__tracked").textContent = convertToTimeFormat(data.time_spent,'h');
 
