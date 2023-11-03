@@ -65,12 +65,15 @@ function getCustomField(data,fieldName){
 
 // Funtion GET QA data
 function getDataFromObject(object,value){
+  
   if(!object.length) return "Unassigned";
   let data = "";
   object.forEach((item) =>{
-    data += item[value]+ ', ' || item['name'] + ', ';
+    const name = item[value] || item['name'];
+    data += name + ', ';
+    console.log(data)
   });
-  console.log(data)
+  
   return data.slice(0, -2);
 }
 
