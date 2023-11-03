@@ -156,19 +156,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       openTask(event.target);
     });
 
-    // Add Listener to Copy Qa Comment
-    const copyTextkBtn = clonedCard.querySelector(".clickup-extension--copy-qa-comment");
-    copyTextkBtn.addEventListener("click",(e)=>{
-      copyToSlack(
-        {
-          pm:data.creator.username,
-          qa:fieldData ? getDataFromObject(fieldData,'username') : 'Unassigned',
-          url:data.url,
-          client:data.project.name,
-          subClient:data.list.name
-        },
-        e.target);
-    });
+    
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
