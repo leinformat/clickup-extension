@@ -71,7 +71,6 @@ function getDataFromObject(object,value){
   object.forEach((item) =>{
     const name = item[value] || item['name'];
     data += name + ', ';
-    console.log(data)
   });
   
   return data.slice(0, -2);
@@ -153,7 +152,7 @@ function handlerCounterTask(taskData,node){
 function taskTemplate(data, clonedCard,fieldData) {
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
-
+    // Open Task
     openTaskBtn.addEventListener("click",(event)=>{
       openTask(event.target);
     });
@@ -266,7 +265,6 @@ function taskTemplate(data, clonedCard,fieldData) {
 
 // This is a Main Funtion Function to handle Tasks
 export function handleTasks(tasks) {
-  console.log(tasks)
   implementorSpinner.classList.add('hide');
   goSettings.classList.add('active');
   if (!!tasks.length){

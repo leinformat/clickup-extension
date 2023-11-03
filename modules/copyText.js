@@ -81,24 +81,3 @@ export const copydeliverToQA = async (data,node) => {
         console.log("We've been an Error to copy Comment: "+error);
       }
 };
-
-  /*
-
-Hi  @Sebastián Vega and @Daniel Melan 
-URL:
-
-WHAT I DID:
-
-OMIT: 
-
-LIMITATION: 
-
-FILES ATTACHED: 
-
-FOR Q.A:
-
-VIDEO:
-
-ACTION REQUIRED:
-@Sebastián Vega please deliver the task after Q.A is approved.
-*/

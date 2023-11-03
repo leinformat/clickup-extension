@@ -1,8 +1,6 @@
-import { tasksContainer, task,tasksToQaContainer,countTasksToQaContainer,toQaSpinner } from "./domElements.js";
-import { copyToSlack } from './copyText.js';
+import { task,tasksToQaContainer,countTasksToQaContainer,toQaSpinner } from "./domElements.js";
 import { orderTasks,tasksCounterToQa } from "./typeMessages.js";
-
-
+import { copyComment } from "./utilities/copyComment.js";
 
 // Funtion to format dates
 const dateFormat = (unix, format)=>{
@@ -63,18 +61,6 @@ function getCustomField(data,fieldName){
     return field.value
   }
   return 0;
-}
-
-// Funtion GET QA data
-function getDataFromObject(object,value){
-  if(!object.length) return "Unassigned";
-
-  let data = "";
-  object.forEach((item,index) =>{
-    index < object.length -1 ? data += item[value] + ', ' : data += item[value]+ '.';
-  });
-
-  return data;
 }
 
 function formatText(text) {
@@ -155,8 +141,10 @@ function taskTemplate(data, clonedCard,fieldData) {
     openTaskBtn.addEventListener("click",(event)=>{
       openTask(event.target);
     });
-
     
+    // Add Listener to Copy Qa Comment
+    const copyTextBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
+    copyComment(copyTextBtn,data,fieldData);
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");

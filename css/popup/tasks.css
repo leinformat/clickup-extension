@@ -146,8 +146,13 @@
     z-index: 50;
 }
 .clickup-extension--implementor-spinner.hide,
-.clickup-extension--to-qa-spinner.hide{
+.clickup-extension--to-qa-spinner.hide,
+.clickup-extension__content.tasks-implentor .clickup-extension__copy-container:not(.implementor-comment),
+.clickup-extension__content.tasks-to-qa .clickup-extension__copy-container:not(.qa-comment){
     display: none;
+}
+.clickup-extension__tasks-toQa-container .clickup-extension__comments{
+    grid-template-columns: repeat(2,1fr);
 }
 /**************** End Task ******************/
 /* General Styles */
