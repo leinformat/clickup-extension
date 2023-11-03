@@ -51,6 +51,31 @@ h1 > span{
     min-height: var(--height);
     padding: 20px;
 }
+/* Scroll */
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+::-webkit-scrollbar:vertical {
+    width:12px;
+}
+::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+    display: none;
+} 
+::-webkit-scrollbar:horizontal {
+    height: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color:var(--blue);
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+    cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color:var(--blue2);
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;  
+}
 button{
     width: fit-content;
     cursor: pointer;
@@ -78,9 +103,13 @@ button{
 }
 button.active{
     background-color: var(--primary);
+    cursor: default;
 }
 .button--primary:hover{
     background-color: var(--blue2);
+}
+.button--secondary:not(.active):hover{
+    background-color: var(--primary);
 }
 .clickup-extension--border{
     height: 1px;

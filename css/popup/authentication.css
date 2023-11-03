@@ -88,9 +88,12 @@
     top: 20px;
     right: 20px;
     border:none;
-    cursor: pointer;
+    cursor: pointer!important;
     color: var(--blue);
     display: none;;
+}
+.clickup-extension__resetAuthAll:hover{
+    color: var(--blue2);
 }
 .clickup-extension__resetAuthAll.active{
     display: block;

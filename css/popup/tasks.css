@@ -101,7 +101,7 @@
     transition: all .3s ease;
 }
 .clickup-extension__count-task:hover{
-    background-color: var(--blue);
+    background-color: var(--blue2);
 }
 .clickup-extension__count-task:hover > span{
     color: #fff;
@@ -122,8 +122,10 @@
 .active--tab>span {
     color: #fff;
 }
-.active--tab {
+.active--tab, 
+.active--tab:hover{
     background-color: var(--blue);
+    cursor:default;
 }
 .clickup-extension__spaces{
     display: flex;
