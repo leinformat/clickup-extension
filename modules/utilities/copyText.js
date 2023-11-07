@@ -89,10 +89,12 @@ export const copyDeliverToQA = async (data,node) => {
 export const revisionQA = async (data,node) => {
   const comment = `<p><strong>Hi: </strong><button data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button> and <button data-test="mention" data-user="${data.imId}" data-name="${data.imName}">@${data.imName}</button> great work, please confirm the review with the report below</p>
   <p><strong>QA OUTCOME:</strong></p>
-  <p><strong class="ql-color-red">NOT APPROVED</strong> or <strong class="ql-color-green">APPROVED</strong></p><br>
+  <p><strong class="ql-color-blue">NOT APPROVED</strong> or <strong class="ql-color-green">APPROVED</strong></p><br>
   <hr class="ql-divider">
   <p><strong>QA ACTIONS:</strong></p><br>
   <p><strong>Issues checklists:</strong> URL</p><br>
+  <p><strong>Page:</strong> URL</p><br>
+  <p><strong>Reference:</strong> URL</p><br>
   <hr class="ql-divider">
   <p><strong>ISSUES REPORT:</strong></p><br>
   <p><strong>ISSUES VIDEO:</strong> URL</p><br>

@@ -96,6 +96,15 @@
     flex-wrap: wrap;
     gap: 10px;
 }
+.clickup-extension__counter-tasks.ready{
+    padding: 10px;
+    top: 10px;
+    background-color: #fff;
+    z-index: 10;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 3px;
+    position: sticky;
+}
 .clickup-extension__count{
     font-weight: 700;
     transition: all .3s ease;

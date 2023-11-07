@@ -1,111 +1,14 @@
 import { tasksContainer, task,countTasksContainer,implementorSpinner,goSettings } from "./domElements.js";
 import { copyToSlack, copyEstimation,copydeliverToQA } from './copyText.js';
 import { orderTasks,tasksCounter } from "./typeMessages.js";
+// Utilities
+import { dateFormat } from "./utilities/dateFormat.js";
+import { convertToTimeFormat } from "./utilities/timeFormat.js";
+import { formatText } from "./utilities/formatText.js";
+import { getCustomField } from "./utilities/customField.js";
+import { openTask } from "./utilities/openTask.js";
+import { getDataFromObject } from "./utilities/getData.js";
 
-// Funtion to format dates
-const dateFormat = (unix, format)=>{
-  if(!unix) return 0;
-  
-  const codeUnix = new Date(Number(unix));
-  
-  if(format=="month"){
-    const date = codeUnix.toLocaleDateString('en-US',{ month: 'short'});
-    return date;
-  }
-  else if(format=="day"){
-    const date = codeUnix.toLocaleDateString('en-US',{ day: 'numeric' });
-    return date;
-  }
-  else if(format=="month-day"){
-    const date = codeUnix.toLocaleDateString('en-US',{month: 'short',day: 'numeric' });
-    return date;
-  }
-  else if(format=="large"){
-    const date = codeUnix.toLocaleDateString("en-US",{
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    return date;
-  }
-  else{
-    const date = codeUnix.toLocaleDateString('en-US',{ year: 'numeric', month: 'short', day: 'numeric' });
-    return date.replace(/\./g, ',');
-  }
-}
-
-// Funtion to Time Format
-function convertToTimeFormat(seconds,format) {
-  if(!seconds) return '0h';
-  
-  if(format == 'h'){
-    // Calculate hours
-    const hours = seconds / 3600000;
-
-    // Return the time in "Xh" format
-    return hours.toFixed(2) + 'h';
-  }
-}
-
-// Funtion GET CUSTOM fIELD
-function getCustomField(data,fieldName){
-  if(data.length < 1) return 0;
-
-  fieldName = fieldName.toLowerCase();
-
-  const field = data.find(item=> item.name.toLowerCase()=== fieldName);
-  if(!!field.value) {
-    return field.value
-  }
-  return 0;
-}
-
-// Funtion GET QA data
-function getDataFromObject(object,value){
-  
-  if(!object.length) return "Unassigned";
-  let data = "";
-  object.forEach((item) =>{
-    const name = item[value] || item['name'];
-    data += name + ', ';
-  });
-  
-  return data.slice(0, -2);
-}
-
-function formatText(text) {
-  // Find the start and end text
-  const startIndextText = text.toLowerCase().indexOf("what we need to do");
-  const endIndextText = text.toLowerCase().indexOf("platform");
-
-  if (startIndextText !== -1) {
-    let newText = text.substring(startIndextText,endIndextText);
-    // Replace line breaks with <br> tags
-    newText =  newText.replace(/\n/g, "<br>");
-    // Remove asterisks around the text
-    newText = newText.replace(/\*+/g, "");
-    return newText;
-  }
-  return 'Open the Task to more information';
-}
-
-function openTask(taskBtn){
-  if(!taskBtn) throw new Error('Sorry There is no a btn node');
-
-  const parentContainer = taskBtn.closest(".clickup-extension__task");
-  
-  if(parentContainer.classList.contains('active')){
-    parentContainer.classList.remove('active');
-  }else{
-    if(document.querySelector('.clickup-extension__task.active') !== null){
-      document.querySelector('.clickup-extension__task.active').classList.remove('active');
-    }
-    parentContainer.classList.add('active');
-  }
-}
 
 // Function to Select tab tasks
 function handlerTaskTab(statusData){
@@ -268,6 +171,7 @@ export function handleTasks(tasks) {
   implementorSpinner.classList.add('hide');
   goSettings.classList.add('active');
   if (!!tasks.length){
+    document.querySelector('.clickup-extension__counter-tasks.to-implementor').classList.add('ready');
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {
       //console.log(data);

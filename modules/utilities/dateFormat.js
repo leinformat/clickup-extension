@@ -4,7 +4,7 @@ export const dateFormat = (unix, format)=>{
     
     const codeUnix = new Date(Number(unix));
     
-    if(format=="month"){
+    if(format=="month"){ 
       const date = codeUnix.toLocaleDateString('en-US',{ month: 'short'});
       return date;
     }

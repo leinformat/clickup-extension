@@ -2,7 +2,6 @@ import {apiUrl} from './auth.js';
 import { teamsData } from './teams.js';
 
 const filterTasks = (tasks, userId)=>{
-
   // Create an empty array to store the filtered results
   const filteredData = tasks.filter((task) => {
     // Find the "qa" field within the "custom_fields" array of the current object

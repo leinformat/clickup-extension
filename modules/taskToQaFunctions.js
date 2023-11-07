@@ -1,140 +1,17 @@
 import { task,tasksToQaContainer,countTasksToQaContainer,toQaSpinner } from "./domElements.js";
 import { orderTasks,tasksCounterToQa } from "./typeMessages.js";
+// Utilities
 import { copyComment } from "./utilities/copyComment.js";
+import { dateFormat } from "./utilities/dateFormat.js";
+import { convertToTimeFormat } from "./utilities/timeFormat.js";
+import { formatText } from "./utilities/formatText.js";
+import { getCustomField } from "./utilities/customField.js";
+import { openTask } from "./utilities/openTask.js";
+import { handlerCounterTask } from "./utilities/counterTasks.js";
 
-// Funtion to format dates
-const dateFormat = (unix, format)=>{
-  if(!unix) return 0;
-  
-  const codeUnix = new Date(Number(unix));
-  
-  if(format=="month"){
-    const date = codeUnix.toLocaleDateString('en-US',{ month: 'short'});
-    return date;
-  }
-  else if(format=="day"){
-    const date = codeUnix.toLocaleDateString('en-US',{ day: 'numeric' }); 
-    return date;
-  }
-  else if(format=="month-day"){
-    const date = codeUnix.toLocaleDateString('en-US',{month: 'short',day: 'numeric' });
-    return date;
-  }
-  else if(format=="large"){
-    const date = codeUnix.toLocaleDateString("en-US",{
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    });
-    return date;
-  }
-  else{
-    const date = codeUnix.toLocaleDateString('en-US',{ year: 'numeric', month: 'short', day: 'numeric' });
-    return date.replace(/\./g, ',');
-  }
-}
-
-// Funtion to Time Format
-function convertToTimeFormat(seconds,format) {
-  if(!seconds) return '0h';
-  
-  if(format == 'h'){
-    // Calculate hours
-    const hours = seconds / 3600000;
-
-    // Return the time in "Xh" format
-    return hours.toFixed(2) + 'h';
-  }
-}
-
-// Funtion GET CUSTOM fIELD
-function getCustomField(data,fieldName){
-  if(data.length < 1) return 0;
-
-  fieldName = fieldName.toLowerCase();
-
-  const field = data.find(item=> item.name.toLowerCase()=== fieldName);
-  if(!!field.value) {
-    return field.value
-  }
-  return 0;
-}
-
-function formatText(text) {
-  // Find the start and end text
-  const startIndextText = text.toLowerCase().indexOf("what we need to do");
-  const endIndextText = text.toLowerCase().indexOf("platform");
-
-  if (startIndextText !== -1) {
-    let newText = text.substring(startIndextText,endIndextText);
-    // Replace line breaks with <br> tags
-    newText =  newText.replace(/\n/g, "<br>");
-    // Remove asterisks around the text
-    newText = newText.replace(/\*+/g, "");
-    return newText;
-  }
-  return 'Open the Task to more information';
-}
-
-function openTask(taskBtn){
-  if(!taskBtn) throw new Error('Sorry There is no a btn node');
-
-  const parentContainer = taskBtn.closest(".clickup-extension__task");
-  
-  if(parentContainer.classList.contains('active')){
-    parentContainer.classList.remove('active');
-  }else{
-    if(document.querySelector('.clickup-extension__task.active') !== null){
-      document.querySelector('.clickup-extension__task.active').classList.remove('active');
-    }
-    parentContainer.classList.add('active');
-  }
-}
-
-// Function to Select tab tasks
-function handlerTaskTab(statusData){
-  const active = document.querySelector('.clickup-extension__counter-tasks.to-qa .clickup-extension__count-task.active--tab');
-  !!active && active.classList.remove('active--tab');
-
-  statusData.classList.add('active--tab');
-  const status = statusData.dataset.status;
-
-  const allTasks = document.querySelectorAll(`.clickup-extension__tasks-toQa-container .clickup-extension__task`);
-  allTasks.forEach(task =>{
-    if(status !== 'all-tasks'){
-      if(task.classList.contains(`clickup-extension--status-${status}`)){
-        task.classList.add('show-only');
-      }else{
-        task.classList.remove('show-only');
-      }
-    }else{
-      task.classList.add('show-only');
-    }
-  });
-}
-
-// Function to counter tasks
-function handlerCounterTask(taskData,node){
-  node.innerHTML = '';
-  for (const task in taskData) {
-    node.innerHTML += `<div class="clickup-extension__count-task to-qa ${task === 'all-tasks' ? 'active--tab': null}" data-status="${task ? task : 'all-tasks' }" style="order:${orderTasks[task]}">
-                          <span class="clickup-extension__label">${task.replace(/-/g, " ")}: </span>
-                          <span class="clickup-extension__count">${taskData[task]}</span>
-                        </div>`;
-  }
-  const allTasksStatus = node.querySelectorAll('.clickup-extension__count-task');
-  allTasksStatus.forEach( status => {
-    status.addEventListener("click",(event)=>{
-      handlerTaskTab(status);
-    });
-  })
-}
 
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard,fieldData) {
+function taskTemplate(data, clonedCard,fieldData){
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
 
@@ -182,18 +59,27 @@ function taskTemplate(data, clonedCard,fieldData) {
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
     
+    // Tasks Status
     clonedCard.querySelector(".clickup-extension__task-status").textContent = data.status.status;
-    clonedCard.querySelector(".clickup-extension__client-name").textContent = `${data.project.name} | ${data.list.name}`;
 
+    // Client Name
+    clonedCard.querySelector(".clickup-extension__client-name").textContent = `${data.project.name} | ${data.list.name}`;
+    
+    // Created Date
     clonedCard.querySelector(".clickup-extension__created-date").textContent =  dateFormat(data.date_created,'large');
 
+    // Status Color
     clonedCard.querySelector(".clickup-extension--status").style.color = data.status.color;
 
+    // Due Date
     clonedCard.querySelector(".clickup-extension__due-date").textContent = dateFormat(data.due_date,'month-day'); ;
 
+    // Tracked Time
     clonedCard.querySelector(".clickup-extension__tracked").textContent = convertToTimeFormat(data.time_spent,'h');
-
+    // Estimated Time
     clonedCard.querySelector(".clickup-extension__estimated").textContent = convertToTimeFormat(data.time_estimate,'h') ;
+
+    // Task Description
     clonedCard.querySelector(".clickup-extension__task-descripion").innerHTML = formatText(data.description) ;
 }
 
@@ -202,6 +88,7 @@ export function handlerTasksToQa(tasks) {
   toQaSpinner.classList.add('hide');
   if (!!tasks.length){
     tasksToQaContainer.innerHTML = "";
+    document.querySelector('.clickup-extension__counter-tasks.to-qa').classList.add('ready');
     tasks.forEach((data) => {
       //console.log(data);
       const clonedCard = task.cloneNode(true);
@@ -214,7 +101,9 @@ export function handlerTasksToQa(tasks) {
       tasksToQaContainer.appendChild(clonedCard);
     });
     // Counter All Tasks
-    handlerCounterTask(tasksCounterToQa,countTasksToQaContainer);
+    const allTasks = '.clickup-extension__tasks-toQa-container .clickup-extension__task'
+    const activeTab = '.clickup-extension__counter-tasks.to-qa .clickup-extension__count-task.active--tab';
+    handlerCounterTask(tasksCounterToQa,countTasksToQaContainer,allTasks,activeTab);
     
   }else{
     tasksToQaContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
