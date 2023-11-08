@@ -12,8 +12,5 @@ chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], function (
   } else {
     dataContent.classList.remove('hide');
     initializeTasks();
-    
-    // QA Tasks
-    //gettingTasksToQa();
   }
 });

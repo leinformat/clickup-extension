@@ -2,7 +2,6 @@
 export const handlerTaskTab = (statusData,activeTab,allTasks) => {
   // -->>
   const active = document.querySelector(`${activeTab}`);
-  console.log(active)
   !!active && active.classList.remove("active--tab");
 
   statusData.classList.add("active--tab");

@@ -15,7 +15,7 @@ export const handlerCounterTask = (taskData,node,tasksAll,activeTab) =>{
 
   allTasksStatus.forEach( status => {
     status.addEventListener("click",(event)=>{
-      handlerTaskTab(status,activeTab,allTasks);
+      handlerTaskTab(status,activeTab,allTasks); 
     });
   })
 }

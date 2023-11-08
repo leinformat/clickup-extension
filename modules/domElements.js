@@ -10,7 +10,6 @@ const emailError = document.querySelector(".clickup-extension__email-error");
 const email = document.querySelector(".clickup-extension__email");
 const submit = document.querySelector(".clickup-extension__submit");
 const dataContent = document.querySelector('.clickup-extension__content');
-//const btnResetAuthAll = document.querySelector('.clickup-extension__resetAuthAll');
 const goSettings = document.querySelector('.clickup-extension__resetAuthAll');
 const authMessage = document.querySelector('.clickup-extension__auth-message');
 

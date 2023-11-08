@@ -1,3 +1,6 @@
+.clickup-extension__task{
+    position:relative;
+}
 .clickup-extension__tasks-container,
 .clickup-extension__tasks-toQa-container {
     display: flex;
@@ -162,6 +165,38 @@
 }
 .clickup-extension__tasks-toQa-container .clickup-extension__comments{
     grid-template-columns: repeat(2,1fr);
+}
+.task-alert--container{
+    width: 20px;
+    height: 20px;
+    background-color: var(--alert);
+    border-radius: 50%;
+    position: absolute;
+    right: 7px;
+    top: -8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10px;
+    cursor: pointer;
+}
+.task-alert--description{
+    position: absolute;
+    right: 25px;
+    background-color: var(--alert);
+    padding: 10px 10px 0;
+    border-radius: 5px;
+    top: -15px;
+    text-transform: capitalize;
+    opacity: 0;
+    z-index: -1;
+    transition: all .5s;
+}
+.task-alert--container:hover .task-alert--description{
+    opacity: 1;
+    z-index: 20;
 }
 /**************** End Task ******************/
 /* General Styles */

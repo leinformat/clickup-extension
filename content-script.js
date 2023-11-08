@@ -78,6 +78,7 @@ const getPageId = (url) => {
   return pageId;
 };
 
+//******************** */ Developer Options *************************
 window.addEventListener("load", (e) => {
   const currentUrl = window.location.href;
   if (

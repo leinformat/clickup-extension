@@ -20,7 +20,7 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
               },
               e.target);
           }
-          // Slack Comment
+          // Estimation Comment
           else if(item.dataset.comment === 'estimation'){
             let qaField = getDataFromObject(fieldData,'username');
             const qaId = getDataFromObject(fieldData,'id');

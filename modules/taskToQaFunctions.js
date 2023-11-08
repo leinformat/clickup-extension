@@ -55,6 +55,7 @@ function taskTemplate(data, clonedCard,fieldData){
 
     // Assignees
     clonedCard.querySelector(".clickup-extension__qa-name").textContent = data.assignees[0].username;
+    clonedCard.querySelector(".clickup-extension__qa-container .clickup-extension__label").textContent = 'Implementor: ';
     
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
@@ -84,7 +85,7 @@ function taskTemplate(data, clonedCard,fieldData){
 }
 
 // This is a Main Funtion Function to handle Tasks
-export function handlerTasksToQa(tasks) {
+export function handlerTasksToQa(tasks){
   toQaSpinner.classList.add('hide');
   if (!!tasks.length){
     tasksToQaContainer.innerHTML = "";
