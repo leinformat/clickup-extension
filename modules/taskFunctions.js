@@ -18,7 +18,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       const dataAlert = taskAlerts(data);
       let descripion = "";
       for (const key in dataAlert) {
-        if(key !== 'count') descripion += `<p>${key}</p><br>`;
+        if(key !== 'count') descripion += `<p>X ${key}</p><br>`;
       }
       const alertContainer = document.createElement("div");
       alertContainer.classList.add('task-alert--container');

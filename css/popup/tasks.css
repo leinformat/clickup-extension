@@ -193,6 +193,7 @@
     opacity: 0;
     z-index: -1;
     transition: all .5s;
+    min-width: 70px;
 }
 .task-alert--container:hover .task-alert--description{
     opacity: 1;

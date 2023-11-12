@@ -1,4 +1,5 @@
 (async () => {
+  // ******************* Task Changes Notifications **********************/
   const Toast = Swal.mixin({
     toast: true,
     position: "top-right",
@@ -45,10 +46,9 @@ const formatMessage = (dataMessage) =>{
   return message;
 }
 
-  chrome.runtime.onMessage.addListener(async function (request){
+chrome.runtime.onMessage.addListener(async function (request){
     if (request.notification) {
       const message = formatMessage(request.notification);
-      console.log(message);
       Toast.fire({
         icon: "info",
         html: message,
@@ -60,9 +60,13 @@ const formatMessage = (dataMessage) =>{
         }
       });
     }
-  });
+});
+// ******************* End Task Changes Notifications **********************/
 })();
 
+//******************** */ Developer Options ************************* //
+
+// Utility functions
 const createButton = (data) =>{
   const button = document.createElement(data.type);
   button.classList.add(data.class,"active");
@@ -78,12 +82,19 @@ const getPageId = (url) => {
   return pageId;
 };
 
-//******************** */ Developer Options *************************
-window.addEventListener("load", (e) => {
+const handlerLiveReload = (currentUrl) =>{
+  const pageId = getPageId(currentUrl);
+  // Send message to background
+  chrome.runtime.sendMessage({ pageToreload: pageId });
+};
+// End Utility functions
+
+window.addEventListener("load", (e) =>{
   const currentUrl = window.location.href;
+  // Drag androp Page
   if (
     currentUrl.includes("https://app.hubspot.com/pages/") && !currentUrl.includes("developerMode=true") || 
-    currentUrl.includes("https://app.hubspot.com/blog/") ||
+    currentUrl.includes("https://app.hubspot.com/blog/") && !currentUrl.includes("developerMode=true") ||
     currentUrl.includes("https://app-eu1.hubspot.com/pages/") && !currentUrl.includes("developerMode=true")
     ) {
     // Body
@@ -101,6 +112,7 @@ window.addEventListener("load", (e) => {
       type: 'a'
     });
 
+    /*
     // Live Reload Button
     const liveReload = createButton({
       url: "javascript:;",
@@ -122,6 +134,7 @@ window.addEventListener("load", (e) => {
         liveReload.classList.remove('reload');
       }, 2000);
     });
+    */
 
     // Developer Mode Show Controls
     const ShowControls = createButton({
@@ -138,43 +151,53 @@ window.addEventListener("load", (e) => {
     });
 
     buttonContainer.append(dvmButton);
-    buttonContainer.append(liveReload);
+    //buttonContainer.append(liveReload);
     bodyContainer.prepend(buttonContainer);
-    bodyContainer.prepend(ShowControls);
+    bodyContainer.prepend(ShowControls);   
   }
-});
 
-document.addEventListener("keydown", function (event) {
-  const currentUrl = window.location.href;
   if (
     currentUrl.includes("https://app.hubspot.com/pages/") ||
     currentUrl.includes("https://app.hubspot.com/blog/") ||
     currentUrl.includes("https://app-eu1.hubspot.com/pages/") ||
-    currentUrl.includes("https://app.hubspot.com/global-content/")
-    ) {
-    if (event.ctrlKey){
-      if (event.key.toLowerCase() === 's') {
-        event.preventDefault();
-        event.stopPropagation();
-        // Control + s
-          const pageId = getPageId(currentUrl);
-          const buttonReload = document.querySelector('.button--live-reload');
-          if (!!buttonReload) {
-            const image = chrome.runtime.getURL("images/loader2.gif");
-            buttonReload.classList.add("reload");
-            buttonReload.style.backgroundImage = `url(${image})`;
+    currentUrl.includes("https://app-eu1.hubspot.com/blog/") ||
+    currentUrl.includes("https://app.hubspot.com/global-content/")){
+  
+     // When you keydown
+     document.addEventListener("keydown", function (event){
+        if (event.ctrlKey){
+          if (event.key.toLowerCase() === "s") {
+            event.preventDefault();
+            event.stopPropagation();
+            // Control + s
+            handlerLiveReload(currentUrl);
           }
-          console.log('yes',pageId)
-          // Delay 2 seconds
-          setTimeout(() => {
-            // Send message to background
-            chrome.runtime.sendMessage({ pageToreload: pageId });
-            if (!!buttonReload) {
-              buttonReload.style.backgroundImage = "none";
-              buttonReload.classList.remove("reload");
-            }
-          }, 2000);
         }
-      }
-   }
+    });
+
+    // Observe Save change
+    setTimeout(() => {
+      // Select the element you want to observe
+      const targetNode = document.querySelector(".private-template__section--header span[data-key]");
+      console.log(document.querySelectorAll('span[data-key]'));
+      console.log(targetNode)
+      // Set up the MutationObserver with a callback function
+      const observer = new MutationObserver(function (mutations){
+        mutations.forEach(function (mutation) {
+          // Check if the mutation is an attribute change and the attribute is "data-key"
+          if (mutation.type === "attributes" && mutation.attributeName === "data-key"){
+            const targetObserved = targetNode.getAttribute("data-key").toLowerCase();
+            if(targetObserved === ('epsavelabel.saved') || targetObserved.includes('autosaved')){
+              handlerLiveReload(currentUrl);
+            }
+          }
+        });
+      });
+
+      // Configure and start observing the target node and the mutation
+      const config = { attributes: true };
+      observer.observe(targetNode, config);
+    }, 1000);
+  }
 });
+
