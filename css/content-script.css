@@ -80,8 +80,11 @@
     top:20px;
     left:38%;
 }
-.button--show-controls.active:hover{
-    color:#fff;
+.button--show-controls.active svg{
+    transition: all .5s;
+}
+.button--show-controls.active:hover svg{
+    fill:#fff;
 }
 .button--show-controls:hover::before {
     border-top: 15px solid #f47f55;

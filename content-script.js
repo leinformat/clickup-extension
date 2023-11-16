@@ -69,7 +69,7 @@ chrome.runtime.onMessage.addListener(async function (request){
 // Utility functions
 const createButton = (data) =>{
   const button = document.createElement(data.type);
-  button.classList.add(data.class,"active");
+  button.classList.add(data.class);
   if(!!data.url && data.type == 'a') button.href = data.url;
   if(!!data.title) button.title = data.title;
   button.textContent = data.text;
@@ -102,7 +102,7 @@ window.addEventListener("load", (e) =>{
     
     // Developer Mode Container
     const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("container--developer-mode","active");
+    buttonContainer.classList.add("container--developer-mode");
 
     // Developer Mode Button
     const dvmButton = createButton({
@@ -139,7 +139,7 @@ window.addEventListener("load", (e) =>{
     // Developer Mode Show Controls
     const ShowControls = createButton({
       class:"button--show-controls",
-      text: "X",
+      text: "",
       title:"Show Dev Controls",
       type: 'div'
     });
@@ -147,7 +147,7 @@ window.addEventListener("load", (e) =>{
     ShowControls.addEventListener("click",()=>{
       ShowControls.classList.toggle('active');
       buttonContainer.classList.toggle('active');
-      !!ShowControls.classList.contains('active') ? ShowControls.textContent = "X" : ShowControls.textContent = ""
+      !!ShowControls.classList.contains('active') ? ShowControls.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" height="1.25em" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:#f66129}</style><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm79 143c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"/></svg>' : ShowControls.innerHTML = ""
     });
 
     buttonContainer.append(dvmButton);
