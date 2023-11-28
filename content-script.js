@@ -112,30 +112,6 @@ window.addEventListener("load", (e) =>{
       type: 'a'
     });
 
-    /*
-    // Live Reload Button
-    const liveReload = createButton({
-      url: "javascript:;",
-      class:"button--live-reload",
-      text: "Live Reload",
-      type: 'a'
-    });
-
-    // --> Live Reload Listener
-    liveReload.addEventListener("click", () => {
-      const image = chrome.runtime.getURL("images/loader2.gif")
-      const pageId = getPageId(currentUrl);
-      liveReload.classList.add('reload');
-      liveReload.style.backgroundImage = `url(${image})`;
-      setTimeout(() => {
-        // Send message to background
-        chrome.runtime.sendMessage({ pageToreload: pageId });
-        liveReload.style.backgroundImage = 'none';
-        liveReload.classList.remove('reload');
-      }, 2000);
-    });
-    */
-
     // Developer Mode Show Controls
     const ShowControls = createButton({
       class:"button--show-controls",
@@ -161,7 +137,8 @@ window.addEventListener("load", (e) =>{
     currentUrl.includes("https://app.hubspot.com/blog/") ||
     currentUrl.includes("https://app-eu1.hubspot.com/pages/") ||
     currentUrl.includes("https://app-eu1.hubspot.com/blog/") ||
-    currentUrl.includes("https://app.hubspot.com/global-content/")){
+    currentUrl.includes("https://app.hubspot.com/global-content/") ||
+    currentUrl.includes("https://app.hubspot.com/email/")){
   
      // When you keydown
      document.addEventListener("keydown", function (event){
@@ -200,4 +177,3 @@ window.addEventListener("load", (e) =>{
     }, 1000);
   }
 });
-

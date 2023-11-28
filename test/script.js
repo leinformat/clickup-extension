@@ -48,3 +48,59 @@ pasteButton.addEventListener('click', async (event) => {
     }
 }); 
 
+/*
+    // Live Reload Button
+    const liveReload = createButton({
+      url: "javascript:;",
+      class:"button--live-reload",
+      text: "Live Reload",
+      type: 'a'
+    });
+
+    // --> Live Reload Listener
+    liveReload.addEventListener("click", () => {
+      const image = chrome.runtime.getURL("images/loader2.gif")
+      const pageId = getPageId(currentUrl);
+      liveReload.classList.add('reload');
+      liveReload.style.backgroundImage = `url(${image})`;
+      setTimeout(() => {
+        // Send message to background
+        chrome.runtime.sendMessage({ pageToreload: pageId });
+        liveReload.style.backgroundImage = 'none';
+        liveReload.classList.remove('reload');
+      }, 2000);
+    });
+
+
+
+
+    const funtionality = () =>{
+    console.log('Nuevo Nodo');
+  }
+  const regex = /design-manager\/(\d+)/;
+  const match = currentUrl.match(regex);
+
+  if (match && match[1]) {
+      // Selecciona el div que deseas observar
+      var targetDiv = document.querySelector('.private-tabs__list');
+
+      // Crea una instancia de MutationObserver y proporciona una función de devolución de llamada
+      var observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+              const modulesRegex = /design-manager\/(\d+)\/modules/;
+              // Verifica si se agregaron nodos al div
+              if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                if (!!currentUrl.match(modulesRegex)) {
+                  console.log(currentUrl.match(modulesRegex))
+                }
+                
+                funtionality();
+              }
+          });
+      });
+
+      // Configura el observador para observar cambios en la estructura del DOM
+      var config = { childList: true };
+      observer.observe(targetDiv, config);
+  }
+    */

@@ -37,6 +37,10 @@ h1{
 h1 > span{
     color:var(--blue);
 }
+.clickup-extension--version{
+    font-size: 0.8rem;
+    font-weight: 700;
+}
 .clickup-extension__label{
     font-size:.8rem;
     color: var(--primary);

@@ -25,7 +25,7 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
             let qaField = getDataFromObject(fieldData,'username');
             const qaId = getDataFromObject(fieldData,'id');
             const dueDate = dateFormat(data.due_date,'month-day');
-            qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+            qaField == 'QA Team' ? qaField = 'QA Team' : qaField = qaField;
   
             copyEstimation(
               {
