@@ -18,3 +18,10 @@ export let tasksCounter = {
 export let tasksCounterToQa = {
     "all-tasks": 0
 }
+
+export const taskAlert = {
+    tacked:"Time has not been tracked",
+    estimated:"It has not been estimated",
+    points:"No points added",
+    qa:"No QA assigned"
+}

@@ -1,5 +1,5 @@
 import { tasksContainer, task,countTasksContainer,implementorSpinner,goSettings } from "./domElements.js";
-import { orderTasks,tasksCounter } from "./typeMessages.js";
+import { orderTasks,tasksCounter,taskAlert } from "./typeMessages.js";
 // Utilities
 import { copyComment } from "./utilities/copyComment.js";
 import { dateFormat } from "./utilities/dateFormat.js";
@@ -14,11 +14,12 @@ import { taskAlerts } from "./utilities/taskAlerts.js";
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData) {
     // Alerts
-    if (!!taskAlerts(data).count) {
-      const dataAlert = taskAlerts(data);
+    if (!!taskAlerts(data,fieldData).count) {
+      const dataAlert = taskAlerts(data,fieldData);
       let descripion = "";
+      let index = 1;
       for (const key in dataAlert) {
-        if(key !== 'count') descripion += `<p>X ${key}</p><br>`;
+        if(key !== 'count') descripion += `<p>${index++}. ${taskAlert[key]}</p><br>`;
       }
       const alertContainer = document.createElement("div");
       alertContainer.classList.add('task-alert--container');
@@ -33,7 +34,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       alertContainer.append(alertDescription,count);
       
       clonedCard.prepend(alertContainer);
-    }
+    } 
     
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
