@@ -174,6 +174,6 @@ window.addEventListener("load", (e) =>{
       // Configure and start observing the target node and the mutation
       const config = { attributes: true };
       observer.observe(targetNode, config);
-    }, 1000);
+    }, 2000);
   }
 });
