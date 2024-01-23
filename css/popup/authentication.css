@@ -83,19 +83,19 @@
     width:20px;
     height:20px;
 }
-.clickup-extension__resetAuthAll{
+.clickup-extension__go-settings{
     position: absolute;
-    top: 20px;
+    top: 24px;
     right: 20px;
     border:none;
     cursor: pointer!important;
     color: var(--blue);
     display: none;;
 }
-.clickup-extension__resetAuthAll:hover{
+.clickup-extension__go-settings:hover{
     color: var(--blue2);
 }
-.clickup-extension__resetAuthAll.active{
+.clickup-extension__go-settings.active{
     display: block;
     background-color: transparent;
 }

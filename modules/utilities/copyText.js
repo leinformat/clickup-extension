@@ -21,7 +21,7 @@ export const copyToSlack = async (data,node) => {
           node.closest('.clickup-extension__copy-container').classList.remove('copy--ok');
         },200);
       } catch (error) {
-        console.log("We've been an Error to copy Comment: "+error);
+        console.log("We've been an Error to copy Comment: "+error); 
       }
 };
 

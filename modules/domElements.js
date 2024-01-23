@@ -10,9 +10,8 @@ const emailError = document.querySelector(".clickup-extension__email-error");
 const email = document.querySelector(".clickup-extension__email");
 const submit = document.querySelector(".clickup-extension__submit");
 const dataContent = document.querySelector('.clickup-extension__content');
-const goSettings = document.querySelector('.clickup-extension__resetAuthAll');
+const goSettings = document.querySelector('.clickup-extension__go-settings');
 const authMessage = document.querySelector('.clickup-extension__auth-message');
-
 
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
@@ -25,6 +24,9 @@ const tasksToQaContainer = document.querySelector('.clickup-extension__tasks-toQ
 const toQaButton = document.querySelectorAll('.clickup-extension__spaces > button');
 const countTasksToQaContainer = document.querySelector('.clickup-extension__counter-tasks.to-qa');
 const toQaSpinner = document.querySelector('.clickup-extension--to-qa-spinner');
+
+// HUBL FIXER
+const hublFixerBtn = document.querySelector('.clickup-extension__hubl-fixer');
 
 export {
   authContainer,
@@ -47,5 +49,6 @@ export {
   toQaButton,
   countTasksToQaContainer,
   implementorSpinner,
-  toQaSpinner
+  toQaSpinner,
+  hublFixerBtn
 };

@@ -8,7 +8,7 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
           // Slack Comment
           if(item.dataset.comment === 'qa-slack'){
             let qaField = getDataFromObject(fieldData,'username');
-            qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+            qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField; 
   
             copyToSlack(
               {

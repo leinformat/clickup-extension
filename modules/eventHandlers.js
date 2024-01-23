@@ -5,11 +5,12 @@ import {
   teamOptions,
   goSettings,
   keyInput,
-  toQaButton
+  toQaButton,
+  hublFixerBtn
 }from './domElements.js';
 
 import {
-  handleInputChange,
+  handleInputChange, 
   handleFormSubmit,
   handleKeyInputChange,
 } from './authFunctions.js';
@@ -17,6 +18,7 @@ import {
 import { handleMessage} from './handleMessage.js';
 
 import { goToSettings } from './settings/settingsFunctions.js';
+import { hublFixer } from './utilities/hublFixer.js';
 
 //########## Listener to All messages from Background.js #########
 chrome.runtime.onMessage.addListener(handleMessage);
@@ -31,7 +33,7 @@ teamOptions.addEventListener("click", (e) => {
   if (e.target.type === "radio") handleInputChange(email, 'email', 'add');
 });
 
-goSettings.addEventListener('click', goToSettings);
+goSettings.addEventListener('click', goToSettings); 
 
 keyInput.addEventListener("change", handleKeyInputChange);
 
@@ -43,5 +45,10 @@ toQaButton.forEach( button => {
     document.querySelector(".clickup-extension__content:not(.hide)").classList.add("hide");
     document.querySelector(`.clickup-extension__content.${button.dataset.type}`).classList.remove("hide");
   });
+});
+
+// HUBL FIXER
+hublFixerBtn.addEventListener("click",()=>{
+  hublFixer();
 });
 

@@ -131,3 +131,8 @@ input[type=checkbox]{
     accent-color:var(--blue);
     height: 13px;
 }
+.clickup-extension__hubl-container {
+    display: flex;
+    max-width: 95%;
+    justify-content: space-between;
+}
