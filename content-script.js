@@ -1,4 +1,25 @@
 (async () => {
+  const getCustomField = (data, fieldName) =>{
+    if (data.length < 1) return 0;
+    fieldName = fieldName.toLowerCase();
+    const field = data.find((item) => item.name.toLowerCase() === fieldName);
+    if (!!field.value) {
+      return field.value;
+    }
+    return 0;
+  }
+  // Funtion GET QA data
+const getDataFromObject = (object, value) => {
+  if (!object.length) return "Unassigned";
+  let data = "";
+  object.forEach((item) => {
+    const name = item[value] || item["name"];
+    data += name + ", ";
+  });
+
+  return data.slice(0, -2);
+};
+
   // ******************* Task Changes Notifications **********************/
   const Toast = Swal.mixin({
     toast: true,
@@ -34,8 +55,12 @@ const soundNotification = () => {
 const formatMessage = (dataMessage) =>{
   let message = '';
   dataMessage.forEach(item =>{
+    // Get QA DATA ...
+    const customField = getCustomField(item.custom_fields,'qa');
+    const qa = getDataFromObject(customField,'username');
     message += `<div class="task__notification-container">
                   <p><span class="task__bold">PM:</span> ${ item.creator.username }</p>
+                  <p><span class="task__bold">QA:</span> ${ qa }</p>
                   <p><span class="task__bold">Task Status:</span> ${ item.status.status }</p>
                   <p>
                     <span class="task__bold">Task Name:</span>
@@ -48,7 +73,7 @@ const formatMessage = (dataMessage) =>{
 
 chrome.runtime.onMessage.addListener(async function (request){
     if (request.notification) {
-      const message = formatMessage(request.notification);
+      const message = formatMessage(request.notification); 
       Toast.fire({
         icon: "info",
         html: message,
@@ -67,6 +92,7 @@ chrome.runtime.onMessage.addListener(async function (request){
 //******************** */ Developer Options ************************* //
 
 // Utility functions
+
 const createButton = (data) =>{
   const button = document.createElement(data.type);
   button.classList.add(data.class);

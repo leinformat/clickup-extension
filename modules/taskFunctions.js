@@ -31,7 +31,7 @@ function taskTemplate(data, clonedCard,fieldData) {
       const count = document.createElement("p");
       count.textContent = dataAlert.count;
     
-      alertContainer.append(alertDescription,count);
+      alertContainer.append(alertDescription,count); 
       
       clonedCard.prepend(alertContainer);
     } 

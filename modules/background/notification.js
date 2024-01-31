@@ -43,7 +43,7 @@ export const getTasks = (data) => {
   });
   
   //console.log(taskSData);
-  !!message.length && handlerNotificationMessage(message);
+  !!message.length && handlerNotificationMessage(message); 
 };
 
 export const handlerNotifications = (data) =>{
