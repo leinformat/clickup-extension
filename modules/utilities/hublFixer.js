@@ -15,7 +15,7 @@ export const hublFixer = () => {
           return Swal.showValidationMessage(`Empty field, please enter the Hubl code`);
         }
         // &apos; = '  |  &quot; = "
-        const step1 = await textContent.replace(/\\"/g, "&quot;");
+        const step1 = await textContent.replace(/\\"/g, '\\\\"');
         const step2 = await step1.replace(/\/[^/]+\/modules\//g, "../modules/");
         const lastStep = await step2.replace(/\\n/g, "");
         const blobHtml = new Blob([lastStep], { type: "text/html" });
