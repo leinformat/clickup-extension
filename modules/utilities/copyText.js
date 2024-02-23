@@ -28,11 +28,11 @@ export const copyToSlack = async (data,node) => {
 // This is to Send on Clickup 
 export const copyEstimation = async (data,node) => {
       const dataQA = data.qa == "QA Team" || data.qa == "Unassigned" ? "": `data-user="${data.qaId}"`;
-      const comment = `<p><strong>Hi: </strong><button data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button></p>
+      const comment = `<p><strong>Hi: </strong><a class="cu-mention" data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</a></p>
                        <p><strong>ACCEPTED: </strong>Yes</p>
                        <p><strong>ADD TO CALENDAR: </strong>Yes</p>
                        <p><strong>THE DIVISION NEEDED: </strong>N/A</p>
-                       <p><strong>Q.A  ASSIGNED: </strong><button ${dataQA} data-name="${data.qa}">@${data.qa}</button></p>
+                       <p><strong>Q.A  ASSIGNED: </strong><a class="cu-mention" ${dataQA} data-name="${data.qa}">@${data.qa}</a></p>
                        <p><strong>DUE DATE TO DELIVER TO QA: </strong>${data.dueDate} COP time</p>`;
         try {
           const blobHtml = new Blob([comment], { type: "text/html" });
