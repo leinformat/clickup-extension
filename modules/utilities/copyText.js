@@ -56,7 +56,7 @@ export const copyEstimation = async (data,node) => {
 
 // This is to Send on Clickup    
 export const copyDeliverToQA = async (data,node) => {
-        const comment = `<p><strong>Hi: </strong><button data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button> and <button data-test="mention" data-user="${data.qaId}" data-name="${data.qa}">@${data.qa}</button></p><br>
+        const comment = `<p><strong>Hi: </strong><button class="cu-mention" data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button> and <button class="cu-mention" data-test="mention" data-user="${data.qaId}" data-name="${data.qa}">@${data.qa}</button></p><br>
                          <p><strong>URL: </strong></p><br>
                          <p><strong>WHAT I DID: </strong></p><br>
                          <p><strong>OMIT: </strong></p><br>
@@ -65,7 +65,7 @@ export const copyDeliverToQA = async (data,node) => {
                          <p><strong>FOR Q.A: </strong></p>
                          <p>VIDEO:</p>
                          <p><strong>ACTION REQUIRED: </strong></p>
-                         <p><button data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button> please deliver the task after Q.A is approved.</p>`;
+                         <p><button class="cu-mention" data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</button> please deliver the task after Q.A is approved.</p>`;
           try {
             const blobHtml = new Blob([comment], { type: "text/html" });
             const blobText = new Blob([comment], { type: "text/plain" });
