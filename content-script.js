@@ -98,7 +98,8 @@ const createButton = (data) =>{
   button.classList.add(data.class);
   if(!!data.url && data.type == 'a') button.href = data.url;
   if(!!data.title) button.title = data.title;
-  button.textContent = data.text;
+  if(!!data.text) button.textContent = data.text;
+  
   return button;
 }
 
@@ -113,6 +114,43 @@ const handlerLiveReload = (currentUrl) =>{
   // Send message to background
   chrome.runtime.sendMessage({ pageToreload: pageId });
 };
+
+// Function to get clipboard content
+async function getClipboardContent() {
+  try {
+      // Read text from the clipboard
+      const clipboardText = await navigator.clipboard.readText();
+      return clipboardText;
+  } catch (error) {
+      console.error('Error reading clipboard:', error);
+      return null;
+  }
+}
+// Function to write to the clipboard
+async function writeToClipboard(text) {
+  try {
+      // Write text to the clipboard
+      await navigator.clipboard.writeText(text);
+      console.log('Text written to clipboard successfully.');
+  } catch (error) {
+      console.error('Error writing to clipboard:', error);
+  }
+}
+// Usage
+async function processClipboard() {
+  // Get clipboard content
+  const content = await getClipboardContent();
+  if (content !== null) {
+      // Perform replacement of {{ with ''
+      const newContent = content.substring(3, content.length - 3);
+      console.log("Clipboard content after replacement:", newContent);
+      
+      // Write new content to clipboard
+      await writeToClipboard(newContent);
+  } else {
+      console.log("Failed to get clipboard content.");
+  }
+}
 // End Utility functions
 
 window.addEventListener("load", (e) =>{
@@ -201,5 +239,71 @@ window.addEventListener("load", (e) =>{
       const config = { attributes: true };
       observer.observe(targetNode, config);
     }, 2000);
+  }
+
+  if (currentUrl.includes("https://app.hubspot.com/design-manager")) {
+      // The element you want to observe
+      const targetNode = document.querySelector("body");
+      // Options for the observer
+      const config = { childList: true, subtree: true };
+
+      // Callback function
+      const callback = (mutationsList, observer) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+            for (const addedNode of mutation.addedNodes){
+              const copyValueButton = addedNode.querySelector('button *[data-key="DesignEditorsUI.customWidgetEditor.sidebar.copySnippetButton.valueLabel"]');
+              const button = copyValueButton.closest('button');
+
+              if(!!copyValueButton){
+                const ListItem = copyValueButton.closest("li");
+
+                const copyVariableList = createButton({
+                  title: "Copy the variable name without the braces {{ }}",
+                  class: "uiListItem",
+                  type: "li",
+                });
+                copyVariableList.classList.add("private-list__item");
+
+                const copyVariableButton = createButton({
+                  class: "uiButton",
+                  text: "Copy variable only",
+                  type: "button",
+                });
+                copyVariableButton.classList.add(
+                  "private-button",
+                  "private-button__link",
+                  "private-button--default"
+                );
+                
+                if(button.classList.contains('private-button--disabled')){
+                  copyVariableButton.classList.add(
+                    "disabled",
+                    "private-button--disabled"
+                  );
+                }
+
+                copyVariableList.append(copyVariableButton);
+
+                ListItem.insertAdjacentElement("afterend", copyVariableList);
+
+                copyVariableList.addEventListener("click", () => {
+                copyValueButton.click();
+
+                // Call function to process clipboard
+                processClipboard();
+                });
+                return;
+              }
+            }
+          }
+        }
+      };
+
+      // Create an instance of MutationObserver
+      const observer = new MutationObserver(callback);
+
+      // Observe the target element
+      observer.observe(targetNode, config);
   }
 });

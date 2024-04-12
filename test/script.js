@@ -103,4 +103,14 @@ pasteButton.addEventListener('click', async (event) => {
       var config = { childList: true };
       observer.observe(targetDiv, config);
   }
-    */
+    
+
+
+  WRITED
+<a class="cu-mention__user-group" data-group_id="1dc236a0-533c-4db9-9d06-13d87425db04" data-name="QA Team" data-handle="qa-team" data-notify="true" data-tag_id="edb9df15-4259-4da7-aacd-1a0c893a3845" href="javascript: void;" tabindex="0">&#xFEFF;<span contenteditable="false"><span embed-node="true">@qa-team</span></span>&#xFEFF;</a>
+
+SENDED
+<p><a href="javascript: void;" class="cu-mention__user-group cu-mention_readonly " data-group_id="1dc236a0-533c-4db9-9d06-13d87425db04" data-user-theme-color="#6985ff" data-handle="qa-team">@qa-team</a> </p>
+
+
+*/
