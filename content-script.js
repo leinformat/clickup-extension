@@ -267,7 +267,7 @@ window.addEventListener("load", (e) =>{
 
                 const copyVariableButton = createButton({
                   class: "uiButton",
-                  text: "Copy variable only",
+                  text: "Copy without braces",
                   type: "button",
                 });
                 copyVariableButton.classList.add(
