@@ -13,6 +13,7 @@ import { taskAlerts } from "./utilities/taskAlerts.js";
  
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData) {
+    console.log(data)
     // Alerts
     if (!!taskAlerts(data,fieldData).count) {
       const dataAlert = taskAlerts(data,fieldData);

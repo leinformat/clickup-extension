@@ -1,6 +1,19 @@
 // This is to Send on Slack
 export const copyToSlack = async (data,node) => {
-    const comment = `<p><strong>Client: </strong>${data.client} | ${data.subClient}</p>
+    //const regex = /^week \d+$/;
+    //regex.test(str);
+    const clients = {
+      "support projects": {message:":otf1: Support",internalName:"- Support Projects"},
+      "week 1": {message:":otf1: Onboarding",internalName:"- Hubspot Onboarding"},
+      "week 2": {message:":otf1: Onboarding",internalName:"- Hubspot Onboarding"},
+      "week 3": {message:":otf1: Onboarding",internalName:"- Hubspot Onboarding"},
+      "week 4": {message:":otf1: Onboarding",internalName:"- Hubspot Onboarding"}
+    }
+    const clientMessage = clients[data.subClient.toLowerCase()]?.message;
+    const clientIntName = clients[data.subClient.toLowerCase()]?.internalName;
+
+    //const client = data.subClient == 'Support Projects' ?  ;
+    const comment = `<p><strong>Client: </strong>${ !!clientMessage ? clientMessage : data.subClient } | ${data.client.replace(clientIntName, "")}</p>
                      <p><strong>URL: </strong>${data.url}</p>
                      <p><strong>Responsible: </strong>@${data.qa}</p>
                      <p><strong>Deliver date: </strong>Today or  Tomorrow, please :handshake:</p>

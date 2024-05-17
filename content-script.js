@@ -241,7 +241,7 @@ window.addEventListener("load", (e) =>{
     }, 2000);
   }
 
-  if (currentUrl.includes("https://app.hubspot.com/design-manager")) {
+  if (currentUrl.includes("https://app.hubspot.com/design-manager/") || currentUrl.includes("https://app-eu1.hubspot.com/design-manager/")){
       // The element you want to observe
       const targetNode = document.querySelector("body");
       // Options for the observer
