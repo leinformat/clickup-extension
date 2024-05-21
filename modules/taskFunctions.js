@@ -12,8 +12,8 @@ import { handlerCounterTask } from "./utilities/counterTasks.js";
 import { taskAlerts } from "./utilities/taskAlerts.js";
  
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard,fieldData) {
-    console.log(data)
+function taskTemplate(data, clonedCard,fieldData,fieldPm) {
+  console.log(data);
     // Alerts
     if (!!taskAlerts(data,fieldData).count) {
       const dataAlert = taskAlerts(data,fieldData);
@@ -48,7 +48,7 @@ function taskTemplate(data, clonedCard,fieldData) {
     const copyTextkBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
     // Add Listener to Copy Qa Comment
     const copyTextBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
-    copyComment(copyTextBtn,data,fieldData);    
+    copyComment(copyTextBtn,data,fieldData,fieldPm);    
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
@@ -66,9 +66,9 @@ function taskTemplate(data, clonedCard,fieldData) {
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    assignedByImg.src = data.creator.profilePicture ? data.creator.profilePicture : "./images/avatar.png" ;
-    assignedByImg.alt = data.creator.username;
-    clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
+    assignedByImg.src = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png" ;
+    assignedByImg.alt = fieldPm[0].username;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = fieldPm[0].username;
 
     // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
@@ -83,7 +83,7 @@ function taskTemplate(data, clonedCard,fieldData) {
 
     // QA
     fieldData ? clonedCard.querySelector(".clickup-extension__qa-name").textContent = getDataFromObject(fieldData,'username') : 'Unassigned';
-
+    
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
     
@@ -120,14 +120,15 @@ export function handleTasks(tasks) {
     document.querySelector('.clickup-extension__counter-tasks.to-implementor').classList.add('ready');
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {
-      //console.log(data);
       const clonedCard = task.cloneNode(true);
 
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
+      // Get PM DATA ...
+      const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
 
       /* TASK RENDER */
-      taskTemplate(data, clonedCard,customField);
+      taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksContainer.appendChild(clonedCard);
     });
     // Counter All Tasks 

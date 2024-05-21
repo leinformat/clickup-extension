@@ -58,8 +58,11 @@ const formatMessage = (dataMessage) =>{
     // Get QA DATA ...
     const customField = getCustomField(item.custom_fields,'qa');
     const qa = getDataFromObject(customField,'username');
+    // Get PM DATA ...
+    const customFieldPm = getCustomField(item.custom_fields,'Project Manager');
+    const pm = getDataFromObject(customFieldPm,'username');
     message += `<div class="task__notification-container">
-                  <p><span class="task__bold">PM:</span> ${ item.creator.username }</p>
+                  <p><span class="task__bold">PM:</span> ${ pm }</p>
                   <p><span class="task__bold">QA:</span> ${ qa }</p>
                   <p><span class="task__bold">Task Status:</span> ${ item.status.status }</p>
                   <p>

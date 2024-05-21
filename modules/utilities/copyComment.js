@@ -2,17 +2,20 @@ import { dateFormat } from './dateFormat.js';
 import { getDataFromObject} from './getData.js';
 import { copyToSlack, copyEstimation, copyDeliverToQA, revisionQA } from './copyText.js';
 
-export const copyComment = (copyTextkBtn,data,fieldData) =>{
+export const copyComment = (copyTextkBtn,data,fieldData,fieldPm) =>{
+  const pmName = getDataFromObject(fieldPm,'username');
+  const pmId = getDataFromObject(fieldPm,'id');
     copyTextkBtn.forEach( item =>{
         item.addEventListener("click",(e)=>{
           // Slack Comment
           if(item.dataset.comment === 'qa-slack'){
             let qaField = getDataFromObject(fieldData,'username');
+
             qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField; 
   
             copyToSlack(
               {
-                pm:data.creator.username,
+                pm:pmName,
                 qa:fieldData ? qaField : 'Unassigned',
                 url:data.url,
                 client:data.project.name,
@@ -29,8 +32,8 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
   
             copyEstimation(
               {
-                pmId:data.creator.id,
-                pm:data.creator.username,
+                pmId:pmId,
+                pm:pmName,
                 qa:fieldData ? qaField : 'Unassigned',
                 qaId,
                 dueDate
@@ -45,8 +48,8 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
   
             copyDeliverToQA(
               {
-                pmId:data.creator.id,
-                pm:data.creator.username,
+                pmId:pmId,
+                pm:pmName,
                 qa:fieldData ? qaField : 'Unassigned',
                 qaId,
               },
@@ -58,8 +61,8 @@ export const copyComment = (copyTextkBtn,data,fieldData) =>{
             const implementorId = getDataFromObject(data.assignees,'id');
             revisionQA(
               {
-                pmId:data.creator.id,
-                pm:data.creator.username,
+                pmId:pmId,
+                pm:pmName,
                 imId: implementorId,
                 imName: implementorName,
               },
