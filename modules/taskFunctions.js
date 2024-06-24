@@ -10,10 +10,9 @@ import { openTask } from "./utilities/openTask.js";
 import { getDataFromObject } from "./utilities/getData.js";
 import { handlerCounterTask } from "./utilities/counterTasks.js";
 import { taskAlerts } from "./utilities/taskAlerts.js";
- 
+
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData,fieldPm) {
-  console.log(data);
     // Alerts
     if (!!taskAlerts(data,fieldData).count) {
       const dataAlert = taskAlerts(data,fieldData);
@@ -66,9 +65,11 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm) {
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    assignedByImg.src = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png" ;
-    assignedByImg.alt = fieldPm[0].username;
-    clonedCard.querySelector(".clickup-extension__asignBy").textContent = fieldPm[0].username;
+    const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png";
+    const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
+    assignedByImg.src = pmImageUrl;
+    assignedByImg.alt = pmName;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = pmName;
 
     // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
@@ -121,12 +122,10 @@ export function handleTasks(tasks) {
     tasksContainer.innerHTML = "";
     tasks.forEach((data) => {
       const clonedCard = task.cloneNode(true);
-
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
       // Get PM DATA ...
       const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
-
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksContainer.appendChild(clonedCard);
@@ -134,8 +133,8 @@ export function handleTasks(tasks) {
     // Counter All Tasks 
     const allTasks = '.clickup-extension__tasks-container.to-implementor .clickup-extension__task';
     const activeTab = '.clickup-extension__counter-tasks.to-implementor .clickup-extension__count-task.active--tab';
-    handlerCounterTask(tasksCounter,countTasksContainer,allTasks,activeTab);
     
+    handlerCounterTask(tasksCounter,countTasksContainer,allTasks,activeTab);
   }else{
     tasksContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
   }
