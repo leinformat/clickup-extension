@@ -11,7 +11,7 @@ import { handlerCounterTask } from "./utilities/counterTasks.js";
 
 
 // this Redndered each Task whit its content
-function taskTemplate(data, clonedCard,fieldData){
+function taskTemplate(data, clonedCard,fieldData,fieldPm){
     // Add Listener to All Tasks
     const openTaskBtn = clonedCard.querySelector(".clickup-extension__open-task");
 
@@ -19,13 +19,17 @@ function taskTemplate(data, clonedCard,fieldData){
       openTask(event.target);
     });
     
+    
     // Add Listener to Copy Qa Comment
     const copyTextBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
-    copyComment(copyTextBtn,data,fieldData);
+
+    copyComment(copyTextBtn,data,fieldData,fieldPm);
+    console.log('here->',copyTextBtn,data,fieldData);
+
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
-
+    
     // Card Container
     clonedCard.style.border = `solid 2px ${data.status.color}`;
     clonedCard.classList.add('clickup-extension--status-'+taskStatus);
@@ -39,9 +43,11 @@ function taskTemplate(data, clonedCard,fieldData){
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    assignedByImg.src = data.creator.profilePicture ? data.creator.profilePicture : "./images/avatar.png" ;
-    assignedByImg.alt = data.creator.username;
-    clonedCard.querySelector(".clickup-extension__asignBy").textContent = data.creator.username;
+    const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png";
+    const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
+    assignedByImg.src = pmImageUrl;
+    assignedByImg.alt = pmName;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = pmName;
 
     // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
@@ -91,14 +97,13 @@ export function handlerTasksToQa(tasks){
     tasksToQaContainer.innerHTML = "";
     document.querySelector('.clickup-extension__counter-tasks.to-qa').classList.add('ready');
     tasks.forEach((data) => {
-      //console.log(data);
       const clonedCard = task.cloneNode(true);
-
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
-
+      // Get PM DATA ...
+      const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
       /* TASK RENDER */
-      taskTemplate(data, clonedCard,customField);
+      taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksToQaContainer.appendChild(clonedCard);
     });
     // Counter All Tasks

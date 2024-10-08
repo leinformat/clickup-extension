@@ -64,7 +64,7 @@ export const gettingTasksToQa = () =>{
       }
       // All DataTaks
       const taskToQa  = filterTasks(allTasks,userId);
-
+  
       // Send Message to Front
       chrome.runtime.sendMessage({ allDataTasksToQa: taskToQa });
   });
