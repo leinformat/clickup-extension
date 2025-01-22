@@ -1,0 +1,123 @@
+/******* General *******/
+@import "../general.css";
+
+/* Container */
+.clickup-theme-uploader__container {
+  background-color: #292929;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  background-image: url(https://5915953.fs1.hubspotusercontent-na1.net/hubfs/5915953/wavy-lines.svg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-direction: column;
+}
+.clickup-theme-uploader__logo{
+  margin-bottom: 20px;
+}
+.clickup-theme-uploader__title{
+  font-size: 28px;
+  font-weight: 700;
+}
+.clickup-theme-uploader__title-highlight{
+  color:var(--white);
+}
+/* Form */
+.clickup-theme-uploader__form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-width: 500px;
+  padding: 30px;
+}
+
+.clickup-theme-uploader__label {
+  display: block;
+  text-align: left;
+  font-size: 18px;
+  color: var(--white);
+  padding-bottom: 15px;
+  font-weight: 700;
+}
+
+.clickup-theme-uploader__input {
+  width: -webkit-fill-available;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #444;
+  border-radius: 5px;
+  background-color: #333;
+  color: #ffffff;
+  background-image: url('../../images/alert.png');
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 98% 50%;
+  cursor: pointer;
+}
+.clickup-theme-uploader__input:focus {
+  cursor: revert;
+}
+
+.clickup-theme-uploader__input::placeholder {
+  color: #777;
+}
+
+/* Button */
+.clickup-theme-uploader__button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.clickup-theme-uploader__message {
+  font-weight: 700;
+  font-size: 18px;
+  display: none;
+}
+.clickup-theme-uploader__message.error.active {
+  color: var(--error);
+  display: block;
+}
+.clickup-theme-uploader__message.susscess.active {
+  color: var(--green);
+  display: block;
+}
+.clickup-theme-uploader__loader.active {
+  --s: 25px;
+  --g :5px;  
+  
+  width: calc(2*(1.353*var(--s) + var(--g)));
+  aspect-ratio: 1;
+  background:
+    linear-gradient(#ff1818 0 0) left/50% 100% no-repeat,
+    conic-gradient(from -90deg at var(--s) calc(0.353*var(--s)),
+      #fff 135deg,#666 0 270deg,#aaa 0); 
+  background-blend-mode: multiply;
+  --_m:
+    linear-gradient(to bottom right,
+       #0000 calc(0.25*var(--s)),#000 0 calc(100% - calc(0.25*var(--s)) - 1.414*var(--g)),#0000 0),
+    conic-gradient(from -90deg at right var(--g) bottom var(--g),#000 90deg,#0000 0);
+  -webkit-mask: var(--_m);
+          mask: var(--_m);
+  background-size:   50% 50%;
+  -webkit-mask-size: 50% 50%;
+          mask-size: 50% 50%;
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+  animation: l9 1.5s infinite;
+}
+@keyframes l9 {
+  0%,12.5%    {background-position:0% 0%,0 0}
+  12.6%,37.5% {background-position:100% 0%,0 0}
+  37.6%,62.5% {background-position:100% 100%,0 0}
+  62.6%,87.5% {background-position:0% 100%,0 0}
+  87.6%,100%  {background-position:0% 0%,0 0}
+}

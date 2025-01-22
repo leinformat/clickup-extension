@@ -6,7 +6,8 @@ import {
   goSettings,
   keyInput,
   toQaButton,
-  hublFixerBtn
+  hublFixerBtn,
+  goThemeUploader
 }from './domElements.js';
 
 import {
@@ -18,6 +19,7 @@ import {
 import { handleMessage} from './handleMessage.js';
 
 import { goToSettings } from './settings/settingsFunctions.js';
+import { goToUploadTheme } from './themeUploader/uploadThemeFunctions.js';
 import { hublFixer } from './utilities/hublFixer.js';
 
 //########## Listener to All messages from Background.js #########
@@ -33,8 +35,6 @@ teamOptions.addEventListener("click", (e) => {
   if (e.target.type === "radio") handleInputChange(email, 'email', 'add');
 });
 
-goSettings.addEventListener('click', goToSettings); 
-
 keyInput.addEventListener("change", handleKeyInputChange);
 
 toQaButton.forEach( button => {
@@ -46,6 +46,10 @@ toQaButton.forEach( button => {
     document.querySelector(`.clickup-extension__content.${button.dataset.type}`).classList.remove("hide");
   });
 });
+
+// ############# Event listeners to External Pages ################
+goSettings.addEventListener('click', goToSettings);
+goThemeUploader.addEventListener('click', goToUploadTheme);
 
 // HUBL FIXER
 hublFixerBtn.addEventListener("click",()=>{

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Fontawesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- sweetalert -->
+  <script src="./plugins/sweetalert/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="./plugins/sweetalert/sweetalert2.min.css">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="../css/themeUploader/styles.css">
+  <title>Clickup Extension | Theme Uploader</title>
+</head>
+
+<body class="clickup-theme-uploader">
+  <div class="clickup-theme-uploader__container">
+    <header class="clickup-theme-uploader__header">
+      <img src="https://horizonthemedev.com/hs-fs/hubfs/raw_assets/public/horizon-theme/images/style-guide-images/logo-header.png?width=60&height=65&name=logo-header.png" alt="Horizon Logo" class="clickup-theme-uploader__logo">
+      <!-- Cambia 'logo.png' por la ruta de tu logo -->
+      <p class="clickup-theme-uploader__label">Powered by On The Fuze</p>
+    </header>
+      <h1 class="clickup-theme-uploader__title">
+        <span class="clickup-theme-uploader__title-highlight">Horizon Theme</span> Uploader
+      </h1>
+      <form class="clickup-theme-uploader__form">
+        <div class="clickup-theme-uploader__field">
+          <label for="access-token" class="clickup-theme-uploader__label">Account Access Token:</label>
+          <input title="Scopes required: content - forms" type="text" id="access-token" class="clickup-theme-uploader__input" placeholder="Enter access token" name="accessToken" required>
+        </div>
+        <div class="clickup-theme-uploader__field">
+          <label for="theme-name" class="clickup-theme-uploader__label">Theme Name:</label>
+          <input title="All in lowercase and no spaces (use dashes)" type="text" id="theme-name" class="clickup-theme-uploader__input" placeholder="Enter theme name" name="themeName" required>
+        </div>
+        <button type="submit" class="clickup-theme-uploader__button">Upload</button>
+      </form>
+      <label for="theme-name" class="clickup-theme-uploader__message"></label>
+      <div class="clickup-theme-uploader__loader"></div>
+  </div>
+  <script defer type="module" src="../themeUploader.js"></script>
+</body>
+
+</html>

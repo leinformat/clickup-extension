@@ -12,6 +12,7 @@ const submit = document.querySelector(".clickup-extension__submit");
 const dataContent = document.querySelector('.clickup-extension__content');
 const goSettings = document.querySelector('.clickup-extension__go-settings');
 const authMessage = document.querySelector('.clickup-extension__auth-message');
+const goThemeUploader = document.querySelector('.clickup-extension__theme-uploader');
 
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
@@ -50,5 +51,6 @@ export {
   countTasksToQaContainer,
   implementorSpinner,
   toQaSpinner,
-  hublFixerBtn
+  hublFixerBtn,
+  goThemeUploader
 };
