@@ -6,7 +6,7 @@
   background-color: #292929;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
   text-align: center;
-  background-image: url(https://5915953.fs1.hubspotusercontent-na1.net/hubfs/5915953/wavy-lines.svg);
+  background-image: url('../../images/wavy-lines.svg');
   background-size: cover;
   height: 100vh;
   display: flex;
