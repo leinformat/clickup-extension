@@ -24,7 +24,6 @@ export const gettingTasks = (action) =>{
       if(action === 'notification'){
         handlerNotifications(response.tasks);
       }else{
-        console.log(response.tasks);
         chrome.runtime.sendMessage({ allDataTasks: response.tasks });
       }
     }catch(err){

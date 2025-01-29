@@ -66,7 +66,7 @@ export const getUserData = () =>{
 }
 
 export const handlerOptions = ()=>{
-  chrome.storage.local.get(["offNotification","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa"], function (result){
+  chrome.storage.local.get(["offNotification","offPopupNotification","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa"], function (result){
     if (!!Object.keys(result).length){
       const optionInputs = document.querySelectorAll('.clickup-settings input');
       console.log(result)
@@ -74,6 +74,8 @@ export const handlerOptions = ()=>{
         // Sound Notification
         if (!!input.classList.contains('clickup-settings__bt-notification')){
           !!result.offNotification ? input.checked = true : input.checked = false;
+        }else if(input.id == 'off-popup-notification'){
+          !!result.offPopupNotification ? input.checked = true : input.checked = false;
         }
         else if(input.id !== 'sound-notification'){
           !!result[input.name] ? input.checked = true : input.checked = false;

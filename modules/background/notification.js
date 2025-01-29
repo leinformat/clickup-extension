@@ -1,9 +1,9 @@
 const taskSData = [];
 
 const handlerNotificationMessage = (message) => {
+  console.log(message);
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const activeTab = tabs[0];
-    //console.log(message);
     if (activeTab) {
       // Send a message to the active tab
       chrome.tabs.sendMessage(activeTab.id,{
@@ -42,7 +42,6 @@ export const getTasks = (data) => {
     }
   });
   
-  //console.log(taskSData);
   !!message.length && handlerNotificationMessage(message); 
 };
 

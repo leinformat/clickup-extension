@@ -74,20 +74,24 @@ const formatMessage = (dataMessage) =>{
   return message;
 }
 
-chrome.runtime.onMessage.addListener(async function (request){
-    if (request.notification) {
-      const message = formatMessage(request.notification); 
-      Toast.fire({
-        icon: "info",
-        html: message,
-      });
+chrome.runtime.onMessage.addListener(async function (request) {
+  if (request.notification) {
+    chrome.storage.local.get(["offNotification","offPopupNotification"], function (result) {
+      // Popup Notification swich Actived - Deactived
+      if (!result.offPopupNotification) {
+        const message = formatMessage(request.notification);
+        Toast.fire({
+          icon: "info",
+          html: message,
+        });
+      }
+      
       // Sound Notification Actived
-      chrome.storage.local.get(["offNotification"], function (result){
-        if (!!Object.keys(result).length){
-          !result.offNotification && soundNotification();
-        }
-      });
-    }
+      if (!!Object.keys(result).length) {
+        !result.offNotification && soundNotification();
+      }
+    });
+  }
 });
 // ******************* End Task Changes Notifications **********************/
 })();
@@ -310,7 +314,3 @@ window.addEventListener("load", (e) =>{
       observer.observe(targetNode, config);
   }
 });
-
-setTimeout(() => {
-  
-}, timeout);

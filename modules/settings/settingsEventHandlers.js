@@ -11,6 +11,9 @@ inputsOption.forEach(input =>{
         if (!!input.classList.contains('clickup-settings__bt-notification')){
             console.log('Disabled Notification:', !!input.checked)
             !!input.checked ? chrome.storage.local.set({offNotification:true}) : chrome.storage.local.set({offNotification:false});
+        }else if(!!input.classList.contains('clickup-settings__off-popup-notification')){
+            console.log('Disabled Popup Notification:', !!input.checked)
+            !!input.checked ? chrome.storage.local.set({offPopupNotification:true}) : chrome.storage.local.set({offPopupNotification:false});
         }
     });
 });
