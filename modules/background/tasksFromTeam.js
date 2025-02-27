@@ -41,7 +41,7 @@ export const gettingTasksToQa = () =>{
 
       if(!customField ) return chrome.runtime.sendMessage({ allDataTasksToQa: [] });
   
-      while (!lastPage){
+      /* while (!lastPage){
         try {
           const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[${customField}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
               method: "GET",
@@ -61,7 +61,55 @@ export const gettingTasksToQa = () =>{
           console.error('Error al obtener datos de la API:', error);
           break;
         }
-      }
+      } */
+
+
+        const batchSize = 100;
+
+        while (!lastPage) {
+          try {
+            // Generar las promesas para 100 páginas en paralelo
+            const requests = Array.from(
+              { length: batchSize },
+              (_, i) =>
+                fetch(
+                  `${apiUrl}/${teamId}/task?custom_fields=[${customField}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${
+                    page + i
+                  }`,
+                  {
+                    method: "GET",
+                    headers: { Authorization: apiKey },
+                  }
+                ).then((res) => res.json()) // Convertir respuesta a JSON directamente
+            );
+
+            // Ejecutar todas las solicitudes en paralelo
+            const responses = await Promise.all(requests);
+
+            for (const response of responses) {
+              if (response.tasks) {
+                allTasks.push(...response.tasks);
+              }
+
+              // Si alguna de las respuestas indica que es la última página, detenemos el loop
+              if (response.last_page === true) {
+                lastPage = true;
+              }
+            }
+
+            // Avanzar al siguiente batch
+            page += batchSize;
+            console.log(
+              `Batch de páginas ${page - batchSize} a ${page - 1} completado.`
+            );
+          } catch (error) {
+            console.error("Error al obtener datos de la API:", error);
+            break;
+          }
+        }
+        
+
+
       // All DataTaks
       const taskToQa  = filterTasks(allTasks,userId);
   
