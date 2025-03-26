@@ -51,6 +51,11 @@ h1 > span{
     color: var(--blue);
     font-weight: 700;
 }
+.clickup-extension__label-comments{
+    font-size:var(--baseFontSize);
+    color:var(--body);
+    font-weight: 700;
+}
 .clickup-extension{
     width: var(--width);
     min-height: var(--height);
@@ -135,4 +140,7 @@ input[type=checkbox]{
     display: flex;
     max-width: 95%;
     justify-content: space-between;
+}
+.clickup-extension--text-align-center{
+    text-align: center;
 }

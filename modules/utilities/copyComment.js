@@ -1,6 +1,6 @@
 import { dateFormat } from './dateFormat.js';
 import { getDataFromObject} from './getData.js';
-import { copyToSlack, copyEstimation, copyDeliverToQA, revisionQA } from './copyText.js';
+import { copyToSlack, copyEstimation, copyDeliverToQA,copyCannotDeliverOnTime, revisionQA } from './copyText.js';
 
 export const copyComment = (copyTextkBtn,data,fieldData,fieldPm) =>{
   const pmName = getDataFromObject(fieldPm,'username');
@@ -83,16 +83,26 @@ export const copyComment = (copyTextkBtn,data,fieldData,fieldPm) =>{
           }
           // Deliver to QA Comment
           else if(item.dataset.comment === 'deliver-to-qa'){
-            let qaField = getDataFromObject(fieldData,'username');
-            const qaId = getDataFromObject(fieldData,'id');
-            qaField == 'QA Team' ? qaField = 'team-qa' : qaField = qaField;
+            const qaData = fieldData;
   
             copyDeliverToQA(
               {
                 pmId:pmId,
                 pm:pmName,
-                qa:fieldData ? qaField : 'Unassigned',
-                qaId,
+                qa:qaData || []
+              },
+              e.target);
+          }
+          // Cannot Deliver on Time Comment
+          else if(item.dataset.comment === 'cannot-deliver-on-time'){
+            const qaData = fieldData;
+            const dueDate = dateFormat(data.due_date,'month-day');
+            copyCannotDeliverOnTime(
+              {
+                pmId:pmId,
+                pm:pmName,
+                dueDate,
+                qa:qaData || []
               },
               e.target);
           }

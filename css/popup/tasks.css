@@ -65,14 +65,31 @@
 .clickup-extension__date-info,
 .clickup-extension__qa-info{
     display:grid;
+}
+.clickup-extension__date-info{
     grid-template-columns: repeat(2,1fr);
 }
-.clickup-extension__estimated-info,
-.clickup-extension__comments{
+.clickup-extension__qa-info{
+    grid-template-columns: repeat(1,1fr);
+}
+.clickup-extension__estimated-info{
     display:grid;
     grid-template-columns: repeat(3,1fr);
     column-gap: 10px;
     row-gap: 10px;
+}
+.clickup-extension__comments-conatiner {
+    padding: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 2px solid var(--body);
+}
+.clickup-extension__comments{
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 5px;
+    row-gap: 12px;
 }
 .clickup-extension__task-descripion{
     word-break: break-word;
