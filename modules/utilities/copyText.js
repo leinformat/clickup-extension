@@ -40,13 +40,52 @@ export const copyToSlack = async (data,node) => {
 
 // This is to Send on Clickup 
 export const copyEstimation = async (data,node) => {
-      const dataQA = data.qa == "QA Team" || data.qa == "Unassigned" ? "": `data-user="${data.qaId}"`;
+      const allData = data.data;
+
+      console.log("fieldData X->",data.qa);
+      
+      const customFields = data.customFields;
+      const dataQA = data.qa;
+      let customFieldsText = "";
+      let qaDataText = "";
+
+      // QA Fields Text
+      dataQA.forEach(qaItem => {
+          const fieldType = qaItem.username ? 'qaByUsers' : 'qaByTeam';
+          if (fieldType === 'qaByUsers') {
+            qaDataText += `<a class="cu-mention" data-user="${qaItem.id}" data-name="${qaItem.username}" data-email="${qaItem.email}" data-notify="true" data-tag_id="7fb32774-a27d-4a44-876c-f909d047bd85" href="javascript: void;"></a>`;
+          } else {
+            qaDataText += `<a class="cu-mention__user-group" data-group_id="${qaItem.id}" data-name="${qaItem.name}" data-handle="${qaItem.handle}" data-tag_id="86d10f3e-c3e3-48da-ae77-c64135e46de0" href="javascript: void;"></a>`;
+          }
+      });
+      
+      console.log("qaDataText X->",qaDataText);
+      // Custom Fields Text
+      Object.keys(customFields).forEach(key => {
+          const fieldType = key;
+          if (fieldType === 'groupFields') {
+              customFieldsText += `<li class="ql-list-item ql-indent-1" data-list="bullet"><strong>${customFields[key][0].fieldName} ${customFields[key].some(field => field.name) ? '✅' : '❌'} </strong></li>`;
+          } else {
+              customFields[key].forEach(field => {
+                  customFieldsText += `<li class="ql-list-item ql-indent-1" data-list="bullet"><strong>${field.fieldName} ${field.name ? '✅' : '❌'} </strong></li>`;
+              });
+          }
+      });
+
       const comment = `<p><strong>Hi: </strong><a class="cu-mention" data-test="mention" data-user="${data.pmId}" data-name="${data.pm}">@${data.pm}</a></p>
-                       <p><strong>ACCEPTED: </strong>Yes</p>
+                       <p><strong>ACCEPTED: </strong><strong class="ql-color-green">Yes</strong><strong>/</strong><strong class="ql-color-red">No</strong></p>
                        <p><strong>ADD TO CALENDAR: </strong>Yes</p>
-                       <p><strong>THE DIVISION NEEDED: </strong>N/A</p>
-                       <p><strong>Q.A  ASSIGNED: </strong><a class="cu-mention" ${dataQA} data-name="${data.qa}">@${data.qa}</a></p>
-                       <p><strong>DUE DATE TO DELIVER TO QA: </strong>${data.dueDate} COP time</p>`;
+                       <p><strong>CUSTOM FIELDS REVIEWED:</strong></p>
+                       <ol>
+                        ${customFieldsText}
+                        <li class="ql-list-item ql-indent-1" data-list="bullet"><strong>Time Estimated ${ allData.time_estimate > 0
+                          ? '✅' : '❌'}</strong></li>
+                        <li class="ql-list-item ql-indent-1" data-list="bullet"><strong>Due Date ${ data.dueDate ? '✅' : '❌'}</strong></li>
+                       </ol>
+                       <p><strong>Q.A  ASSIGNED: </strong>${ qaDataText || 'Unassigned ❌'}</p>
+                       <p><strong>CHECKED ACCESS: </strong>Yes</p>
+                       <p><strong>DUE DATE FOR QA DELIVERY: </strong>${data.dueDate} COP time</p>
+                       <p><strong>ACTION REQUIRED: </strong> N/A</p>`;
         try {
           const blobHtml = new Blob([comment], { type: "text/html" });
           const blobText = new Blob([comment], { type: "text/plain" });

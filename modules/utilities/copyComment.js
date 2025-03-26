@@ -25,18 +25,59 @@ export const copyComment = (copyTextkBtn,data,fieldData,fieldPm) =>{
           }
           // Estimation Comment
           else if(item.dataset.comment === 'estimation'){
-            let qaField = getDataFromObject(fieldData,'username');
-            const qaId = getDataFromObject(fieldData,'id');
+            
+            const validFields = [
+              "level of complexity",
+              "project type (internal)",
+              "level of complexity+",
+              "level of complexity*",
+            ];
+
+            const customFieldsFirst = data.custom_fields.filter(
+              (field) =>
+                validFields.includes(field.name.toLowerCase())
+            );
+
+            const customFields = {
+              fields: [],
+              groupFields: []
+            };
+
+            for (const customField of customFieldsFirst) {
+              const fieldValue = customField?.value;
+
+              const fieldSelectedOption =
+                customField?.type_config &&
+                customField?.type_config.options.find(
+                  (option) => option.orderindex == fieldValue
+                );
+
+              if(customField?.name.toLowerCase().includes('level of complexity')){
+                customFields.groupFields.push({
+                  fieldName: customField?.name,
+                  name: fieldSelectedOption?.name || null,
+                  value: fieldValue || null,
+                });
+              }else{
+                customFields.fields.push({
+                  fieldName: customField?.name,
+                  name: fieldSelectedOption?.name || null,
+                  value: fieldValue || null,
+                });
+              }             
+            }
+            
+            const qaData = fieldData;
             const dueDate = dateFormat(data.due_date,'month-day');
-            qaField == 'QA Team' ? qaField = 'QA Team' : qaField = qaField;
-  
+
             copyEstimation(
               {
                 pmId:pmId,
                 pm:pmName,
-                qa:fieldData ? qaField : 'Unassigned',
-                qaId,
-                dueDate
+                qa: qaData || [],
+                dueDate,
+                customFields,
+                data
               },
               e.target);
           }
