@@ -1,8 +1,6 @@
 (async () => {
   // ******************* Start Private Apps page **********************/
   // Functions
-  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
   const handlerScopes = (domElement, unSelect = false) => {
         const sidebar = domElement.querySelector(".private-modal--sidebar");
 
@@ -38,7 +36,7 @@
                 }
             }
         });
-    };
+  };
 
   const createDomElement = ({ classes=[], type, url, title, text }) => {
     const element = document.createElement(type);
