@@ -33,7 +33,7 @@
     {
       "matches": ["<all_urls>"],
       "css": ["./plugins/sweetalert/sweetalert2.min.css","./css/content-script.css"],
-      "js": ["./plugins/sweetalert/sweetalert2.all.min.js","content-script.js"],
+      "js": ["./plugins/sweetalert/sweetalert2.all.min.js","content-script.js","select-private-app-scopes.js"],
       "run_at": "document_idle"
     
     }
