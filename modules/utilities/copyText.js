@@ -1,3 +1,5 @@
+import { generatedEmoji } from "./emojis.js";
+
 const handlerQaTextData = (data) => {
   const qaData = data;
   let qaDataText = "";
@@ -47,7 +49,7 @@ export const copyToSlack = async (data, node) => {
   } | ${data.client.replace(clientIntName, "")}</p>
                      <p><strong>URL: </strong>${data.url}</p>
                      <p><strong>Responsible: </strong>@${data.qa}</p>
-                     <p><strong>Deliver date: </strong>Today or  Tomorrow, please :handshake:</p>
+                     <p><strong>Deliver date: </strong>Today or  Tomorrow, please ${generatedEmoji()}</p>
                      <p><strong>PM: <strong>@${data.pm}</p>`;
   try {
     const blobHtml = new Blob([comment], { type: "text/html" });
