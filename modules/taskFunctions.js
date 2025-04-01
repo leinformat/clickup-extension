@@ -15,7 +15,7 @@ import { taskAlerts } from "./utilities/taskAlerts.js";
 function taskTemplate(data, clonedCard,fieldData,fieldPm) {
     // Alerts
     if (!!taskAlerts(data,fieldData).count) {
-      const dataAlert = taskAlerts(data,fieldData);
+      const dataAlert = taskAlerts(data,fieldData); 
       let descripion = "";
       let index = 1;
       for (const key in dataAlert) {

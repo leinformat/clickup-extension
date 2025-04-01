@@ -24,8 +24,6 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     const copyTextBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
 
     copyComment(copyTextBtn,data,fieldData,fieldPm);
-    console.log('here->',copyTextBtn,data,fieldData);
-
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");

@@ -100,10 +100,10 @@ export const gettingTasksToQa = () =>{
             // Avanzar al siguiente batch
             page += batchSize;
             console.log(
-              `Batch de páginas ${page - batchSize} a ${page - 1} completado.`
+              `Batch page ${page}: ${responses.length} tasks loaded`
             );
           } catch (error) {
-            console.error("Error al obtener datos de la API:", error);
+            console.error("Error getting tasks:", error);
             break;
           }
         }

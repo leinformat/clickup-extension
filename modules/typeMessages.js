@@ -21,7 +21,8 @@ export let tasksCounterToQa = {
 
 export const taskAlert = {
     tacked:"Time has not been tracked",
-    estimated:"It has not been estimated",
-    points:"No points added",
-    qa:"No QA assigned"
+    estimated:"Task has not been estimated",
+    qa:"QA has not been assigned",
+    levelOfComplexity:"Level Of Complexity has not been applied",
+    projectType:"Project Type has not been applied"
 }
