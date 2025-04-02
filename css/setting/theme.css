@@ -65,7 +65,7 @@ input:checked ~ div .clickup-settings__icon--sun {
 input:checked ~ div .clickup-settings__icon--moon {
     display: block;
 }
-.clickup-settings__dark-mode button{
+.clickup-settings__dark-mode button:not(.clickup-extension__go-settings){
     color: #000;
 }
 

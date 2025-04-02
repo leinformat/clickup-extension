@@ -184,6 +184,9 @@
 .clickup-extension__tasks-toQa-container .clickup-extension__comments{
     grid-template-columns: repeat(2,1fr);
 }
+.clickup-extension__task-name{
+    font-weight: 700;
+}
 .task-alert--container{
     width: 20px;
     height: 20px;
@@ -227,6 +230,6 @@
 .clickup-settings__dark-mode .clickup-extension__counter-tasks.ready {
     border: solid 1px #FFF;
 }
-.clickup-settings__dark-mode button{
+.clickup-settings__dark-mode button:not(.clickup-extension__go-settings){
     color: #000;
 }

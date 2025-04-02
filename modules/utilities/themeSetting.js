@@ -6,12 +6,14 @@ export const handlerTheme = (isDaskMode) => {
         {name: "white-light",value: "#000"},
         {name: "black",value: "#FFFFFF"},
         {name: "body",value: "#FFFFFF"},
+        {name: "blue",value: "#9300ff"}
       ],
       lightTheme: [
         {name: "white",value: "#F4F4F4"},
         {name: "white-light",value: "#FFFFFF"},
         {name: "black",value: "#000"},
-        {name: "body",value: "#0e101a"}
+        {name: "body",value: "#0e101a"},
+        {name: "blue",value: "#4B0082"}
       ],
     }; 
   
