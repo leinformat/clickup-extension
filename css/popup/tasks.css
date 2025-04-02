@@ -115,11 +115,12 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    background-color: var(--white-light);
 }
 .clickup-extension__counter-tasks.ready{
     padding: 10px;
     top: 10px;
-    background-color: #fff;
+    background-color: var(--white-light);
     z-index: 10;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 3px;
@@ -171,7 +172,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--white-light);
     z-index: 50;
 }
 .clickup-extension--implementor-spinner.hide,
@@ -220,4 +221,12 @@
 /* General Styles */
 .clickup-extension__content.hide{
     display: none;
+}
+
+/* Dark Mode */
+.clickup-settings__dark-mode .clickup-extension__counter-tasks.ready {
+    border: solid 1px #FFF;
+}
+.clickup-settings__dark-mode button{
+    color: #000;
 }

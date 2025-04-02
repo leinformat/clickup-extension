@@ -1,0 +1,53 @@
+/* Container */
+.clickup-settings {
+    min-height: 100vh;
+    background-color: var(--white);
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+
+}
+.clickup-settings__container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--white-light);
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 5px;
+}
+.clickup-settings__title{
+    padding-bottom: 5px;
+}
+.clickup-settings__profile-info{
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.clickup-settings__user-avatar{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+.clickup-settings__container{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.clickup-settings__sound-container,
+.clickup-settings__team-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0 10px;
+}
+.clickup-settings__teams{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+@media(min-width:600px){
+    .clickup-settings__container {
+        min-width: 600px;
+    }
+}

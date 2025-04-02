@@ -25,7 +25,6 @@ export const taskAlerts = (data,fieldData) => {
   
   if (!levelOfComplexity) alerts.levelOfComplexity = levelOfComplexity;
 
-  console.log(alerts)
   alerts.count = Object.keys(alerts).length;
   return alerts; 
 };

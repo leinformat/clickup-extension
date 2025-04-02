@@ -1,3 +1,4 @@
+import { handlerTheme } from "../utilities/themeSetting.js";
 import { userAvatar, userName, userEmail,teamsContainer } from "./settingsDomElements.js";
 
 export const goToSettings = () =>{
@@ -66,21 +67,28 @@ export const getUserData = () =>{
 }
 
 export const handlerOptions = ()=>{
-  chrome.storage.local.get(["offNotification","offPopupNotification","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa"], function (result){
+  chrome.storage.local.get(["offNotification","offPopupNotification","data-engineering-&-analysis","project-managers","engineers","front-end-dev","back-end-dev","designers","qa","darkMode"], function (result){
     if (!!Object.keys(result).length){
       const optionInputs = document.querySelectorAll('.clickup-settings input');
-      console.log(result)
+      
       optionInputs.forEach(input =>{
         // Sound Notification
         if (!!input.classList.contains('clickup-settings__bt-notification')){
           !!result.offNotification ? input.checked = true : input.checked = false;
-        }else if(input.id == 'off-popup-notification'){
+        }
+        else if(!!input.classList.contains('clickup-settings__switch-input')){
+          input.checked = !!result[input.name];
+          handlerTheme(!!result[input.name]);
+        }
+        else if(input.id == 'off-popup-notification'){
           !!result.offPopupNotification ? input.checked = true : input.checked = false;
         }
         else if(input.id !== 'sound-notification'){
           !!result[input.name] ? input.checked = true : input.checked = false;
         }
+        
       });
+
     }
   });
 }

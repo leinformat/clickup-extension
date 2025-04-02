@@ -17,6 +17,20 @@
 <body>
     <main class="clickup-settings">
       <section class="clickup-settings__container vibrating-div">
+        <!-- Theme Switch -->
+        <section class="clickup-settings__theme">
+          <h1 class="clickup-settings__title">Theme</h1>
+          <div class="clickup-extension--border"></div>
+          <label class="clickup-settings__switch">
+            <input class="clickup-settings__switch-input" name="darkMode" type="checkbox" id="darkModeToggle">
+            <span class="clickup-settings__slider"></span>
+            <div class="clickup-settings__icon-container">
+              <i class="fas fa-sun clickup-settings__icon clickup-settings__icon--sun"></i>
+              <i class="fas fa-moon clickup-settings__icon clickup-settings__icon--moon"></i>
+            </div>
+        </label>
+        </section>
+
         <h1 class="clickup-settings__title">Account Settings</h1>
         <div class="clickup-extension--border"></div>
         <!-- User Data -->
@@ -62,5 +76,35 @@
       </section>
     </main>
     <script defer type="module" src="./settings.js"></script>
+    <!-- <script>
+      const toggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+        const sunIcon = document.querySelector(".clickup-settings__icon--sun");
+        const moonIcon = document.querySelector(".clickup-settings__icon--moon");
+
+        function setDarkMode(isDark) {
+            if (isDark) {
+                body.classList.add("clickup-settings__dark-mode");
+                localStorage.setItem("darkMode", "enabled");
+                toggle.checked = true;
+                sunIcon.style.display = "none";
+                moonIcon.style.display = "block";
+            } else {
+                body.classList.remove("clickup-settings__dark-mode");
+                localStorage.setItem("darkMode", "disabled");
+                toggle.checked = false;
+                sunIcon.style.display = "block";
+                moonIcon.style.display = "none";
+            }
+        }
+
+        toggle.addEventListener("change", () => {
+            setDarkMode(toggle.checked);
+        });
+
+        if (localStorage.getItem("darkMode") === "enabled") {
+            setDarkMode(true);
+        }
+  </script> -->
 </body>
 </html>

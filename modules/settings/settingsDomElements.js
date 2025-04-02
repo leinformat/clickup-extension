@@ -4,6 +4,7 @@ const userEmail = document.querySelector('.clickup-settings__user-email');
 const userAvatar = document.querySelector('.clickup-settings__user-avatar');
 const inputsOption = document.querySelectorAll('.clickup-settings input');
 const teamsContainer = document.querySelector('.clickup-settings__teams');
+const themeSelector = document.querySelector('.clickup-settings__theme');
 
 export { 
     btnResetAuthAll,
@@ -11,5 +12,6 @@ export {
     userEmail,
     userAvatar,
     inputsOption,
-    teamsContainer
+    teamsContainer,
+    themeSelector
 };

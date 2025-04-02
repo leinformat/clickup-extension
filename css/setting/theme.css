@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    transition: background 0.3s, color 0.3s;
+}
+.clickup-settings__dark-mode {
+    background: #121212;
+    color: #ffffff;
+}
+.clickup-settings__switch {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.clickup-settings__switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.clickup-settings__slider {
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+}
+.clickup-settings__slider:before {
+    content: "";
+    height: 18px;
+    width: 18px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+.clickup-settings__theme{
+    padding: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+input:checked + .clickup-settings__slider {
+    background-color: #2196F3;
+}
+input:checked + .clickup-settings__slider:before {
+    transform: translateX(26px);
+}
+.clickup-settings__icon {
+    font-size: 20px;
+    transition: opacity 0.3s;
+}
+.clickup-settings__icon--moon {
+    display: none;
+}
+.clickup-settings__icon--sun{
+    color: #FFD700;
+}
+input:checked ~ div .clickup-settings__icon--sun {
+    display: none;
+}
+input:checked ~ div .clickup-settings__icon--moon {
+    display: block;
+}
+.clickup-settings__dark-mode button{
+    color: #000;
+}
+
+.clickup-settings__dark-mode .clickup-extension--border {
+    background-color: #e6dfdf;
+}
