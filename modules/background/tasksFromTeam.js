@@ -1,5 +1,5 @@
 import {apiUrl} from './auth.js';
-import { teamsData } from './teams.js';
+import { teamsData,teamIds } from './teams.js';
 
 const filterTasks = (tasks, userId)=>{
   // Create an empty array to store the filtered results
@@ -40,29 +40,6 @@ export const gettingTasksToQa = () =>{
       const {apiKey,teamId,userId} = await result;
 
       if(!customField ) return chrome.runtime.sendMessage({ allDataTasksToQa: [] });
-  
-      /* while (!lastPage){
-        try {
-          const req = await fetch( `${apiUrl}/${teamId}/task?custom_fields=[${customField}]&subtasks=true&statuses[]=In%20Progress&statuses[]=Accepted&statuses[]=qa&page=${page}`,{
-              method: "GET",
-              headers: {
-                  Authorization: apiKey,
-              },
-            });
-            
-          const response = await req.json(); 
-          allTasks.push(...response.tasks);
-          page++;
-
-          if (response.last_page === true){
-            lastPage = true;
-          }
-        } catch (error){
-          console.error('Error al obtener datos de la API:', error);
-          break;
-        }
-      } */
-
 
         const batchSize = 100;
 
@@ -108,12 +85,68 @@ export const gettingTasksToQa = () =>{
           }
         }
         
-
-
       // All DataTaks
       const taskToQa  = filterTasks(allTasks,userId);
   
       // Send Message to Front
       chrome.runtime.sendMessage({ allDataTasksToQa: taskToQa });
+  });
+}
+
+export const gettingTasksToPm = () =>{
+  chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], async (result) => {
+      const allTasks = [];
+      let page = 0;
+      let lastPage = false;
+      const {apiKey,teamId,userId} = await result;
+
+      const customField =`{"field_id":"${teamIds.proyectManager.id}","operator":"ANY","value":["${userId}"]}`;
+
+      if(!userId || !teamId || !apiKey) return chrome.runtime.sendMessage({ allDataTasksToPm: [] });
+
+        const batchSize = 100;
+
+        while (!lastPage) {
+          try {
+            // Generar las promesas para 100 páginas en paralelo
+            const requests = Array.from(
+              { length: batchSize },
+              (_, i) =>
+                fetch(
+                  `${apiUrl}/${teamId}/task?custom_fields=[${customField}]&page=${page + i}`,
+                  {
+                    method: "GET",
+                    headers: { Authorization: apiKey },
+                  }
+                ).then((res) => res.json()) // Convertir respuesta a JSON directamente
+            );
+
+            // Ejecutar todas las solicitudes en paralelo
+            const responses = await Promise.all(requests);
+
+            for (const response of responses) {
+              if (response.tasks) {
+                allTasks.push(...response.tasks);
+              }
+
+              // Si alguna de las respuestas indica que es la última página, detenemos el loop
+              if (response.last_page === true) {
+                lastPage = true;
+              }
+            }
+
+            // Avanzar al siguiente batch
+            page += batchSize;
+            console.log(
+              `Batch page ${page}: ${responses.length} tasks loaded`
+            );
+          } catch (error) {
+            console.error("Error getting tasks:", error);
+            break;
+          }
+        }
+        
+      // Send Message to Front
+      chrome.runtime.sendMessage({ allDataTasksToPm: allTasks });
   });
 }

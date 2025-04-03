@@ -2,7 +2,8 @@
     position:relative;
 }
 .clickup-extension__tasks-container,
-.clickup-extension__tasks-toQa-container {
+.clickup-extension__tasks-toQa-container,
+.clickup-extension__tasks-toPm-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -163,7 +164,8 @@
     margin-top: 10px;
 }
 .clickup-extension--implementor-spinner,
-.clickup-extension--to-qa-spinner{
+.clickup-extension--to-qa-spinner,
+.clickup-extension--to-pm-spinner{
     position: absolute;
     top:0;
     bottom: 0;
@@ -177,11 +179,13 @@
 }
 .clickup-extension--implementor-spinner.hide,
 .clickup-extension--to-qa-spinner.hide,
+.clickup-extension--to-pm-spinner.hide,
 .clickup-extension__content.tasks-implentor .clickup-extension__copy-container:not(.implementor-comment),
 .clickup-extension__content.tasks-to-qa .clickup-extension__copy-container:not(.qa-comment){
     display: none;
 }
-.clickup-extension__tasks-toQa-container .clickup-extension__comments{
+.clickup-extension__tasks-toQa-container .clickup-extension__comments,
+.clickup-extension__tasks-toPm-container .clickup-extension__comments{
     grid-template-columns: repeat(2,1fr);
 }
 .clickup-extension__task-name{

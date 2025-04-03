@@ -26,3 +26,7 @@ export const taskAlert = {
     levelOfComplexity:"Level Of Complexity has not been applied",
     projectType:"Project Type has not been applied"
 }
+
+export const tasksCounterToPm = {
+    "all-tasks": 0
+}

@@ -18,6 +18,7 @@
     </div>
     <button title="Settings" class="clickup-extension__go-settings"><i class="fa-solid fa-gear fa-xl"></i></button>
     <header class="clickup-extension__spaces">
+      <button class="button--secondary clickup-extension__qa-assigned-btn" data-type="tasks-to-pm">PM Assigned</button>
       <button class="button--secondary clickup-extension__qa-assigned-btn" data-type="tasks-to-qa">QA Assigned</button>
       <button class="button--secondary clickup-extension__implementor-btn active" data-type="tasks-implentor">Implementor</button>
     </header>
@@ -175,6 +176,20 @@
         <!-- First Task -->
       </div>
     </section>
+
+    <!-- PM TASKS hide -->
+    <section class="clickup-extension__content hide tasks-to-pm">
+      <div class="clickup-extension--to-pm-spinner">
+        <img src="./images/spinner.gif" alt="spiner">
+      </div>
+      <header class="clickup-extension__counter-tasks to-pm">
+        <!-- Counter Tasks -->
+      </header>
+      <div class="clickup-extension__tasks-toPm-container">
+        <!-- First Task -->
+      </div>
+    </section>
+
     <script defer type="module" src="./main.js"></script>
     <script src="./plugins/sweetalert/sweetalert2.all.min.js"></script>
   </main>

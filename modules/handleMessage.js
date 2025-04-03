@@ -5,8 +5,9 @@ import {
     handleValidEmail,
 } from './authFunctions.js';
 
-import {handleTasks} from './taskFunctions.js';
+import { handleTasks } from './taskFunctions.js';
 import { handlerTasksToQa } from './taskToQaFunctions.js';
+import { handlerTasksToPm } from './taskToPmFunctions.js';
 
 // Function to handle messages from the background
 export function handleMessage(request, sender, sendResponse) {
@@ -29,5 +30,9 @@ export function handleMessage(request, sender, sendResponse) {
     // Task To QA
     if (request.allDataTasksToQa) {
         handlerTasksToQa(request.allDataTasksToQa);
+    }
+    // Task To QA
+    if (request.allDataTasksToPm) {
+        handlerTasksToPm(request.allDataTasksToPm);
     }
 }

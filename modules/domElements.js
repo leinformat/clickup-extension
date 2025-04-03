@@ -26,6 +26,12 @@ const toQaButton = document.querySelectorAll('.clickup-extension__spaces > butto
 const countTasksToQaContainer = document.querySelector('.clickup-extension__counter-tasks.to-qa');
 const toQaSpinner = document.querySelector('.clickup-extension--to-qa-spinner');
 
+// Tasks to Pm
+const tasksToPmContainer = document.querySelector('.clickup-extension__tasks-toPm-container');
+const toPmButton = document.querySelectorAll('.clickup-extension__spaces > button');
+const countTasksToPmContainer = document.querySelector('.clickup-extension__counter-tasks.to-pm');
+const toPmSpinner = document.querySelector('.clickup-extension--to-pm-spinner');
+
 // HUBL FIXER
 const hublFixerBtn = document.querySelector('.clickup-extension__hubl-fixer');
 
@@ -52,5 +58,9 @@ export {
   implementorSpinner,
   toQaSpinner,
   hublFixerBtn,
-  goThemeUploader
+  goThemeUploader,
+  tasksToPmContainer,
+  toPmButton,
+  countTasksToPmContainer,
+  toPmSpinner,
 };

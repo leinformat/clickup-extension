@@ -39,3 +39,14 @@ export const teamsData = {
     },
   ],
 };
+
+export const teamIds = {
+  proyectManager: {
+    id: "ad53b9b7-83e7-453e-8673-7e32426a0c0c",
+    name: "Project Manager",
+  },
+  qa: {
+    id: "2cfc4334-05ab-41de-9555-2e1bd6f96051",
+    name: "QA",
+  }
+};
