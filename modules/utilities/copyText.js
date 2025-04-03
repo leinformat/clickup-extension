@@ -82,8 +82,18 @@ export const copyEstimation = async (data, node) => {
   const allData = data.data;
   const customFields = data.customFields;
   const dataQA = data.qa;
+  const acceptedStatuses = [
+    'accepted',
+    'in progress',
+    'qa',
+    'to be delivered'
+  ]
+  const status = acceptedStatuses.includes(allData?.status?.status?.toLowerCase())
+        ? '<strong class="ql-color-green">Yes ✅</strong>'
+        : '<strong class="ql-color-red">No ❌</strong>';
+
   let customFieldsText = "";
-  
+  console.log(data)
   // QA Fields Text
   const qaDataText = handlerQaTextData(dataQA);
 
@@ -108,7 +118,7 @@ export const copyEstimation = async (data, node) => {
   const comment = `<p>Hi <a class="cu-mention" data-test="mention" data-user="${
     data.pmId
   }" data-name="${data.pm}">@${data.pm}</a></p>
-                       <p><strong>ACCEPTED: </strong><strong class="ql-color-green">Yes</strong><strong>/</strong><strong class="ql-color-red">No</strong></p>
+                       <p><strong>ACCEPTED: </strong>${status}</p>
                        <p><strong>ADD TO CALENDAR: </strong>Yes</p>
                        <p><strong>CUSTOM FIELDS REVIEWED:</strong></p>
                        <ol>

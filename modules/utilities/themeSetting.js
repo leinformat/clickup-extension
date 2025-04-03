@@ -22,9 +22,7 @@ export const handlerTheme = (isDaskMode) => {
       document.documentElement.style.setProperty(`--${color.name}`, color.value)
     );
   } else {
-    colors.lightTheme.forEach((color) =>
-      document.documentElement.style.setProperty(`--${color.name}`, color.value)
-    );
+    document.documentElement.style = "";
     document.documentElement.classList.remove("clickup-settings__dark-mode");
   }
 };

@@ -1,7 +1,6 @@
 const taskSData = [];
 
 const handlerNotificationMessage = (message) => {
-  console.log(message);
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const activeTab = tabs[0];
     if (activeTab) {
