@@ -96,7 +96,7 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
 // This is a Main Funtion Function to handle Tasks
 export function handlerTasksToPm(tasks){
   toPmSpinner.classList.add('hide');
-  console.log(task);
+  
   if (!!tasks.length){
     tasksToPmContainer.innerHTML = "";
     document.querySelector('.clickup-extension__counter-tasks.to-pm').classList.add('ready');

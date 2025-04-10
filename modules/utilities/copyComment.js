@@ -42,7 +42,7 @@ export const copyComment = (copyTextkBtn,data,fieldData,fieldPm) =>{
               fields: [],
               groupFields: []
             };
-
+          
             for (const customField of customFieldsFirst) {
               const fieldValue = customField?.value;
 
