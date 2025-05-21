@@ -10,6 +10,7 @@ import { openTask } from "./utilities/openTask.js";
 import { getDataFromObject } from "./utilities/getData.js";
 import { handlerCounterTask } from "./utilities/counterTasks.js";
 import { taskAlerts } from "./utilities/taskAlerts.js";
+import { detectCurrentUrl } from "./detectCurrentUrl.js";
 
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData,fieldPm) {
@@ -62,6 +63,9 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm) {
     // Incrent Counter Tasks
     tasksCounter['all-tasks']++;
     tasksCounter[taskStatus] ? tasksCounter[taskStatus]++ : tasksCounter[taskStatus] = 1;
+
+    // URL
+    clonedCard.dataset.taskUrl = data.url;
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
@@ -135,6 +139,12 @@ export function handleTasks(tasks) {
     const activeTab = '.clickup-extension__counter-tasks.to-implementor .clickup-extension__count-task.active--tab';
     
     handlerCounterTask(tasksCounter,countTasksContainer,allTasks,activeTab);
+
+    //Detect current url
+    detectCurrentUrl({
+      allTasks,
+    });
+
   }else{
     tasksContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
   }

@@ -35,6 +35,9 @@ const toPmSpinner = document.querySelector('.clickup-extension--to-pm-spinner');
 // HUBL FIXER
 const hublFixerBtn = document.querySelector('.clickup-extension__hubl-fixer');
 
+// HUBL FIXER
+const mainContainer = document.querySelector('.clickup-extension--main');
+
 export {
   authContainer,
   authenticationForm,
@@ -63,4 +66,5 @@ export {
   toPmButton,
   countTasksToPmContainer,
   toPmSpinner,
+  mainContainer
 };

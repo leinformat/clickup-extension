@@ -17,5 +17,4 @@ chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId","darkMode"],
     dataContent.classList.remove('hide');
     initializeTasks();
   }
-
 });

@@ -237,3 +237,40 @@
 .clickup-settings__dark-mode button:not(.clickup-extension__go-settings){
     color: #000;
 }
+
+.clickup-extension__active-url {
+  position: relative;
+}
+
+/* Current Task URL  */
+.clickup-extension__active-url::after {
+  content: '';
+  position: absolute;
+  top: -3%;
+  left: 21px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  border-radius: 50%;
+  box-shadow: 0 0 10px red;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px red;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.4);
+    opacity: 0.6;
+    box-shadow: 0 0 20px red;
+  }
+  100% {
+    transform: translateY(-50%) scale(1);
+    opacity: 1;
+    box-shadow: 0 0 10px red;
+  }
+}

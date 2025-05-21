@@ -8,7 +8,7 @@ import { formatText } from "./utilities/formatText.js";
 import { getCustomField } from "./utilities/customField.js";
 import { openTask } from "./utilities/openTask.js";
 import { handlerCounterTask } from "./utilities/counterTasks.js";
-
+import { detectCurrentUrl } from "./detectCurrentUrl.js";
 
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData,fieldPm){
@@ -109,6 +109,11 @@ export function handlerTasksToQa(tasks){
     const activeTab = '.clickup-extension__counter-tasks.to-qa .clickup-extension__count-task.active--tab';
     handlerCounterTask(tasksCounterToQa,countTasksToQaContainer,allTasks,activeTab);
     
+    //Detect current url
+    detectCurrentUrl({
+      allTasks,
+    });
+        
   }else{
     tasksToQaContainer.innerHTML="<h2 style='text-align:center'>You don't have any tasks assigned</h2>";
   }
