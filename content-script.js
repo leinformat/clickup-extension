@@ -226,7 +226,9 @@ window.addEventListener("load", (e) =>{
     // Observe Save change
     setTimeout(() => {
       // Select the element you want to observe
-      const targetNode = document.querySelector(".private-template__section--header span[data-key]");
+      //const targetNode = document.querySelector(".private-template__section--header span[data-key]");
+      const targetNode = document.querySelector("span[data-key]");
+
       console.log(document.querySelectorAll('span[data-key]'));
       console.log(targetNode)
       // Set up the MutationObserver with a callback function
