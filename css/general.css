@@ -71,7 +71,7 @@ h1 > span{
 ::-webkit-scrollbar:vertical {
     width:12px;
 }
-::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+::-webkit-scrollbar-button:increment {
     display: none;
 } 
 ::-webkit-scrollbar:horizontal {
