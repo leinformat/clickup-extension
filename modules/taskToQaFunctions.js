@@ -54,6 +54,9 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     taskName.title = "Go to Task";
     taskName.target = '_blank';
 
+    // URL
+    clonedCard.dataset.taskUrl = data.url;
+
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
 

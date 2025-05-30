@@ -12,7 +12,7 @@ import { detectCurrentUrl } from "./detectCurrentUrl.js";
 
 // this Redndered each Task whit its content
 function taskTemplate(data, clonedCard,fieldData,fieldPm){
-    console.log(data)
+    // URL
     clonedCard.dataset.taskUrl = data.url;
 
     // Add Listener to All Tasks
