@@ -2,7 +2,7 @@
   // ******************* Start Private Apps page **********************/
   // Functions
   const handlerScopes = (domElement, unSelect = false) => {
-        const sidebar = domElement.querySelector(".private-modal--sidebar");
+        const sidebar = domElement;
 
         if (!sidebar) {
             console.error("Sidebar Scope Section Not Found.");
@@ -12,7 +12,7 @@
 
         // Expand sidebar buttons if they are collapsed
         const sidebarButtons = sidebar.querySelectorAll(
-            'div.private-clickable[aria-expanded="false"]'
+            'div[aria-expanded="false"]'
         );
         sidebarButtons.forEach(button => button.click());
 
@@ -57,7 +57,7 @@
 
     // Check if the URL contains 'app.hubspot.com/private-apps/'
     if (currentUrl.includes('app.hubspot.com/private-apps/')) {
-      const appContainerSelector = ".private-layer[data-layer-for='UIModalPanel']";
+      const appContainerSelector = "[data-layer-for='ModalPanel']";
 
       const observer = new MutationObserver(async (mutations) => {
         for (const mutation of mutations) {
@@ -65,8 +65,10 @@
             if (node.nodeType === 1) {
               if (node.matches(appContainerSelector)) {
 
-                const headerSidebar = node.querySelector(".private-modal__header__inner");
+                const headerSidebar = node.querySelector("header > div");
+                headerSidebar.classList.add("private-apps-scopes-header");
 
+                console.log(headerSidebar);
                 if (headerSidebar){
                   const selectScopesButton = createDomElement({
                     classes: [

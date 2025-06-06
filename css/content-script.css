@@ -89,6 +89,7 @@
 .button--show-controls:hover::before {
     border-top: 15px solid #f47f55;
 }
+
 @keyframes cambiaColor {
     0% { border-top-color: #F66129; } 
     50% { border-top-color: #fffb00; }
@@ -97,4 +98,9 @@
 
 .resizable-panes .resizer.is--horizontal{
     height: 16px!important;
+}
+
+/***************** Private Apps Scopes **********************#} */
+.private-apps-scopes-header {
+    gap: 20px;
 }
