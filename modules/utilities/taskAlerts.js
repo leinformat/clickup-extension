@@ -20,7 +20,9 @@ export const taskAlerts = (data,fieldData) => {
   if (!time_estimate) alerts.estimated = !!time_estimate;
   if (qa === 'Unassigned') alerts.qa = !qa;
 
-  if (!('value' in projectType)) alerts.projectType = false;
+  if (!!projectType){
+    if (!('value' in projectType)) alerts.projectType = false;
+  }
   
   if (!levelOfComplexity) alerts.levelOfComplexity = levelOfComplexity;
 
