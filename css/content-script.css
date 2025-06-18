@@ -96,7 +96,7 @@
     100% { border-top-color: #F66129; } 
 }
 
-.resizable-panes .resizer.is--horizontal{
+.resizer.is--horizontal{
     height: 16px!important;
 }
 
