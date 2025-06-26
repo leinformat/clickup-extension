@@ -40,12 +40,15 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     tasksCounterToQa[taskStatus] ? tasksCounterToQa[taskStatus]++ : tasksCounterToQa[taskStatus] = 1;
 
     // PM Info
-    const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
+    /* const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png";
-    const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
     assignedByImg.src = pmImageUrl;
     assignedByImg.alt = pmName;
-    clonedCard.querySelector(".clickup-extension__asignBy").textContent = pmName;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = pmName; */
+    
+    const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
+    clonedCard.querySelector(".clickup-extension__qa-name").textContent = pmName;
+    clonedCard.querySelector(".clickup-extension__qa-container .clickup-extension__label").textContent = 'Project Manager: ';
 
     // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
@@ -60,9 +63,14 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     const fullTaskName = clonedCard.querySelector(".clickup-extension__full-task-name");
     fullTaskName.textContent = data.name;
 
-    // Assignees
-    clonedCard.querySelector(".clickup-extension__qa-name").textContent = data.assignees[0].username;
-    clonedCard.querySelector(".clickup-extension__qa-container .clickup-extension__label").textContent = 'Implementor: ';
+    // Assignees    
+    const assignee = data.assignees;
+    const assigneeImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
+    const assigneeImageUrl = assignee.length && !!assignee[0].profilePicture ? assignee[0].profilePicture : "./images/avatar.png";
+    const assigneeName = assignee.length && !!assignee[0].username ? assignee[0].username : "Undefined";
+    assigneeImg.src = assigneeImageUrl;
+    assigneeImg.alt = assigneeName;
+    clonedCard.querySelector(".clickup-extension__asignBy").textContent = assigneeName;
     
     // Poinst
     clonedCard.querySelector(".clickup-extension__points").textContent = data.points ? data.points : 'Unassigned';
