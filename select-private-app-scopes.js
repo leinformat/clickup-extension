@@ -56,7 +56,7 @@
     const currentUrl = window.location.href;
 
     // Check if the URL contains 'app.hubspot.com/private-apps/'
-    if (currentUrl.includes('app.hubspot.com/private-apps/')) {
+    if (currentUrl.includes('.hubspot.com/private-apps/')) {
       const appContainerSelector = "[data-layer-for='ModalPanel']";
 
       const observer = new MutationObserver(async (mutations) => {
