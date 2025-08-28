@@ -19,7 +19,7 @@ export const gettingTasks = (action) =>{
         console.log(response.err);
         return chrome.runtime.sendMessage({ gettingTaskErr: 'Error to getting Tasks' });
       }
-
+      
       // getting notification
       if(action === 'notification'){
         handlerNotifications(response.tasks);

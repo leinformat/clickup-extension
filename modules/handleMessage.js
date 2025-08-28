@@ -25,6 +25,7 @@ export function handleMessage(request, sender, sendResponse) {
     }
     // Task To IM
     if (request.allDataTasks) {
+        console.log(request.allDataTasks);
         handleTasks(request.allDataTasks);
     }
     // Task To QA

@@ -18,7 +18,7 @@ export function handleMessage(request, sender, sendResponse) {
   if(request.listTasks){
     gettingTasks();
     gettingTasksToQa();
-    gettingTasksToPm();
+    //gettingTasksToPm();
   }
   if(request.pageToreload){
     pageReload(request.pageToreload);
