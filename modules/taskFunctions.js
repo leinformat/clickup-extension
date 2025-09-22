@@ -69,7 +69,7 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm) {
 
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "./images/avatar.png";
+    const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "/images/avatar.png";
     const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
     assignedByImg.src = pmImageUrl;
     assignedByImg.alt = pmName;

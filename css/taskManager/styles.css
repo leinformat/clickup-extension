@@ -1,0 +1,69 @@
+/******* General *******/
+@import "../general.css";
+body {
+    --baseFontSize:16px;
+    background-color: var(--white);
+}
+/* Container */
+.clickup-extension--task-manager{
+    width: 900px;
+    position: relative;
+}
+.clickup-extension__task-header{
+    padding: 20px;
+}
+.clickup-extension__label {
+    font-size: 1rem;
+}
+.button--secondary {
+    font-size: 14px;
+}
+.task-alert--container {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+}
+.clickup-extension__task-manager-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.clickup-extension__task-manager-buttons button {
+    margin-top: 0;
+}
+.clickup-extension__task-manager-refresh{
+    padding: 5px 8px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 3px;
+    cursor: pointer;
+}
+.clickup-extension__hubl-container {
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+    background-color:var(--white-light);
+    padding: 10px;
+    max-width: 100%;
+    margin-top: 15px;
+}
+.clickup-extension__counter-tasks.ready {
+    top: 70px;
+}
+.clickup-extension__go-settings {
+    z-index: 15;
+    top:10px;
+}
+.clickup-extension__task-manager-refresh-icon{
+    transition: transform 0.3s ease;
+}
+.clickup-extension__task-manager-refresh.active .clickup-extension__task-manager-refresh-icon{
+    animation: rotate 1.5s linear infinite;
+}
+@keyframes rotate {
+    from { 
+        transform: rotate(0deg); 
+    }
+    to   { 
+        transform: rotate(360deg);
+    }
+}

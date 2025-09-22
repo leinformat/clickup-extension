@@ -13,6 +13,7 @@ const dataContent = document.querySelector('.clickup-extension__content');
 const goSettings = document.querySelector('.clickup-extension__go-settings');
 const authMessage = document.querySelector('.clickup-extension__auth-message');
 const goThemeUploader = document.querySelector('.clickup-extension__theme-uploader');
+const goTaskManager = document.querySelector('.clickup-extension__task-manager');
 
 // Tasks
 const tasksContainer = document.querySelector('.clickup-extension__tasks-container');
@@ -66,5 +67,6 @@ export {
   toPmButton,
   countTasksToPmContainer,
   toPmSpinner,
-  mainContainer
+  mainContainer,
+  goTaskManager
 };

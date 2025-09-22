@@ -7,7 +7,8 @@ import {
   keyInput,
   toQaButton,
   hublFixerBtn,
-  goThemeUploader
+  goThemeUploader,
+  goTaskManager
 }from './domElements.js';
 
 import {
@@ -19,11 +20,11 @@ import {
 import { handleMessage} from './handleMessage.js';
 
 import { goToSettings } from './settings/settingsFunctions.js';
-import { goToUploadTheme } from './themeUploader/uploadThemeFunctions.js';
+import { goToPage } from './utilities/goToPage.js';
 import { hublFixer } from './utilities/hublFixer.js';
 
 //########## Listener to All messages from Background.js #########
-chrome.runtime.onMessage.addListener(handleMessage);
+chrome.runtime.onMessage.addListener(handleMessage); 
 
 //############## Event listeners to Authentication ################
 authenticationForm.addEventListener("submit", handleFormSubmit);
@@ -49,10 +50,18 @@ toQaButton.forEach( button => {
 
 // ############# Event listeners to External Pages ################
 goSettings.addEventListener('click', goToSettings);
-goThemeUploader.addEventListener('click', goToUploadTheme);
 
 // HUBL FIXER
-hublFixerBtn.addEventListener("click",()=>{
+!!hublFixerBtn && hublFixerBtn.addEventListener("click",()=>{
   hublFixer();
 });
 
+// Theme Uploader
+!!goThemeUploader && goThemeUploader.addEventListener('click', ()=>{
+  goToPage({ path: "windows/themeUploader.html" });
+});
+
+// Task Manager
+!!goTaskManager && goTaskManager.addEventListener('click', ()=>{
+  goToPage({ path: "windows/taskManager.html" });
+});

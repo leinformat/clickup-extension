@@ -63,6 +63,7 @@ h1 > span{
     min-height: var(--height);
     padding: 20px;
     background-color: var(--white-light);
+    margin: 0 auto;
 }
 /* Scroll */
 ::-webkit-scrollbar {

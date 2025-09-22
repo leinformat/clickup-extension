@@ -160,8 +160,9 @@
 }
 .clickup-extension__spaces{
     display: flex;
-    gap: 10px;
+    gap: 30px;
     margin-top: 10px;
+    align-items: center;
 }
 .clickup-extension--implementor-spinner,
 .clickup-extension--to-qa-spinner,
@@ -223,6 +224,9 @@
 .task-alert--container:hover .task-alert--description{
     opacity: 1;
     z-index: 20;
+}
+.clickup-extension__task-manager{
+  cursor: pointer;
 }
 /**************** End Task ******************/
 /* General Styles */
