@@ -24,7 +24,7 @@ setInterval(() => {
   if (!userActive) {
     getTasks();
   }
-  // reset flag for the next 15s window
+  // reset flag for the next 20s window
   userActive = false;
 }, 20000);
 
@@ -36,5 +36,29 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.allDataTasks) {
     defText.innerText = defTextValue;
     refreshBtn.classList.remove("active");
+    // Active Urls
+    chrome.tabs.query({}, function (tabs) {
+      console.log(tabs)
+      tabs.forEach((tab) => {
+        const tasks = document.querySelectorAll(`.tasks-implentor .clickup-extension__task[data-task-url="${tab.url}"]`);
+        tasks.forEach((task) => {
+          task.classList.add('clickup-extension__active-url');
+          task.style.order = -1000;
+        });
+      });
+    });
+  }
+  if (message.allDataTasksToQa) {
+    // Active Urls
+    chrome.tabs.query({}, function (tabs) {
+      console.log(tabs)
+      tabs.forEach((tab) => {
+        const tasks = document.querySelectorAll(`.tasks-to-qa .clickup-extension__task[data-task-url="${tab.url}"]`);
+        tasks.forEach((task) => {
+          task.classList.add('clickup-extension__active-url');
+          task.style.order = -1000;
+        });
+      });
+    });
   }
 });
