@@ -4,6 +4,7 @@ import { tasksCounter,tasksCounterToQa } from "./modules/typeMessages.js";
 const defText = refreshBtn.querySelector('.clickup-extension__task-manager-refresh-text');
 const defTextValue = defText.innerText;
 let userActive = false;
+const TASK_TIMEOUT = 60000;
 
 // Detect user interaction
 ["mousemove", "keydown", "click", "scroll"].forEach(evt => {
@@ -33,7 +34,7 @@ setInterval(() => {
   }
   // reset flag for the next 20s window
   userActive = false;
-}, 20000);
+}, TASK_TIMEOUT);
 
 refreshBtn.addEventListener('click',()=>{
   getTasks()
