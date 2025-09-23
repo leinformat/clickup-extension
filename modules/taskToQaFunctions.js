@@ -66,7 +66,7 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     // Assignees    
     const assignee = data.assignees;
     const assigneeImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
-    const assigneeImageUrl = assignee.length && !!assignee[0].profilePicture ? assignee[0].profilePicture : "./images/avatar.png";
+    const assigneeImageUrl = assignee.length && !!assignee[0].profilePicture ? assignee[0].profilePicture : "/images/avatar.png";
     const assigneeName = assignee.length && !!assignee[0].username ? assignee[0].username : "Undefined";
     assigneeImg.src = assigneeImageUrl;
     assigneeImg.alt = assigneeName;

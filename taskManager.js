@@ -1,4 +1,5 @@
 import { refreshBtn } from "./modules/taskManager/domElements.js";
+import { tasksCounter,tasksCounterToQa } from "./modules/typeMessages.js";
 
 const defText = refreshBtn.querySelector('.clickup-extension__task-manager-refresh-text');
 const defTextValue = defText.innerText;
@@ -13,6 +14,13 @@ let userActive = false;
 
 // Function to run
 function getTasks() {
+  Object.keys(tasksCounter).forEach(k => delete tasksCounter[k]);
+  Object.keys(tasksCounterToQa).forEach(k => delete tasksCounterToQa[k]);
+
+  tasksCounter['all-tasks'] = 0;
+  tasksCounterToQa['all-tasks'] = 0;
+
+  console.log(tasksCounter);
   console.log("Running task:", new Date().toISOString());
   defText.innerText = "Refreshing...";
   refreshBtn.classList.add('active');
