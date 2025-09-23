@@ -20,7 +20,6 @@ function getTasks() {
   tasksCounter['all-tasks'] = 0;
   tasksCounterToQa['all-tasks'] = 0;
 
-  console.log(tasksCounter);
   console.log("Running task:", new Date().toISOString());
   defText.innerText = "Refreshing...";
   refreshBtn.classList.add('active');
@@ -46,7 +45,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     refreshBtn.classList.remove("active");
     // Active Urls
     chrome.tabs.query({}, function (tabs) {
-      console.log(tabs)
       tabs.forEach((tab) => {
         const tasks = document.querySelectorAll(`.tasks-implentor .clickup-extension__task[data-task-url="${tab.url}"]`);
         tasks.forEach((task) => {
@@ -59,7 +57,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.allDataTasksToQa) {
     // Active Urls
     chrome.tabs.query({}, function (tabs) {
-      console.log(tabs)
       tabs.forEach((tab) => {
         const tasks = document.querySelectorAll(`.tasks-to-qa .clickup-extension__task[data-task-url="${tab.url}"]`);
         tasks.forEach((task) => {
