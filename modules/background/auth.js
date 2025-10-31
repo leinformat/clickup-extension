@@ -1,5 +1,5 @@
 // auth.js
-export const apiUrl = "https://api.clickup.com/api/v2/team/";
+export const apiUrl = "https://api.clickup.com/api/v2/team";
 
 // Function to handle API key authentication
 export async function handleDataKey(apikey) {
@@ -33,7 +33,7 @@ export async function handleDataKey(apikey) {
 // Function to handle form data
 export async function handleFormData({ team, email, key }) {
   try {
-    const req = await fetch(apiUrl + team, {
+    const req = await fetch(`${apiUrl}/${team}`, {
       method: "GET",
       headers: {
         Authorization: key,
