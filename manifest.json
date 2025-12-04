@@ -21,7 +21,7 @@
     "service_worker": "background.js",
     "type": "module"
   },
-  "host_permissions":[
+  "host_permissions": [
     "<all_urls>"
   ],
   "icons": {
@@ -31,18 +31,32 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "css": ["./plugins/sweetalert/sweetalert2.min.css","./css/content-script.css"],
-      "js": ["./plugins/sweetalert/sweetalert2.all.min.js","content-script.js","select-private-app-scopes.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "./plugins/sweetalert/sweetalert2.min.css",
+        "./css/content-script.css"
+      ],
+      "js": [
+        "./plugins/sweetalert/sweetalert2.all.min.js",
+        "content-script.js",
+        "select-private-app-scopes.js",
+        "./contentScript/designManager.js"
+      ],
       "run_at": "document_idle"
-    
     }
   ],
   "options_page": "options.html",
   "web_accessible_resources": [
     {
-      "resources": ["audio/tarea-actualizada.mp3","images/loader2.gif"],
-      "matches": [ "<all_urls>" ],
+      "resources": [
+        "audio/tarea-actualizada.mp3",
+        "images/loader2.gif"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
       "run_at": "document_idle"
     }
   ]

@@ -90,17 +90,39 @@
     border-top: 15px solid #f47f55;
 }
 
+.resizer.is--horizontal{
+    height: 16px!important;
+}
+/***************** Private Apps Scopes **********************#} */
+.private-apps-scopes-header {
+    gap: 20px;
+}
+
+/***************** Module Settings **********************#} */
+.module-toolbar-container{
+    position: relative;
+}
+.close-module-options-container {
+    position: absolute;
+    right: 15px;
+    z-index: 500;
+    display: flex;
+    bottom: -55%;
+    cursor: pointer;
+}
+.close-module-options-container svg {
+    width: 26px;
+    fill: #ff4800;
+}
+.module-sidebar-container{
+    transition: all .5s ease-in-out;
+}
+.module-sidebar-container.sidebar-is-closed {
+    min-width: 0!important;
+    width: 0!important;
+}
 @keyframes cambiaColor {
     0% { border-top-color: #F66129; } 
     50% { border-top-color: #fffb00; }
     100% { border-top-color: #F66129; } 
-}
-
-.resizer.is--horizontal{
-    height: 16px!important;
-}
-
-/***************** Private Apps Scopes **********************#} */
-.private-apps-scopes-header {
-    gap: 20px;
 }
