@@ -6,7 +6,6 @@
 
         if (!sidebar) {
             console.error("Sidebar Scope Section Not Found.");
-            alert("Sidebar Scope Section Not Found.");
             return;
         }
 

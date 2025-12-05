@@ -18,9 +18,8 @@
   };
 
   const handlerSidebar = (sidebar, toolbar) => {
-    if (!sidebar ||!toolbar) {
+    if (!sidebar || !toolbar) {
       console.error("Sidebar Scope Section Not Found.");
-      alert("Sidebar Scope Section Not Found.");
       return;
     }
 
@@ -42,7 +41,7 @@
   window.addEventListener("load", (e) => {
     // Design Manager page
     const currentUrl = window.location.href;
-    const isModuleEditor = /app\.hubspot\.com\/design-manager\/\d+\/modules\/\d+/.test(currentUrl);
+    const isModuleEditor = /app\.hubspot\.com\/design-manager/.test(currentUrl);
 
     if (isModuleEditor) {
       const appContainerSelector = "[data-test-id='custom-widget-editor-sidebar']";

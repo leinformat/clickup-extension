@@ -262,7 +262,7 @@ window.addEventListener("load", (e) =>{
           if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
             for (const addedNode of mutation.addedNodes){
               const copyValueButton = addedNode.querySelector('button *[data-key="DesignEditorsUI.customWidgetEditor.sidebar.copySnippetButton.valueLabel"]');
-              const button = copyValueButton.closest('button');
+              const button = copyValueButton?.closest('button');
 
               if(!!copyValueButton){
                 const ListItem = copyValueButton.closest("li");
