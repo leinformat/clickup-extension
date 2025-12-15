@@ -108,7 +108,7 @@ export function handlerTasksToPm(tasks){
       // Get PM DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
       // Get PM DATA ...
-      const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
+      const customFieldPm = getCustomField(data.custom_fields,'Consultant');
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksToPmContainer.appendChild(clonedCard);

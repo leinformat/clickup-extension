@@ -48,7 +48,7 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm){
     
     const pmName = fieldPm.length && !!fieldPm[0].username ? fieldPm[0].username : "Undefined";
     clonedCard.querySelector(".clickup-extension__qa-name").textContent = pmName;
-    clonedCard.querySelector(".clickup-extension__qa-container .clickup-extension__label").textContent = 'Project Manager: ';
+    clonedCard.querySelector(".clickup-extension__qa-container .clickup-extension__label").textContent = 'Consultant: ';
 
     // Task Info
     const taskName = clonedCard.querySelector(".clickup-extension__task-name");
