@@ -48,7 +48,7 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm) {
     const copyTextkBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
     // Add Listener to Copy Qa Comment
     const copyTextBtn = clonedCard.querySelectorAll(".clickup-extension--copy-comment");
-    copyComment(copyTextBtn,data,fieldData,fieldPm);    
+    copyComment(copyTextBtn,data,fieldData,fieldPm);
 
     // Task Status
     const taskStatus = data.status.status.toLowerCase().replace(/ /g, "-");
@@ -129,7 +129,8 @@ export function handleTasks(tasks) {
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
       // Get PM DATA ...
-      const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
+      const customFieldPm = getCustomField(data.custom_fields,'Consultant');
+      console.log('Here ------------>',data);
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksContainer.appendChild(clonedCard);

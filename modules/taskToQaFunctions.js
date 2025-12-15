@@ -110,7 +110,7 @@ export function handlerTasksToQa(tasks){
       // Get QA DATA ...
       const customField = getCustomField(data.custom_fields,'qa');
       // Get PM DATA ...
-      const customFieldPm = getCustomField(data.custom_fields,'Project Manager');
+      const customFieldPm = getCustomField(data.custom_fields,'Consultant');
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksToQaContainer.appendChild(clonedCard);
