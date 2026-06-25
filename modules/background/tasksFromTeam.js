@@ -150,3 +150,61 @@ export const gettingTasksToPm = () =>{
       chrome.runtime.sendMessage({ allDataTasksToPm: allTasks });
   });
 }
+
+export const gettingTasksToQaV2 = () =>{
+  chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], async (result) => {
+      const allTasks = [];
+      let page = 0;
+      let lastPage = false;
+      const {apiKey,teamId,userId} = await result;
+
+      const customField =`{"field_id":"${teamIds.proyectManager.id}","operator":"ANY","value":["${userId}"]}`;
+
+      if(!userId || !teamId || !apiKey) return chrome.runtime.sendMessage({ allDataTasksToPm: [] });
+
+        const batchSize = 100;
+
+        while (!lastPage) {
+          try {
+            // Generar las promesas para 100 páginas en paralelo
+            const requests = Array.from(
+              { length: batchSize },
+              (_, i) =>
+                fetch(
+                  `${apiUrl}/${teamId}/task?subtasks=true&custom_items[]=1007&assignees[]=${userId}&page=${page + i}`,
+                  {
+                    method: "GET",
+                    headers: { Authorization: apiKey },
+                  }
+                ).then((res) => res.json()) // Convertir respuesta a JSON directamente
+            );
+
+            // Ejecutar todas las solicitudes en paralelo
+            const responses = await Promise.all(requests);
+
+            for (const response of responses) {
+              if (response.tasks) {
+                allTasks.push(...response.tasks);
+              }
+
+              // Si alguna de las respuestas indica que es la última página, detenemos el loop
+              if (response.last_page === true) {
+                lastPage = true;
+              }
+            }
+
+            // Avanzar al siguiente batch
+            page += batchSize;
+            console.log(
+              `Batch page ${page}: ${responses.length} tasks loaded`
+            );
+          } catch (error) {
+            console.error("Error getting tasks - QA V2:", error);
+            break;
+          }
+        }
+        
+      // Send Message to Front
+      chrome.runtime.sendMessage({ allDataTasksToQaV2: allTasks });
+  });
+}

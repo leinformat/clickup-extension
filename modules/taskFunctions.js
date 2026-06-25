@@ -67,6 +67,9 @@ function taskTemplate(data, clonedCard,fieldData,fieldPm) {
     // URL
     clonedCard.dataset.taskUrl = data.url;
 
+    // ID
+    clonedCard.dataset.taskId = data.id;
+
     // PM Info
     const assignedByImg = clonedCard.querySelector(".clickup-extension__img-asignBy");
     const pmImageUrl = fieldPm.length && !!fieldPm[0].profilePicture ? fieldPm[0].profilePicture : "/images/avatar.png";
@@ -130,7 +133,7 @@ export function handleTasks(tasks) {
       const customField = getCustomField(data.custom_fields,'qa');
       // Get PM DATA ...
       const customFieldPm = getCustomField(data.custom_fields,'Consultant');
-      console.log('Here ------------>',data);
+      /* console.log('Here ------------>',data); */
       /* TASK RENDER */
       taskTemplate(data, clonedCard,customField,customFieldPm);
       tasksContainer.appendChild(clonedCard);
@@ -143,7 +146,7 @@ export function handleTasks(tasks) {
 
     //Detect current url
     detectCurrentUrl({
-      allTasks,
+      allTasks
     });
 
   }else{

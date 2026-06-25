@@ -47,7 +47,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Active Urls
     chrome.tabs.query({}, function (tabs) {
       tabs.forEach((tab) => {
-        const tasks = document.querySelectorAll(`.tasks-implentor .clickup-extension__task[data-task-url="${tab.url}"]`);
+        const url = tab.url.replace(/\/+$/, '');
+        const taskId = url.split('/').pop();
+
+        const tasks = document.querySelectorAll(`.tasks-implentor .clickup-extension__task[data-task-id="${taskId}"]`);
         tasks.forEach((task) => {
           task.classList.add('clickup-extension__active-url');
           task.style.order = -1000;
@@ -59,7 +62,10 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Active Urls
     chrome.tabs.query({}, function (tabs) {
       tabs.forEach((tab) => {
-        const tasks = document.querySelectorAll(`.tasks-to-qa .clickup-extension__task[data-task-url="${tab.url}"]`);
+        const url = tab.url.replace(/\/+$/, '');
+        const taskId = url.split('/').pop();
+
+        const tasks = document.querySelectorAll(`.tasks-to-qa .clickup-extension__task[data-task-id="${taskId}"]`);
         tasks.forEach((task) => {
           task.classList.add('clickup-extension__active-url');
           task.style.order = -1000;

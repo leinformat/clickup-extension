@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Una extensión para llevar un control  de las tareas asignadas y sus estados en clickup",
   "action": {
-    "default_popup": "popup.html",
+    "default_popup": "./windows/popup.html",
     "default_icon": "./images/otf-logo.png"
   },
   "permissions": [
@@ -40,14 +40,14 @@
       ],
       "js": [
         "./plugins/sweetalert/sweetalert2.all.min.js",
-        "content-script.js",
-        "select-private-app-scopes.js",
+        "./contentScript/content-script.js",
+        "./contentScript/select-private-app-scopes.js",
         "./contentScript/designManager.js"
       ],
       "run_at": "document_idle"
     }
   ],
-  "options_page": "options.html",
+  "options_page": "./windows/options.html",
   "web_accessible_resources": [
     {
       "resources": [

@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- sweetalert -->
-    <script src="./plugins/sweetalert/sweetalert2.all.min.js"></script>
-    <link rel="stylesheet" href="./plugins/sweetalert/sweetalert2.min.css">
+    <script src="../plugins/sweetalert/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="../plugins/sweetalert/sweetalert2.min.css">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="./css/setting/styles.css">
+    <link rel="stylesheet" href="../css/setting/styles.css">
     <title>Clickup Extension | Settings</title>
 </head>
 <body>
@@ -75,36 +75,6 @@
         </section>
       </section>
     </main>
-    <script defer type="module" src="./settings.js"></script>
-    <!-- <script>
-      const toggle = document.getElementById("darkModeToggle");
-        const body = document.body;
-        const sunIcon = document.querySelector(".clickup-settings__icon--sun");
-        const moonIcon = document.querySelector(".clickup-settings__icon--moon");
-
-        function setDarkMode(isDark) {
-            if (isDark) {
-                body.classList.add("clickup-settings__dark-mode");
-                localStorage.setItem("darkMode", "enabled");
-                toggle.checked = true;
-                sunIcon.style.display = "none";
-                moonIcon.style.display = "block";
-            } else {
-                body.classList.remove("clickup-settings__dark-mode");
-                localStorage.setItem("darkMode", "disabled");
-                toggle.checked = false;
-                sunIcon.style.display = "block";
-                moonIcon.style.display = "none";
-            }
-        }
-
-        toggle.addEventListener("change", () => {
-            setDarkMode(toggle.checked);
-        });
-
-        if (localStorage.getItem("darkMode") === "enabled") {
-            setDarkMode(true);
-        }
-  </script> -->
+    <script defer type="module" src="../settings.js"></script>
 </body>
 </html>

@@ -8,6 +8,5 @@ export const getCustomField = (data, fieldName) =>{
     return field.value;
   }
 
-  console.log(field)
   return 0;
 }

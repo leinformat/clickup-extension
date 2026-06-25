@@ -1,12 +1,11 @@
 import {apiUrl} from './auth.js';
 import { handlerNotifications } from './notification.js';
 
-
 export const gettingTasks = (action) =>{
   chrome.storage.local.get(["teamId", "userEmail", "apiKey", "userId"], async (result) => {
   try {
       const {apiKey,teamId,userId} = await result;
-      const req = await fetch( `${apiUrl}/${teamId}/task?subtasks=true&assignees[]=${userId}`, {
+      const req = await fetch( `${apiUrl}/${teamId}/task?subtasks=true&custom_items[]=0&assignees[]=${userId}`, {
       method: "GET",
       headers: {
           Authorization: apiKey,

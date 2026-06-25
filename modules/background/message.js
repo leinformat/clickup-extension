@@ -2,7 +2,7 @@
 import { handleDataKey, handleFormData, handleResetAuthAll } from "./auth.js";
 import { pageReload } from "./developer.js";
 import { gettingTasks } from "./tasks.js";
-import { gettingTasksToQa, gettingTasksToPm } from "./tasksFromTeam.js";
+import { gettingTasksToQa, gettingTasksToQaV2 } from "./tasksFromTeam.js";
 
 // Function to handle incoming messages
 export function handleMessage(request, sender, sendResponse) {
@@ -18,7 +18,7 @@ export function handleMessage(request, sender, sendResponse) {
   if(request.listTasks){
     gettingTasks();
     gettingTasksToQa();
-    //gettingTasksToPm();
+    gettingTasksToQaV2();
   }
   if(request.pageToreload){
     pageReload(request.pageToreload);
