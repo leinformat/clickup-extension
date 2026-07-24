@@ -162,6 +162,7 @@ async function processClipboard() {
 }
 
 // Function to add search to menu
+// Function to add search to menu
 const addSearchToMenu = (menu) => {
     if (menu.querySelector("#menuItemSwitcherSearch")) {
         return;
@@ -191,6 +192,8 @@ const addSearchToMenu = (menu) => {
 
         const menuItems = menu.querySelectorAll('li[role="menuitem"]');
 
+        let hasResults = false;
+
         menuItems.forEach((menuItem) => {
             if (menuItem.querySelector("#allAccounts")) {
                 return;
@@ -198,10 +201,35 @@ const addSearchToMenu = (menu) => {
 
             const text = menuItem.textContent.toLowerCase();
 
-            menuItem.style.display = text.includes(searchValue)
-                ? ""
-                : "none";
+            const isVisible = text.includes(searchValue);
+
+            menuItem.style.display = isVisible ? "" : "none";
+
+            if (isVisible) {
+                hasResults = true;
+            }
         });
+
+        let noResultsMessage = menu.querySelector(
+            ".chrome-extension-no-results"
+        );
+
+        if (!hasResults && searchValue) {
+            if (!noResultsMessage) {
+                noResultsMessage = document.createElement("li");
+                noResultsMessage.classList.add(
+                    "chrome-extension-no-results"
+                );
+                noResultsMessage.innerHTML = `
+                  <span class="chrome-extension-no-results-icon">⌕</span>
+                  <span>No accounts found</span>
+              `;
+
+                searchContainer.after(noResultsMessage);
+            }
+        } else if (noResultsMessage) {
+            noResultsMessage.remove();
+        }
     });
 };
 
